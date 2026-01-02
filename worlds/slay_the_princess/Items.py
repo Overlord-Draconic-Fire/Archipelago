@@ -4,57 +4,81 @@ from BaseClasses import Item, ItemClassification
 from .Names import ItemName
 
 
-celeste_64_base_id: int = 0xCA0000
+offset: int = 63900000
+princess: int = 100
+voice: int = 200
+dagger: int = 300
+other: int = 400
+memories: int = 10000
 
 
-class Celeste64Item(Item):
-    game = "Celeste 64"
+class SlayThePrincessItem(Item):
+    game = "Slay The Princess"
 
 
-class Celeste64ItemData(NamedTuple):
+class SlayThePrincessItemData(NamedTuple):
     code: Optional[int] = None
     type: ItemClassification = ItemClassification.filler
 
 
-collectable_item_data_table: Dict[str, Celeste64ItemData] = {
-    ItemName.strawberry: Celeste64ItemData(celeste_64_base_id + 0x0, ItemClassification.progression_skip_balancing),
-    ItemName.raspberry:  Celeste64ItemData(celeste_64_base_id + 0x9, ItemClassification.filler),
+other_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.filler: SlayThePrincessItemData(offset + 0, ItemClassification.filler),
+    ItemName.mirror: SlayThePrincessItemData(offset + other + 1, ItemClassification.progression),
+    ItemName.gift: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression),
 }
 
-unlockable_item_data_table: Dict[str, Celeste64ItemData] = {
-    ItemName.dash_refill:        Celeste64ItemData(celeste_64_base_id + 0x1, ItemClassification.progression),
-    ItemName.double_dash_refill: Celeste64ItemData(celeste_64_base_id + 0x2, ItemClassification.progression),
-    ItemName.feather:            Celeste64ItemData(celeste_64_base_id + 0x3, ItemClassification.progression),
-    ItemName.coin:               Celeste64ItemData(celeste_64_base_id + 0x4, ItemClassification.progression),
-    ItemName.cassette:           Celeste64ItemData(celeste_64_base_id + 0x5, ItemClassification.progression),
-    ItemName.traffic_block:      Celeste64ItemData(celeste_64_base_id + 0x6, ItemClassification.progression),
-    ItemName.spring:             Celeste64ItemData(celeste_64_base_id + 0x7, ItemClassification.progression),
-    ItemName.breakables:         Celeste64ItemData(celeste_64_base_id + 0x8, ItemClassification.progression),
+dagger_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.dagger: SlayThePrincessItemData(offset + dagger + 0, ItemClassification.progression),
+    ItemName.dagger1: SlayThePrincessItemData(offset + dagger + 1, ItemClassification.progression),
+    ItemName.dagger2: SlayThePrincessItemData(offset + dagger + 2, ItemClassification.progression),
+    ItemName.dagger3: SlayThePrincessItemData(offset + dagger + 3, ItemClassification.progression),
+    ItemName.dagger4: SlayThePrincessItemData(offset + dagger + 4, ItemClassification.progression),
 }
 
-move_item_data_table: Dict[str, Celeste64ItemData] = {
-    ItemName.ground_dash: Celeste64ItemData(celeste_64_base_id + 0xA, ItemClassification.progression),
-    ItemName.air_dash:    Celeste64ItemData(celeste_64_base_id + 0xB, ItemClassification.progression),
-    ItemName.skid_jump:   Celeste64ItemData(celeste_64_base_id + 0xC, ItemClassification.progression),
-    ItemName.climb:       Celeste64ItemData(celeste_64_base_id + 0xD, ItemClassification.progression),
+princess_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.adversary: SlayThePrincessItemData(offset + princess + 0, ItemClassification.progression),
+    ItemName.tower: SlayThePrincessItemData(offset + princess + 1, ItemClassification.progression),
+    ItemName.spectre: SlayThePrincessItemData(offset + princess + 2, ItemClassification.progression),
+    ItemName.nightmare: SlayThePrincessItemData(offset + princess + 3, ItemClassification.progression),
+    ItemName.razor: SlayThePrincessItemData(offset + princess + 4, ItemClassification.progression),
+    ItemName.beast: SlayThePrincessItemData(offset + princess + 5, ItemClassification.progression),
+    ItemName.witch: SlayThePrincessItemData(offset + princess + 6, ItemClassification.progression),
+    ItemName.stranger: SlayThePrincessItemData(offset + princess + 7, ItemClassification.progression),
+    ItemName.prisoner: SlayThePrincessItemData(offset + princess + 8, ItemClassification.progression),
+    ItemName.damsel: SlayThePrincessItemData(offset + princess + 9, ItemClassification.progression),
+
+    ItemName.needle: SlayThePrincessItemData(offset + princess + 10, ItemClassification.progression),
+    ItemName.fury: SlayThePrincessItemData(offset + princess + 11, ItemClassification.progression),
+    ItemName.apotheosis: SlayThePrincessItemData(offset + princess + 12, ItemClassification.progression),
+    ItemName.dragon: SlayThePrincessItemData(offset + princess + 13, ItemClassification.progression),
+    ItemName.wraith: SlayThePrincessItemData(offset + princess + 14, ItemClassification.progression),
+    ItemName.clarity: SlayThePrincessItemData(offset + princess + 15, ItemClassification.progression),
+    ItemName.den: SlayThePrincessItemData(offset + princess + 16, ItemClassification.progression),
+    ItemName.wild: SlayThePrincessItemData(offset + princess + 17, ItemClassification.progression),
+    ItemName.thorn: SlayThePrincessItemData(offset + princess + 18, ItemClassification.progression),
+    ItemName.cage: SlayThePrincessItemData(offset + princess + 19, ItemClassification.progression),
+    ItemName.grey: SlayThePrincessItemData(offset + princess + 20, ItemClassification.progression),
+    ItemName.happily: SlayThePrincessItemData(offset + princess + 21, ItemClassification.progression),
+
+    ItemName.goddess: SlayThePrincessItemData(offset + princess + 22, ItemClassification.progression)
 }
 
-checkpoint_item_data_table: Dict[str, Celeste64ItemData] = {
-    ItemName.checkpoint_1:  Celeste64ItemData(celeste_64_base_id + 0x20, ItemClassification.progression),
-    ItemName.checkpoint_2:  Celeste64ItemData(celeste_64_base_id + 0x21, ItemClassification.progression),
-    ItemName.checkpoint_3:  Celeste64ItemData(celeste_64_base_id + 0x22, ItemClassification.progression),
-    ItemName.checkpoint_4:  Celeste64ItemData(celeste_64_base_id + 0x23, ItemClassification.progression),
-    ItemName.checkpoint_5:  Celeste64ItemData(celeste_64_base_id + 0x24, ItemClassification.progression),
-    ItemName.checkpoint_6:  Celeste64ItemData(celeste_64_base_id + 0x25, ItemClassification.progression),
-    ItemName.checkpoint_7:  Celeste64ItemData(celeste_64_base_id + 0x26, ItemClassification.progression),
-    ItemName.checkpoint_8:  Celeste64ItemData(celeste_64_base_id + 0x27, ItemClassification.progression),
-    ItemName.checkpoint_9:  Celeste64ItemData(celeste_64_base_id + 0x28, ItemClassification.progression),
-    ItemName.checkpoint_10: Celeste64ItemData(celeste_64_base_id + 0x29, ItemClassification.progression),
+voice_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.broken: SlayThePrincessItemData(offset + voice + 0, ItemClassification.progression),
+    ItemName.cheated: SlayThePrincessItemData(offset + voice + 1, ItemClassification.progression),
+    ItemName.cold: SlayThePrincessItemData(offset + voice + 2, ItemClassification.progression),
+    ItemName.contrarian: SlayThePrincessItemData(offset + voice + 3, ItemClassification.progression),
+    ItemName.hunted: SlayThePrincessItemData(offset + voice + 4, ItemClassification.progression),
+    ItemName.opportunist: SlayThePrincessItemData(offset + voice + 5, ItemClassification.progression),
+    ItemName.paranoid: SlayThePrincessItemData(offset + voice + 6, ItemClassification.progression),
+    ItemName.skeptic: SlayThePrincessItemData(offset + voice + 7, ItemClassification.progression),
+    ItemName.smitten: SlayThePrincessItemData(offset + voice + 8, ItemClassification.progression),
+    ItemName.stubborn: SlayThePrincessItemData(offset + voice + 9, ItemClassification.progression),
 }
 
-item_data_table: Dict[str, Celeste64ItemData] = {**collectable_item_data_table,
-                                                 **unlockable_item_data_table,
-                                                 **move_item_data_table,
-                                                 **checkpoint_item_data_table}
+item_data_table: Dict[str, SlayThePrincessItemData] = {**other_item_data_table,
+                                                       **dagger_item_data_table,
+                                                       **princess_item_data_table,
+                                                       **voice_item_data_table}
 
 item_table = {name: data.code for name, data in item_data_table.items() if data.code is not None}

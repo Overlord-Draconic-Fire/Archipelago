@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="ModuleUpdate")
+warnings.filterwarnings("ignore", message="_speedups not available")
+
 import argparse
 import copy
 import logging

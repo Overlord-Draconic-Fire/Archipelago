@@ -199,7 +199,7 @@ class BadelineChaserSpeed(Range):
     default = 3
 
 
-celeste_64_option_groups = [
+slay_the_princess_option_groups = [
     OptionGroup("Goal Options", [
         TotalStrawberries,
         StrawberriesRequiredPercentage,
@@ -225,7 +225,7 @@ celeste_64_option_groups = [
 
 
 @dataclass
-class Celeste64Options(PerGameCommonOptions):
+class SlayThePrincessOptions(PerGameCommonOptions):
     death_link: DeathLink
     death_link_amnesty: DeathLinkAmnesty
 
