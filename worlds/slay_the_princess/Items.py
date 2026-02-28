@@ -32,7 +32,6 @@ dagger_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.dagger1: SlayThePrincessItemData(offset + dagger + 1, ItemClassification.progression),
     ItemName.dagger2: SlayThePrincessItemData(offset + dagger + 2, ItemClassification.progression),
     ItemName.dagger3: SlayThePrincessItemData(offset + dagger + 3, ItemClassification.progression),
-    ItemName.dagger4: SlayThePrincessItemData(offset + dagger + 4, ItemClassification.progression),
 }
 
 princess_item_data_table: Dict[str, SlayThePrincessItemData] = {

@@ -73,7 +73,7 @@ def has_dagger_for(state: CollectionState, world, dagger: str) -> bool:
         elif dagger in CHAPTER_3_DAGGERS:
             return state.has(ItemName.dagger3, world.player)
         elif dagger is ItemName.dagger_goddess:
-            return state.has(ItemName.dagger4, world.player)
+            return state.has(ItemName.dagger_goddess, world.player)
 
     return state.has(dagger, world.player)
 
