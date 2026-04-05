@@ -131,7 +131,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Happily Ever After
     RegionName.happily: SlayThePrincessRegionData(RegionName.happily, Chapter.three),
-    RegionName.happily_paranoid: SlayThePrincessRegionData(RegionName.happily, Chapter.three),
+    RegionName.happily_skeptic: SlayThePrincessRegionData(RegionName.happily, Chapter.three),
     RegionName.happily_opportunist: SlayThePrincessRegionData(RegionName.happily, Chapter.three),
 
     # META
@@ -405,7 +405,7 @@ def set_region_rules(world, regions: dict[str, Region]):
     )
 
     # Damsel → Happily / Grey Burned (entry)
-    regions[RegionName.damsel].connect(regions[RegionName.happily_paranoid + entry])
+    regions[RegionName.damsel].connect(regions[RegionName.happily_skeptic + entry])
     regions[RegionName.damsel].connect(regions[RegionName.happily_opportunist + entry])
 
     regions[RegionName.damsel].connect(
@@ -477,7 +477,7 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.grey_burned + entry].connect(regions[RegionName.grey + entry])
 
     # Happily (entry)
-    regions[RegionName.happily_paranoid + entry].connect(regions[RegionName.happily + entry])
+    regions[RegionName.happily_skeptic + entry].connect(regions[RegionName.happily + entry])
     regions[RegionName.happily_opportunist + entry].connect(regions[RegionName.happily + entry])
 
     # endregion
@@ -687,9 +687,9 @@ def set_region_rules(world, regions: dict[str, Region]):
     )  # Grey Burned
 
     # Happily (entry)
-    regions[RegionName.happily_paranoid + entry].connect(
-        connecting_region=regions[RegionName.happily_paranoid],
-        rule=lambda state: state.has(ItemName.happily, world.player) and has_voices(state, world, [ItemName.paranoid])
+    regions[RegionName.happily_skeptic + entry].connect(
+        connecting_region=regions[RegionName.happily_skeptic],
+        rule=lambda state: state.has(ItemName.happily, world.player) and has_voices(state, world, [ItemName.skeptic])
     )  # Happily Paranoid
 
     regions[RegionName.happily_opportunist + entry].connect(
@@ -764,7 +764,7 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.grey_burned].connect(regions[RegionName.grey])
 
     # Happily
-    regions[RegionName.happily_paranoid].connect(regions[RegionName.happily])
+    regions[RegionName.happily_skeptic].connect(regions[RegionName.happily])
     regions[RegionName.happily_opportunist].connect(regions[RegionName.happily])
     # endregion
 
