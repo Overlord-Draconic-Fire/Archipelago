@@ -1,7 +1,7 @@
 from typing import Dict, NamedTuple, Optional, Callable, Any
 
 from BaseClasses import Location, CollectionState
-from .Names import LocationName, RegionName
+from .Names import ItemName, LocationName, RegionName
 from .Rules import max_reachable_vessels
 
 offset: int = 63900000
@@ -35,16 +35,16 @@ mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         rule=lambda state, world: max_reachable_vessels(state, world) > 0),
     LocationName.mirror2: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 1,
-        rule=lambda state, world: max_reachable_vessels(state, world) > 1),
+        rule=lambda state, world: (max_reachable_vessels(state, world) > 1) and state.has(ItemName.goddess, world.player)),
     LocationName.mirror3: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 2,
-        rule=lambda state, world: max_reachable_vessels(state, world) > 2),
+        rule=lambda state, world: (max_reachable_vessels(state, world) > 2) and state.has(ItemName.goddess, world.player)),
     LocationName.mirror4: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 3,
-        rule=lambda state, world: max_reachable_vessels(state, world) > 3),
+        rule=lambda state, world: (max_reachable_vessels(state, world) > 3) and state.has(ItemName.goddess, world.player)),
     LocationName.mirror5: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 4,
-        rule=lambda state, world: max_reachable_vessels(state, world) > 4),
+        rule=lambda state, world: (max_reachable_vessels(state, world) > 4) and state.has(ItemName.goddess, world.player)),
 }
 
 princess_location_data_table: Dict[str, SlayThePrincessLocationData] = {
