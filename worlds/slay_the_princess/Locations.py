@@ -25,8 +25,6 @@ class SlayThePrincessLocationData(NamedTuple):
 
 others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.win: SlayThePrincessLocationData(RegionName.win),
-    LocationName.chap2: SlayThePrincessLocationData(RegionName.chap2, offset + specials + 0),
-    LocationName.chap3: SlayThePrincessLocationData(RegionName.chap3, offset + specials + 1)
 }
 
 mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -75,6 +73,11 @@ princess_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.goddess: SlayThePrincessLocationData(RegionName.goddess + entry, offset + princess + 22)
 }
 
+global_chapter_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+    LocationName.chap2: SlayThePrincessLocationData(RegionName.chap2, offset + princess + 23),
+    LocationName.chap3: SlayThePrincessLocationData(RegionName.chap3, offset + princess + 24)
+}
+
 heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.adversary_heart: SlayThePrincessLocationData(RegionName.adversary_dagger, offset + heart + 0),
     LocationName.tower_heart: SlayThePrincessLocationData(RegionName.tower, offset + heart + 1),
@@ -113,6 +116,7 @@ heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 location_data_table: Dict[str, SlayThePrincessLocationData] = {**others_location_data_table,
                                                                **mirror_location_data_table,
                                                                **princess_location_data_table,
+                                                               **global_chapter_location_data_table,
                                                                **heart_location_data_table}
 
 location_table = {name: data.address for name, data in location_data_table.items() if data.address is not None}

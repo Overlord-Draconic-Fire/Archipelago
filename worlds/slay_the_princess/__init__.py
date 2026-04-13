@@ -2,10 +2,12 @@ from typing import List
 
 from BaseClasses import Region, CollectionState, ItemClassification
 from worlds.AutoWorld import World
-from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table
-from .Locations import SlayThePrincessLocation, location_data_table, location_table
+from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
+    dagger_princess_item_data_table, dagger_chapter_item_data_table
+from .Locations import SlayThePrincessLocation, location_table, others_location_data_table, princess_location_data_table, \
+    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table
 from .Names import ItemName, LocationName, RegionName
-from .Options import SlayThePrincessOptions, slay_the_princess_option_groups, resolve_options
+from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
 from .Rules import has_dagger_for
 
@@ -17,32 +19,18 @@ class SlayThePrincessWorld(World):
 
     # Class Data
     game = "Slay The Princess"
-    #options_dataclass = Celeste64Options
-    #options: Celeste64Options
+    options_dataclass = SlayThePrincessOptions
+    options: SlayThePrincessOptions
     location_name_to_id = location_table
     item_name_to_id = item_table
-
-    """def generate_early(self) -> None:
-        resolve_options(self)"""
+    optional_location_tables = {
+        "chapter_rando": princess_location_data_table,
+        "global_chapter_rando": global_chapter_location_data_table,
+        "heart_rando": heart_location_data_table,
+        "mirror_rando": mirror_location_data_table,
+    }
 
     def create_regions(self) -> None:
-        """
-        sanity_tables = (
-            (self.options.friendsanity, friend_location_data_table),
-            (self.options.signsanity, sign_location_data_table),
-            (self.options.carsanity, car_location_data_table),
-        )
-
-        for enabled, data_table in sanity_tables:
-            if not enabled:
-                continue
-
-            region.add_locations({
-                location_name: location_data.address for location_name, location_data in data_table.items()
-                if data.region == region_name
-            }, SlayThePrincessLocation)
-        """
-
         # Create regions
         regions: dict[str, Region] = {}
         for region_name, region_data in region_data_table.items():
@@ -59,12 +47,18 @@ class SlayThePrincessWorld(World):
         # Create entrance
         set_region_rules(self, regions)
 
+        # Build active locations table from always-on + option-gated tables.
+        active_location_data_table = dict(others_location_data_table)
+        for option_name, data_table in self.optional_location_tables.items():
+            if getattr(self.options, option_name):
+                active_location_data_table.update(data_table)
+
         # Create locations.
         for region_name, region_data in regions.items():
             region = self.multiworld.get_region(region_name, self.player)
 
             region.add_locations({
-                location_name: location_data.address for location_name, location_data in location_data_table.items()
+                location_name: location_data.address for location_name, location_data in active_location_data_table.items()
                 if location_data.region == region_name
             }, SlayThePrincessLocation)
 
@@ -72,6 +66,9 @@ class SlayThePrincessWorld(World):
 
     def create_goal_region(self) -> None:
         # Credit (autre que good et oblivion)
+
+        # region.add_locations for LocationName.win !!!
+
         victory_location = self.multiworld.get_location(LocationName.win, self.player)
         victory_location.place_locked_item(SlayThePrincessItem(ItemName.credits_reached, ItemClassification.progression, None, self.player))
         self.multiworld.completion_condition[self.player] = lambda state: state.has(ItemName.credits_reached, self.player)
@@ -81,10 +78,21 @@ class SlayThePrincessWorld(World):
 
     def create_items(self) -> None:
         item_pool: List[SlayThePrincessItem] = []
-        item_pool += [self.create_item(name) for name in princess_item_data_table.keys()]
-        item_pool += [self.create_item(name) for name in voice_item_data_table.keys()]
-        item_pool += [self.create_item(ItemName.dagger)]
-        item_pool += [self.create_item(ItemName.gift) for _ in range(5)]
+
+        if self.options.chapter_access in [2, 4]:
+            item_pool += [self.create_item(name) for name in princess_item_data_table.keys()]
+        if self.options.chapter_access in [3, 4]:
+            item_pool += [self.create_item(name) for name in voice_item_data_table.keys()]
+
+        if self.options.pristine_dagger_rando == 2:
+            item_pool += [self.create_item(ItemName.dagger)]
+        if self.options.pristine_dagger_rando == 3:
+            item_pool += [self.create_item(name) for name in dagger_chapter_item_data_table.keys()]
+        if self.options.pristine_dagger_rando == 4:
+            item_pool += [self.create_item(name) for name in dagger_princess_item_data_table.keys()]
+
+        if self.options.gift_rando:
+            item_pool += [self.create_item(ItemName.gift) for _ in range(5)]
 
         item_pool += [self.create_item(ItemName.filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 1)]
         self.multiworld.itempool += item_pool
@@ -94,3 +102,14 @@ class SlayThePrincessWorld(World):
 
     def connect_entrances(self) -> None:
         pass
+
+    def fill_slot_data(self):
+        return {
+            "chapter_access": self.options.chapter_access.value,
+            "pristine_dagger_rando": self.options.pristine_dagger_rando.value,
+            "gift_rando": self.options.gift_rando.value,
+            "chapter_rando": self.options.chapter_rando.value,
+            "global_chapter_rando": self.options.global_chapter_rando.value,
+            "heart_rando": self.options.heart_rando.value,
+            "mirror_rando": self.options.mirror_rando.value,
+        }
