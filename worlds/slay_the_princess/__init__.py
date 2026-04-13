@@ -90,7 +90,13 @@ class SlayThePrincessWorld(World):
         self.multiworld.itempool += item_pool
 
     def set_rules(self) -> None:
-        pass
+        for location_name, location_data in location_data_table.items():
+            if location_data.rule is None:
+                continue
+
+            location = self.multiworld.get_location(location_name, self.player)
+            # location_data.rule expects (state, world); bind this world instance.
+            location.access_rule = (lambda state, rule=location_data.rule: rule(state, self))
 
     def connect_entrances(self) -> None:
         pass
