@@ -58,9 +58,8 @@ VESSEL_GRAPH = {
 }
 
 
-def has_dagger_for(state: CollectionState, world, dagger: str) -> bool:
-    #mode = world.options.dagger_mode
-    mode = 1
+def has_dagger(state: CollectionState, world, dagger: str) -> bool:
+    mode = world.options.pristine_dagger_rando
     if mode == 0:
         return True
     elif mode == 1:
@@ -77,15 +76,16 @@ def has_dagger_for(state: CollectionState, world, dagger: str) -> bool:
 
     return state.has(dagger, world.player)
 
+def has_princess(state: CollectionState, world, princess: str) -> bool:
+    return world.options.chapter_access in [0, 2] or state.has(princess, world.player)
 
 def has_voice(state: CollectionState, world, voice: str) -> bool:
-    # return not world.options.rando_voice or state.has(voice, world.player)
-    return state.has(voice, world.player)
+    return world.options.chapter_access in [0, 1] or state.has(voice, world.player)
 
 
 def has_voices(state: CollectionState, world, voices: List[str]) -> bool:
-    """if not world.options.rando_voice:
-        return True"""
+    if world.options.chapter_access in [0, 1]:
+        return True
 
     for voice in voices:
         if not state.has(voice, world.player):
@@ -94,7 +94,7 @@ def has_voices(state: CollectionState, world, voices: List[str]) -> bool:
 
 
 def has_all_voices(state: CollectionState, world) -> bool:
-    return has_voices(state, world, [ItemName.stubborn, ItemName.broken, ItemName.cold, ItemName.paranoid, ItemName.cheated, ItemName.hunted, ItemName.opportunist, ItemName.contrarian, ItemName.skeptic, ItemName.smitten])
+    return world.options.chapter_access in [0, 1] or has_voices(state, world, [ItemName.stubborn, ItemName.broken, ItemName.cold, ItemName.paranoid, ItemName.cheated, ItemName.hunted, ItemName.opportunist, ItemName.contrarian, ItemName.skeptic, ItemName.smitten])
 
 
 def max_reachable_vessels(state: CollectionState, world) -> int:
@@ -125,7 +125,12 @@ def max_reachable_vessels(state: CollectionState, world) -> int:
         if count >= 5:
             break
 
-    return min(count, state.count(ItemName.gift, world.player))
+    if world.options.gift_rando:
+        max_count = state.count(ItemName.gift, world.player)
+    else:
+        max_count = 5
+
+    return min(count, max_count)
 
 
 def test_goal(state: CollectionState, world) -> bool:

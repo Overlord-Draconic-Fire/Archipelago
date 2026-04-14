@@ -1,15 +1,19 @@
 from typing import List
 
 from BaseClasses import Region, CollectionState, ItemClassification
-from worlds.AutoWorld import World
+from worlds.AutoWorld import World, WebWorld
 from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
     dagger_princess_item_data_table, dagger_chapter_item_data_table
 from .Locations import SlayThePrincessLocation, location_table, others_location_data_table, princess_location_data_table, \
-    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table
+    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
-from .Rules import has_dagger_for
+from .Rules import has_dagger
+
+
+class SlayThePrincessWeb(WebWorld):
+    option_groups = slay_the_princess_option_groups
 
 
 class SlayThePrincessWorld(World):
@@ -19,6 +23,7 @@ class SlayThePrincessWorld(World):
 
     # Class Data
     game = "Slay The Princess"
+    web = SlayThePrincessWeb()
     options_dataclass = SlayThePrincessOptions
     options: SlayThePrincessOptions
     location_name_to_id = location_table
@@ -79,16 +84,16 @@ class SlayThePrincessWorld(World):
     def create_items(self) -> None:
         item_pool: List[SlayThePrincessItem] = []
 
-        if self.options.chapter_access in [2, 4]:
+        if self.options.chapter_access in [1, 3]:
             item_pool += [self.create_item(name) for name in princess_item_data_table.keys()]
-        if self.options.chapter_access in [3, 4]:
+        if self.options.chapter_access in [2, 3]:
             item_pool += [self.create_item(name) for name in voice_item_data_table.keys()]
 
-        if self.options.pristine_dagger_rando == 2:
+        if self.options.pristine_dagger_rando == 1:
             item_pool += [self.create_item(ItemName.dagger)]
-        if self.options.pristine_dagger_rando == 3:
+        if self.options.pristine_dagger_rando == 2:
             item_pool += [self.create_item(name) for name in dagger_chapter_item_data_table.keys()]
-        if self.options.pristine_dagger_rando == 4:
+        if self.options.pristine_dagger_rando == 3:
             item_pool += [self.create_item(name) for name in dagger_princess_item_data_table.keys()]
 
         if self.options.gift_rando:
@@ -103,7 +108,6 @@ class SlayThePrincessWorld(World):
                 continue
 
             location = self.multiworld.get_location(location_name, self.player)
-            # location_data.rule expects (state, world); bind this world instance.
             location.access_rule = (lambda state, rule=location_data.rule: rule(state, self))
 
     def connect_entrances(self) -> None:
