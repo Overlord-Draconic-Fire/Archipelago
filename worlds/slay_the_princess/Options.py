@@ -33,7 +33,7 @@ class PristineDaggerRando(Choice):
     option_one_dagger = 1
     option_chapter_dagger = 2
     option_princess_dagger = 3
-    default = 3
+    default = 1
 
 
 class GiftRando(DefaultOnToggle):
