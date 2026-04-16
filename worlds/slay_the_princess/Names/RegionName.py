@@ -47,6 +47,7 @@ wraith_cold = "Chapter III - The Wraith (Cold)"
 wraith_opportunist = "Chapter III - The Wraith (Opportunist)"
 
 clarity = "Chapter ??? - The Moment of Clarity"
+clarity_dagger = "Chapter ??? - The Moment of Clarity [Dagger Only]"
 
 razor_chap3 = "Chapter III - Razor"
 razor_no_way = "Chapter III - No Way Out"

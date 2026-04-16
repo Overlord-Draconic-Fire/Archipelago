@@ -79,6 +79,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Moment of Clarity
     RegionName.clarity: SlayThePrincessRegionData(RegionName.clarity, Chapter.three),
+    RegionName.clarity_dagger: SlayThePrincessRegionData(RegionName.clarity, Chapter.three),
 
     # Razor
     RegionName.razor_chap3: SlayThePrincessRegionData(RegionName.razor_chap3, Chapter.three),
@@ -788,6 +789,11 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.wild_dagger],
         rule=lambda state: has_dagger(state, world, ItemName.dagger_wild)
     )  # Chapter III Wild Dagger Only
+
+    regions[RegionName.clarity].connect(
+        connecting_region=regions[RegionName.clarity_dagger],
+        rule=lambda state: has_dagger(state, world, ItemName.dagger_clarity)
+    )  # Chapter ??? Clarity Dagger Only
     # endregion
 
     # region Special (Furry Weathered Heart)
