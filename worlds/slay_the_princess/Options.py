@@ -20,19 +20,19 @@ class ChapterAccessRando(Choice):
     default = 3
 
 
-class PristineDaggerRando(Choice):
+class PristineBladeRando(Choice):
     """
-    Controls how many Pristine Daggers are available and shuffles them into the item pool.
-    - Nothing: Pristine Dagger is not randomized
-    - One Dagger: Only one Pristine Dagger is available for the entire game (+1 items)
-    - Chapter Dagger: One Pristine Dagger per chapter [The fourth one is for the goddess] (+4 items)
-    - Princess Dagger: One Pristine Dagger per princess (+23 items)
+    Controls how many Pristine Blades are available and shuffles them into the item pool.
+    - Nothing: Pristine Blade is not randomized
+    - One Blade: Only one Pristine Blade is available for the entire game (+1 items)
+    - Chapter Blade: One Pristine Blade per chapter [The fourth one is for the goddess] (+4 items)
+    - Princess Blade: One Pristine Blade per princess (+23 items)
     """
     display_name = "Pristine Dagger Rando"
     option_nothing = 0
-    option_one_dagger = 1
-    option_chapter_dagger = 2
-    option_princess_dagger = 3
+    option_one_blade = 1
+    option_chapter_blade = 2
+    option_princess_blade = 3
     default = 1
 
 
@@ -81,8 +81,8 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     chapter_access: ChapterAccessRando
     #couple_princesses_and_voices: CouplePrincessesAndVoices
     #all_voices_chapter: AllVoicesChapter
-    pristine_dagger_rando: PristineDaggerRando
-    #force_chapter1_dagger: ForceChapter1DaggerRando
+    pristine_blade_rando: PristineBladeRando
+    #force_chapter1_blade: ForceChapter1BladeRando
     gift_rando: GiftRando
     #narrator_rando: NarratorRando
     #good_oblivion_ending: GoodOblivionEnding
@@ -105,8 +105,8 @@ slay_the_princess_option_groups = [
         ChapterAccessRando,
         #CouplePrincessesAndVoices
         #AllVoicesChapter
-        PristineDaggerRando,
-        #ForceChapter1DaggerRando,
+        PristineBladeRando,
+        #ForceChapter1BladeRando,
         GiftRando,
         #NarratorRando,
         #GoodOblivionEnding,

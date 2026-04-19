@@ -3,13 +3,13 @@ from typing import List
 from BaseClasses import Region, CollectionState, ItemClassification
 from worlds.AutoWorld import World, WebWorld
 from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
-    dagger_princess_item_data_table, dagger_chapter_item_data_table
+    blade_princess_item_data_table, blade_chapter_item_data_table#, gallery_item_data_table
 from .Locations import SlayThePrincessLocation, location_table, others_location_data_table, princess_location_data_table, \
     global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
-from .Rules import has_dagger
+from .Rules import has_blade
 
 
 class SlayThePrincessWeb(WebWorld):
@@ -89,12 +89,12 @@ class SlayThePrincessWorld(World):
         if self.options.chapter_access in [2, 3]:
             item_pool += [self.create_item(name) for name in voice_item_data_table.keys()]
 
-        if self.options.pristine_dagger_rando == 1:
-            item_pool += [self.create_item(ItemName.dagger)]
-        if self.options.pristine_dagger_rando == 2:
-            item_pool += [self.create_item(name) for name in dagger_chapter_item_data_table.keys()]
-        if self.options.pristine_dagger_rando == 3:
-            item_pool += [self.create_item(name) for name in dagger_princess_item_data_table.keys()]
+        if self.options.pristine_blade_rando == 1:
+            item_pool += [self.create_item(ItemName.blade)]
+        if self.options.pristine_blade_rando == 2:
+            item_pool += [self.create_item(name) for name in blade_chapter_item_data_table.keys()]
+        if self.options.pristine_blade_rando == 3:
+            item_pool += [self.create_item(name) for name in blade_princess_item_data_table.keys()]
 
         if self.options.gift_rando:
             item_pool += [self.create_item(ItemName.gift) for _ in range(5)]
@@ -116,7 +116,7 @@ class SlayThePrincessWorld(World):
     def fill_slot_data(self):
         return {
             "chapter_access": self.options.chapter_access.value,
-            "pristine_dagger_rando": self.options.pristine_dagger_rando.value,
+            "pristine_blade_rando": self.options.pristine_blade_rando.value,
             "gift_rando": self.options.gift_rando.value,
             "chapter_rando": self.options.chapter_rando.value,
             "global_chapter_rando": self.options.global_chapter_rando.value,

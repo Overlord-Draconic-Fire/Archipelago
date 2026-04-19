@@ -7,7 +7,7 @@ from .Names import ItemName
 offset: int = 63900000
 princess: int = 100
 voice: int = 200
-dagger: int = 300
+blade: int = 300
 other: int = 400
 memories: int = 10000
 
@@ -27,41 +27,41 @@ other_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.gift: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression),
 }
 
-dagger_item_data_table: Dict[str, SlayThePrincessItemData] = {
-    ItemName.dagger: SlayThePrincessItemData(offset + dagger + 0, ItemClassification.progression),
+blade_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.blade: SlayThePrincessItemData(offset + blade + 0, ItemClassification.progression),
 }
 
-dagger_chapter_item_data_table: Dict[str, SlayThePrincessItemData] = {
-    ItemName.dagger1: SlayThePrincessItemData(offset + dagger + 1, ItemClassification.progression),
-    ItemName.dagger2: SlayThePrincessItemData(offset + dagger + 2, ItemClassification.progression),
-    ItemName.dagger3: SlayThePrincessItemData(offset + dagger + 3, ItemClassification.progression),
-    ItemName.dagger4: SlayThePrincessItemData(offset + dagger + 4, ItemClassification.progression),
+blade_chapter_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.blade1: SlayThePrincessItemData(offset + blade + 1, ItemClassification.progression),
+    ItemName.blade2: SlayThePrincessItemData(offset + blade + 2, ItemClassification.progression),
+    ItemName.blade3: SlayThePrincessItemData(offset + blade + 3, ItemClassification.progression),
+    ItemName.blade4: SlayThePrincessItemData(offset + blade + 4, ItemClassification.progression),
 }
 
-dagger_princess_item_data_table: Dict[str, SlayThePrincessItemData] = {
-    ItemName.dagger_princess: SlayThePrincessItemData(offset + dagger + 5, ItemClassification.progression),
-    ItemName.dagger_adversary: SlayThePrincessItemData(offset + dagger + 6, ItemClassification.progression),
-    ItemName.dagger_tower: SlayThePrincessItemData(offset + dagger + 7, ItemClassification.progression),
-    ItemName.dagger_spectre: SlayThePrincessItemData(offset + dagger + 8, ItemClassification.progression),
-    ItemName.dagger_nightmare: SlayThePrincessItemData(offset + dagger + 9, ItemClassification.progression),
-    ItemName.dagger_razor: SlayThePrincessItemData(offset + dagger + 10, ItemClassification.progression),
-    ItemName.dagger_beast: SlayThePrincessItemData(offset + dagger + 11, ItemClassification.progression),
-    ItemName.dagger_witch: SlayThePrincessItemData(offset + dagger + 12, ItemClassification.progression),
-    ItemName.dagger_stranger: SlayThePrincessItemData(offset + dagger + 13, ItemClassification.progression),
-    ItemName.dagger_prisoner: SlayThePrincessItemData(offset + dagger + 14, ItemClassification.progression),
-    ItemName.dagger_damsel: SlayThePrincessItemData(offset + dagger + 15, ItemClassification.progression),
-    ItemName.dagger_needle: SlayThePrincessItemData(offset + dagger + 16, ItemClassification.progression),
-    ItemName.dagger_fury: SlayThePrincessItemData(offset + dagger + 17, ItemClassification.progression),
-    ItemName.dagger_apotheosis: SlayThePrincessItemData(offset + dagger + 18, ItemClassification.progression),
-    ItemName.dagger_dragon: SlayThePrincessItemData(offset + dagger + 19, ItemClassification.progression),
-    ItemName.dagger_den: SlayThePrincessItemData(offset + dagger + 20, ItemClassification.progression),
-    ItemName.dagger_clarity: SlayThePrincessItemData(offset + dagger + 21, ItemClassification.progression),
-    ItemName.dagger_wild: SlayThePrincessItemData(offset + dagger + 22, ItemClassification.progression),
-    ItemName.dagger_thorn: SlayThePrincessItemData(offset + dagger + 23, ItemClassification.progression),
-    ItemName.dagger_cage: SlayThePrincessItemData(offset + dagger + 24, ItemClassification.progression),
-    ItemName.dagger_grey: SlayThePrincessItemData(offset + dagger + 25, ItemClassification.progression),
-    ItemName.dagger_happily: SlayThePrincessItemData(offset + dagger + 26, ItemClassification.progression),
-    ItemName.dagger_goddess: SlayThePrincessItemData(offset + dagger + 27, ItemClassification.progression),
+blade_princess_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.blade_princess: SlayThePrincessItemData(offset + blade + 5, ItemClassification.progression),
+    ItemName.blade_adversary: SlayThePrincessItemData(offset + blade + 6, ItemClassification.progression),
+    ItemName.blade_tower: SlayThePrincessItemData(offset + blade + 7, ItemClassification.progression),
+    ItemName.blade_spectre: SlayThePrincessItemData(offset + blade + 8, ItemClassification.progression),
+    ItemName.blade_nightmare: SlayThePrincessItemData(offset + blade + 9, ItemClassification.progression),
+    ItemName.blade_razor: SlayThePrincessItemData(offset + blade + 10, ItemClassification.progression),
+    ItemName.blade_beast: SlayThePrincessItemData(offset + blade + 11, ItemClassification.progression),
+    ItemName.blade_witch: SlayThePrincessItemData(offset + blade + 12, ItemClassification.progression),
+    ItemName.blade_stranger: SlayThePrincessItemData(offset + blade + 13, ItemClassification.progression),
+    ItemName.blade_prisoner: SlayThePrincessItemData(offset + blade + 14, ItemClassification.progression),
+    ItemName.blade_damsel: SlayThePrincessItemData(offset + blade + 15, ItemClassification.progression),
+    ItemName.blade_needle: SlayThePrincessItemData(offset + blade + 16, ItemClassification.progression),
+    ItemName.blade_fury: SlayThePrincessItemData(offset + blade + 17, ItemClassification.progression),
+    ItemName.blade_apotheosis: SlayThePrincessItemData(offset + blade + 18, ItemClassification.progression),
+    ItemName.blade_dragon: SlayThePrincessItemData(offset + blade + 19, ItemClassification.progression),
+    ItemName.blade_den: SlayThePrincessItemData(offset + blade + 20, ItemClassification.progression),
+    ItemName.blade_clarity: SlayThePrincessItemData(offset + blade + 21, ItemClassification.progression),
+    ItemName.blade_wild: SlayThePrincessItemData(offset + blade + 22, ItemClassification.progression),
+    ItemName.blade_thorn: SlayThePrincessItemData(offset + blade + 23, ItemClassification.progression),
+    ItemName.blade_cage: SlayThePrincessItemData(offset + blade + 24, ItemClassification.progression),
+    ItemName.blade_grey: SlayThePrincessItemData(offset + blade + 25, ItemClassification.progression),
+    ItemName.blade_happily: SlayThePrincessItemData(offset + blade + 26, ItemClassification.progression),
+    ItemName.blade_goddess: SlayThePrincessItemData(offset + blade + 27, ItemClassification.progression),
 }
 
 princess_item_data_table: Dict[str, SlayThePrincessItemData] = {
@@ -106,9 +106,9 @@ voice_item_data_table: Dict[str, SlayThePrincessItemData] = {
 }
 
 item_data_table: Dict[str, SlayThePrincessItemData] = {**other_item_data_table,
-                                                       **dagger_item_data_table,
-                                                       **dagger_chapter_item_data_table,
-                                                       **dagger_princess_item_data_table,
+                                                       **blade_item_data_table,
+                                                       **blade_chapter_item_data_table,
+                                                       **blade_princess_item_data_table,
                                                        **princess_item_data_table,
                                                        **voice_item_data_table}
 

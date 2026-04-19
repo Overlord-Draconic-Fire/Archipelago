@@ -3,7 +3,7 @@ from enum import Enum
 
 from BaseClasses import Region
 from .Names import RegionName, ItemName
-from .Rules import has_voice, has_all_voices, has_voices, has_dagger, max_reachable_vessels, has_princess
+from .Rules import has_voice, has_all_voices, has_voices, has_blade, max_reachable_vessels, has_princess
 
 entry = " ENTRY"
 
@@ -34,7 +34,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Chapters 2
     RegionName.adversary: SlayThePrincessRegionData(RegionName.adversary, Chapter.two),
-    RegionName.adversary_dagger: SlayThePrincessRegionData(RegionName.adversary, Chapter.two),
+    RegionName.adversary_blade: SlayThePrincessRegionData(RegionName.adversary, Chapter.two),
     RegionName.tower: SlayThePrincessRegionData(RegionName.tower, Chapter.two),
     RegionName.spectre: SlayThePrincessRegionData(RegionName.spectre, Chapter.two),
     RegionName.nightmare: SlayThePrincessRegionData(RegionName.nightmare, Chapter.two),
@@ -42,7 +42,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.beast: SlayThePrincessRegionData(RegionName.beast, Chapter.two),
     RegionName.witch: SlayThePrincessRegionData(RegionName.witch, Chapter.two),
     RegionName.stranger: SlayThePrincessRegionData(RegionName.stranger, Chapter.two),
-    RegionName.stranger_dagger: SlayThePrincessRegionData(RegionName.stranger, Chapter.two),
+    RegionName.stranger_blade: SlayThePrincessRegionData(RegionName.stranger, Chapter.two),
     RegionName.prisoner: SlayThePrincessRegionData(RegionName.prisoner, Chapter.two),
     RegionName.damsel: SlayThePrincessRegionData(RegionName.damsel, Chapter.two),
 
@@ -79,7 +79,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Moment of Clarity
     RegionName.clarity: SlayThePrincessRegionData(RegionName.clarity, Chapter.three),
-    RegionName.clarity_dagger: SlayThePrincessRegionData(RegionName.clarity, Chapter.three),
+    RegionName.clarity_blade: SlayThePrincessRegionData(RegionName.clarity, Chapter.three),
 
     # Razor
     RegionName.razor_chap3: SlayThePrincessRegionData(RegionName.razor_chap3, Chapter.three),
@@ -105,7 +105,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Wild
     RegionName.wild: SlayThePrincessRegionData(RegionName.wild, Chapter.three),
-    RegionName.wild_dagger: SlayThePrincessRegionData(RegionName.wild, Chapter.three, False),
+    RegionName.wild_blade: SlayThePrincessRegionData(RegionName.wild, Chapter.three, False),
     RegionName.wild_beast_broken: SlayThePrincessRegionData(RegionName.wild, Chapter.three),
     RegionName.wild_beast_contrarian: SlayThePrincessRegionData(RegionName.wild, Chapter.three),
     RegionName.wild_beast_opportunist: SlayThePrincessRegionData(RegionName.wild, Chapter.three),
@@ -178,41 +178,41 @@ def set_region_rules(world, regions: dict[str, Region]):
 
     regions[RegionName.one].connect(
         connecting_region=regions[RegionName.adversary + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_princess)
+        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
     )  # Chapter I -> Adversary
 
     regions[RegionName.one].connect(
         connecting_region=regions[RegionName.tower + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_princess)
+        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
     )  # Chapter I -> Tower
 
     regions[RegionName.one].connect(
         connecting_region=regions[RegionName.spectre + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_princess)
+        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
     )  # Chapter I -> Spectre
 
     regions[RegionName.one].connect(regions[RegionName.nightmare + entry])  # Chapter I -> Nightmare
 
     regions[RegionName.one].connect(
         connecting_region=regions[RegionName.razor + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_princess)
+        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
     )  # Chapter I -> Razor
 
     regions[RegionName.one].connect(
         connecting_region=regions[RegionName.beast + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_princess)
+        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
     )  # Chapter I -> Beast
 
     regions[RegionName.one].connect(
         connecting_region=regions[RegionName.witch + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_princess)
+        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
     )  # Chapter I -> Witch
 
     regions[RegionName.one].connect(regions[RegionName.stranger + entry])  # Chapter I -> Stranger
 
     regions[RegionName.one].connect(
         connecting_region=regions[RegionName.prisoner + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_princess)
+        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
     )  # Chapter I -> Prisoner
 
     regions[RegionName.one].connect(regions[RegionName.damsel + entry])  # Chapter I -> Damsel
@@ -270,32 +270,32 @@ def set_region_rules(world, regions: dict[str, Region]):
     )  # Chapter II Damsel entry -> Damsel
     # endregion
 
-    # region Chapter 2 Dagger Only
+    # region Chapter 2 Blade Only
     regions[RegionName.adversary].connect(
-        connecting_region=regions[RegionName.adversary_dagger],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_adversary)
-    )  # Chapter II Adversary Dagger Only
+        connecting_region=regions[RegionName.adversary_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
+    )  # Chapter II Adversary Blade Only
 
     regions[RegionName.stranger].connect(
-        connecting_region=regions[RegionName.stranger_dagger],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_stranger)
-    )  # Chapter II Stranger Dagger Only
+        connecting_region=regions[RegionName.stranger_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_stranger)
+    )  # Chapter II Stranger Blade Only
     # endregion
 
     # region Chapter 2 -> Chapter 3 Sub Entry
     # Adversary → Needle / Fury (entry)
     regions[RegionName.adversary].connect(
         connecting_region=regions[RegionName.needle_hunted + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_adversary)
+        rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
     )
     regions[RegionName.adversary].connect(
         connecting_region=regions[RegionName.needle_skeptic + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_adversary)
+        rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
     )
 
     regions[RegionName.adversary].connect(
         connecting_region=regions[RegionName.fury_other + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_adversary)
+        rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
     )
     regions[RegionName.adversary].connect(regions[RegionName.fury_pacifism + entry])
     regions[RegionName.adversary].connect(regions[RegionName.fury_unarmed_broken + entry])
@@ -304,23 +304,23 @@ def set_region_rules(world, regions: dict[str, Region]):
     # Tower → Apotheosis / Fury Tower (entry)
     regions[RegionName.tower].connect(
         connecting_region=regions[RegionName.fury_tower + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_tower)
+        rule=lambda state: has_blade(state, world, ItemName.blade_tower)
     )
 
     regions[RegionName.tower].connect(
         connecting_region=regions[RegionName.apotheosis_contrarian + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_tower)
+        rule=lambda state: has_blade(state, world, ItemName.blade_tower)
     )
     regions[RegionName.tower].connect(regions[RegionName.apotheosis_paranoid + entry])
 
     # Spectre → Dragon / Wraith (entry)
     regions[RegionName.spectre].connect(
         connecting_region=regions[RegionName.dragon_kind + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_spectre)
+        rule=lambda state: has_blade(state, world, ItemName.blade_spectre)
     )
     regions[RegionName.spectre].connect(
         connecting_region=regions[RegionName.dragon_harsh + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_spectre)
+        rule=lambda state: has_blade(state, world, ItemName.blade_spectre)
     )
 
     regions[RegionName.spectre].connect(regions[RegionName.wraith_cheated + entry])
@@ -331,11 +331,11 @@ def set_region_rules(world, regions: dict[str, Region]):
 
     regions[RegionName.nightmare].connect(
         connecting_region=regions[RegionName.wraith_cold + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_nightmare)
+        rule=lambda state: has_blade(state, world, ItemName.blade_nightmare)
     )
     regions[RegionName.nightmare].connect(
         connecting_region=regions[RegionName.wraith_opportunist + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_nightmare)
+        rule=lambda state: has_blade(state, world, ItemName.blade_nightmare)
     )
 
     # Razor → No Way / Race (entry)
@@ -345,64 +345,64 @@ def set_region_rules(world, regions: dict[str, Region]):
 
     regions[RegionName.razor].connect(
         connecting_region=regions[RegionName.razor_race_broken + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_razor)
+        rule=lambda state: has_blade(state, world, ItemName.blade_razor)
     )
     regions[RegionName.razor].connect(
         connecting_region=regions[RegionName.razor_race_paranoid + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_razor)
+        rule=lambda state: has_blade(state, world, ItemName.blade_razor)
     )
     regions[RegionName.razor].connect(
         connecting_region=regions[RegionName.razor_race_stubborn + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_razor)
+        rule=lambda state: has_blade(state, world, ItemName.blade_razor)
     )
 
     # Beast → Den / Wild (entry)
     regions[RegionName.beast].connect(regions[RegionName.den_skeptic + entry])
     regions[RegionName.beast].connect(
         connecting_region=regions[RegionName.den_stubborn + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_beast)
+        rule=lambda state: has_blade(state, world, ItemName.blade_beast)
     )
 
     regions[RegionName.beast].connect(regions[RegionName.wild_beast_broken + entry])
     regions[RegionName.beast].connect(regions[RegionName.wild_beast_contrarian + entry])
     regions[RegionName.beast].connect(
         connecting_region=regions[RegionName.wild_beast_opportunist + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_beast)
+        rule=lambda state: has_blade(state, world, ItemName.blade_beast)
     )
     regions[RegionName.beast].connect(
         connecting_region=regions[RegionName.wild_beast_stubborn + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_beast)
+        rule=lambda state: has_blade(state, world, ItemName.blade_beast)
     )
 
     # Witch → Thorn / Wild (entry)
     regions[RegionName.witch].connect(
         connecting_region=regions[RegionName.thorn_smitten + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_witch)
+        rule=lambda state: has_blade(state, world, ItemName.blade_witch)
     )
     regions[RegionName.witch].connect(
         connecting_region=regions[RegionName.thorn_cheated + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_witch)
+        rule=lambda state: has_blade(state, world, ItemName.blade_witch)
     )
 
     regions[RegionName.witch].connect(
         connecting_region=regions[RegionName.wild_witch_stubborn + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_witch))
+        rule=lambda state: has_blade(state, world, ItemName.blade_witch))
     regions[RegionName.witch].connect(
         connecting_region=regions[RegionName.wild_witch_cheated + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_witch))
+        rule=lambda state: has_blade(state, world, ItemName.blade_witch))
     regions[RegionName.witch].connect(regions[RegionName.wild_witch_paranoid + entry])
 
     # Prisoner → Cage / Grey (entry)
     regions[RegionName.prisoner].connect(
         connecting_region=regions[RegionName.cage_paranoid + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_prisoner)
+        rule=lambda state: has_blade(state, world, ItemName.blade_prisoner)
     )
     regions[RegionName.prisoner].connect(regions[RegionName.cage_cheated + entry])
     regions[RegionName.prisoner].connect(regions[RegionName.cage_broken + entry])
 
     regions[RegionName.prisoner].connect(
         connecting_region=regions[RegionName.grey_drowned + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_prisoner)
+        rule=lambda state: has_blade(state, world, ItemName.blade_prisoner)
     )
 
     # Damsel → Happily / Grey Burned (entry)
@@ -411,7 +411,7 @@ def set_region_rules(world, regions: dict[str, Region]):
 
     regions[RegionName.damsel].connect(
         connecting_region=regions[RegionName.grey_burned + entry],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_damsel)
+        rule=lambda state: has_blade(state, world, ItemName.blade_damsel)
     )
     # endregion
 
@@ -784,16 +784,16 @@ def set_region_rules(world, regions: dict[str, Region]):
     )
     # endregion
 
-    # region Chapter 3 Dagger Only
+    # region Chapter 3 Blade Only
     regions[RegionName.wild].connect(
-        connecting_region=regions[RegionName.wild_dagger],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_wild)
-    )  # Chapter III Wild Dagger Only
+        connecting_region=regions[RegionName.wild_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_wild)
+    )  # Chapter III Wild Blade Only
 
     regions[RegionName.clarity].connect(
-        connecting_region=regions[RegionName.clarity_dagger],
-        rule=lambda state: has_dagger(state, world, ItemName.dagger_clarity)
-    )  # Chapter ??? Clarity Dagger Only
+        connecting_region=regions[RegionName.clarity_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_clarity)
+    )  # Chapter ??? Clarity Blade Only
     # endregion
 
     # region Special (Furry Weathered Heart)
@@ -802,17 +802,17 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.fury_unarmed_contrarian].connect(regions[RegionName.fury_weathered_heart])
     regions[RegionName.fury_other].connect(regions[RegionName.fury_weathered_heart])
     regions[RegionName.fury_tower].connect(connecting_region=regions[RegionName.fury_weathered_heart],
-                                           rule=lambda state: has_dagger(state, world, ItemName.dagger_fury))
+                                           rule=lambda state: has_blade(state, world, ItemName.blade_fury))
     # endregion
 
     # region The Space Between
-    regions[RegionName.adversary_dagger].connect(regions[RegionName.space_between])
+    regions[RegionName.adversary_blade].connect(regions[RegionName.space_between])
     regions[RegionName.tower].connect(regions[RegionName.space_between])
     regions[RegionName.spectre].connect(regions[RegionName.space_between])
     regions[RegionName.nightmare].connect(regions[RegionName.space_between])
     regions[RegionName.beast].connect(regions[RegionName.space_between])
     regions[RegionName.witch].connect(regions[RegionName.space_between])
-    regions[RegionName.stranger_dagger].connect(regions[RegionName.space_between])
+    regions[RegionName.stranger_blade].connect(regions[RegionName.space_between])
     regions[RegionName.prisoner].connect(regions[RegionName.space_between])
     regions[RegionName.damsel].connect(regions[RegionName.space_between])
 

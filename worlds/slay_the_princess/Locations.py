@@ -79,13 +79,13 @@ global_chapter_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 }
 
 heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
-    LocationName.adversary_heart: SlayThePrincessLocationData(RegionName.adversary_dagger, offset + heart + 0),
+    LocationName.adversary_heart: SlayThePrincessLocationData(RegionName.adversary_blade, offset + heart + 0),
     LocationName.tower_heart: SlayThePrincessLocationData(RegionName.tower, offset + heart + 1),
     LocationName.spectre_heart: SlayThePrincessLocationData(RegionName.spectre, offset + heart + 2),
     LocationName.nightmare_heart: SlayThePrincessLocationData(RegionName.nightmare, offset + heart + 3),
     LocationName.beast_heart: SlayThePrincessLocationData(RegionName.beast, offset + heart + 4),
     LocationName.witch_heart: SlayThePrincessLocationData(RegionName.witch, offset + heart + 5),
-    LocationName.stranger_heart: SlayThePrincessLocationData(RegionName.stranger_dagger, offset + heart + 6),
+    LocationName.stranger_heart: SlayThePrincessLocationData(RegionName.stranger_blade, offset + heart + 6),
     LocationName.prisoner_heart_patient: SlayThePrincessLocationData(RegionName.prisoner, offset + heart + 7),
     LocationName.prisoner_heart_clever: SlayThePrincessLocationData(RegionName.prisoner, offset + heart + 8),
     LocationName.damsel_heart_gentle: SlayThePrincessLocationData(RegionName.damsel, offset + heart + 9),
@@ -98,10 +98,10 @@ heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.dragon_heart_main: SlayThePrincessLocationData(RegionName.dragon, offset + heart + 15),
     LocationName.dragon_heart_stencil: SlayThePrincessLocationData(RegionName.dragon, offset + heart + 16),
     LocationName.wraith_heart: SlayThePrincessLocationData(RegionName.wraith, offset + heart + 17),
-    LocationName.clarity_heart: SlayThePrincessLocationData(RegionName.clarity_dagger, offset + heart + 18),
+    LocationName.clarity_heart: SlayThePrincessLocationData(RegionName.clarity_blade, offset + heart + 18),
     LocationName.den_heart: SlayThePrincessLocationData(RegionName.den, offset + heart + 19),
     LocationName.wild_heart_curious: SlayThePrincessLocationData(RegionName.wild, offset + heart + 20),
-    LocationName.wild_heart_scarred: SlayThePrincessLocationData(RegionName.wild_dagger, offset + heart + 21),
+    LocationName.wild_heart_scarred: SlayThePrincessLocationData(RegionName.wild_blade, offset + heart + 21),
     LocationName.thorn_heart: SlayThePrincessLocationData(RegionName.thorn, offset + heart + 22),
     LocationName.cage_heart_open: SlayThePrincessLocationData(RegionName.cage, offset + heart + 23),
     LocationName.grey_heart_bright: SlayThePrincessLocationData(RegionName.grey_burned, offset + heart + 24),

@@ -3,30 +3,30 @@ from typing import List
 from BaseClasses import CollectionState
 from .Names import ItemName, RegionName
 
-CHAPTER_2_DAGGERS = {
-    ItemName.dagger_adversary,
-    ItemName.dagger_tower,
-    ItemName.dagger_spectre,
-    ItemName.dagger_nightmare,
-    ItemName.dagger_razor,
-    ItemName.dagger_beast,
-    ItemName.dagger_witch,
-    ItemName.dagger_stranger,
-    ItemName.dagger_prisoner,
-    ItemName.dagger_damsel,
+CHAPTER_2_BLADES = {
+    ItemName.blade_adversary,
+    ItemName.blade_tower,
+    ItemName.blade_spectre,
+    ItemName.blade_nightmare,
+    ItemName.blade_razor,
+    ItemName.blade_beast,
+    ItemName.blade_witch,
+    ItemName.blade_stranger,
+    ItemName.blade_prisoner,
+    ItemName.blade_damsel,
 }
 
-CHAPTER_3_DAGGERS = {
-    ItemName.dagger_needle,
-    ItemName.dagger_fury,
-    ItemName.dagger_apotheosis,
-    ItemName.dagger_dragon,
-    ItemName.dagger_den,
-    ItemName.dagger_wild,
-    ItemName.dagger_thorn,
-    ItemName.dagger_cage,
-    ItemName.dagger_grey,
-    ItemName.dagger_happily,
+CHAPTER_3_BLADES = {
+    ItemName.blade_needle,
+    ItemName.blade_fury,
+    ItemName.blade_apotheosis,
+    ItemName.blade_dragon,
+    ItemName.blade_den,
+    ItemName.blade_wild,
+    ItemName.blade_thorn,
+    ItemName.blade_cage,
+    ItemName.blade_grey,
+    ItemName.blade_happily,
 }
 
 VESSEL_GRAPH = {
@@ -58,23 +58,23 @@ VESSEL_GRAPH = {
 }
 
 
-def has_dagger(state: CollectionState, world, dagger: str) -> bool:
-    mode = world.options.pristine_dagger_rando
+def has_blade(state: CollectionState, world, blade: str) -> bool:
+    mode = world.options.pristine_blade_rando
     if mode == 0:
         return True
     elif mode == 1:
-        return state.has(ItemName.dagger, world.player)
+        return state.has(ItemName.blade, world.player)
     elif mode == 2:
-        if dagger is ItemName.dagger_princess:
-            return state.has(ItemName.dagger1, world.player)
-        elif dagger in CHAPTER_2_DAGGERS:
-            return state.has(ItemName.dagger2, world.player)
-        elif dagger in CHAPTER_3_DAGGERS:
-            return state.has(ItemName.dagger3, world.player)
-        elif dagger is ItemName.dagger_goddess:
-            return state.has(ItemName.dagger_goddess, world.player)
+        if blade is ItemName.blade_princess:
+            return state.has(ItemName.blade1, world.player)
+        elif blade in CHAPTER_2_BLADES:
+            return state.has(ItemName.blade2, world.player)
+        elif blade in CHAPTER_3_BLADES:
+            return state.has(ItemName.blade3, world.player)
+        elif blade is ItemName.blade_goddess:
+            return state.has(ItemName.blade_goddess, world.player)
 
-    return state.has(dagger, world.player)
+    return state.has(blade, world.player)
 
 def has_princess(state: CollectionState, world, princess: str) -> bool:
     return world.options.chapter_access in [0, 2] or state.has(princess, world.player)
