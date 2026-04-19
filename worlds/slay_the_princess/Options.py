@@ -28,7 +28,7 @@ class PristineBladeRando(Choice):
     - Chapter Blade: One Pristine Blade per chapter [The fourth one is for the goddess] (+4 items)
     - Princess Blade: One Pristine Blade per princess (+23 items)
     """
-    display_name = "Pristine Dagger Rando"
+    display_name = "Pristine Blade Rando"
     option_nothing = 0
     option_one_blade = 1
     option_chapter_blade = 2
