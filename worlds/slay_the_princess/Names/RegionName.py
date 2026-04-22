@@ -37,6 +37,7 @@ apotheosis_contrarian = "Chapter III - The Apotheosis (Contrarian)"
 apotheosis_paranoid = "Chapter III - The Apotheosis (Paranoid)"
 
 dragon = "Chapter III - The Princess and the Dragon"
+dragon_fuse = "Chapter III - The Princess and the Dragon (Fuse)"
 dragon_kind = "Chapter III - The Princess and the Dragon (Kind Princess)"
 dragon_harsh = "Chapter III - The Princess and the Dragon (Harsh Princess)"
 

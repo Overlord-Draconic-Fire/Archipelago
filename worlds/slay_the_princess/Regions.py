@@ -67,6 +67,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Dragon
     RegionName.dragon: SlayThePrincessRegionData(RegionName.dragon, Chapter.three),
+    RegionName.dragon_fuse: SlayThePrincessRegionData(RegionName.dragon, Chapter.three, False),
     RegionName.dragon_kind: SlayThePrincessRegionData(RegionName.dragon, Chapter.three),
     RegionName.dragon_harsh: SlayThePrincessRegionData(RegionName.dragon, Chapter.three),
 
@@ -805,6 +806,14 @@ def set_region_rules(world, regions: dict[str, Region]):
                                            rule=lambda state: has_blade(state, world, ItemName.blade_fury))
     # endregion
 
+    # region Special Dragon
+    regions[RegionName.dragon_harsh].connect(regions[RegionName.dragon_fuse])
+    regions[RegionName.dragon_kind].connect(
+        connecting_region=regions[RegionName.dragon_fuse],
+        rule=lambda state: has_blade(state, world, ItemName.blade_dragon)
+    )
+    # endregion
+
     # region The Space Between
     regions[RegionName.adversary_blade].connect(regions[RegionName.space_between])
     regions[RegionName.tower].connect(regions[RegionName.space_between])
@@ -821,7 +830,7 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.apotheosis].connect(regions[RegionName.space_between])
     regions[RegionName.dragon].connect(regions[RegionName.space_between])
     regions[RegionName.wraith].connect(regions[RegionName.space_between])
-    regions[RegionName.clarity].connect(regions[RegionName.space_between])
+    regions[RegionName.clarity_blade].connect(regions[RegionName.space_between])
     regions[RegionName.den].connect(regions[RegionName.space_between])
     regions[RegionName.wild].connect(regions[RegionName.space_between])
     regions[RegionName.thorn].connect(regions[RegionName.space_between])

@@ -96,7 +96,7 @@ heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.fury_heart_unwound: SlayThePrincessLocationData(RegionName.fury, offset + heart + 13),
     LocationName.apotheosis_heart: SlayThePrincessLocationData(RegionName.apotheosis, offset + heart + 14),
     LocationName.dragon_heart_main: SlayThePrincessLocationData(RegionName.dragon, offset + heart + 15),
-    LocationName.dragon_heart_stencil: SlayThePrincessLocationData(RegionName.dragon, offset + heart + 16),
+    LocationName.dragon_heart_stencil: SlayThePrincessLocationData(RegionName.dragon_fuse, offset + heart + 16),
     LocationName.wraith_heart: SlayThePrincessLocationData(RegionName.wraith, offset + heart + 17),
     LocationName.clarity_heart: SlayThePrincessLocationData(RegionName.clarity_blade, offset + heart + 18),
     LocationName.den_heart: SlayThePrincessLocationData(RegionName.den, offset + heart + 19),
