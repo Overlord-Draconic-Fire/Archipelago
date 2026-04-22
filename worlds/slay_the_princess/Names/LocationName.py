@@ -69,3 +69,39 @@ cage_heart_open = "An Open Heart, or a Watchful One"
 grey_heart_bright = "A Bright Heart"
 grey_heart_deep = "A Deep Heart"
 happily_heart = "An Honest Heart"
+
+# Gallery
+def _gallery_list(route_name, count) -> list[str]:
+    # Index 0 is intentionally empty so callers can use 1-based gallery indexes.
+    return [""] + [f"{route_name} (Gallery {i})" for i in range(1, count + 1)]
+
+# Beginnings & Endings
+gallery_princess: list[str] = _gallery_list("The Hero and the Princess", 18)
+gallery_spaceBetween: list[str] = _gallery_list("The Spaces Between", 9)
+gallery_finale: list[str] = _gallery_list("The End of Everything", 20)
+
+# 1st Row
+gallery_adversary: list[str] = _gallery_list("The Adversary", 20)
+gallery_tower: list[str] = _gallery_list("The Tower", 13)
+gallery_spectre: list[str] = _gallery_list("The Spectre", 18)
+gallery_nightmare: list[str] = _gallery_list("The Nightmare", 19)
+gallery_razor: list[str] = _gallery_list("The Razor", 20)
+gallery_beast: list[str] = _gallery_list("The Beast", 17)
+gallery_witch: list[str] = _gallery_list("The Witch", 20)
+gallery_stranger: list[str] = _gallery_list("The Stranger", 12)
+gallery_prisoner: list[str] = _gallery_list("The Prisoner", 17)
+gallery_damsel: list[str] = _gallery_list("The Damsel", 20)
+
+# 2nd Row
+gallery_needle: list[str] = _gallery_list("The Eye of the Needle", 20)
+gallery_fury: list[str] = _gallery_list("The Fury", 20)
+gallery_apotheosis: list[str] = _gallery_list("The Apotheosis", 20)
+gallery_dragon: list[str] = _gallery_list("The Princess and the Dragon", 20)
+gallery_wraith: list[str] = _gallery_list("The Wraith", 11)
+gallery_clarity: list[str] = _gallery_list("The Moment of Clarity", 14)
+gallery_den: list[str] = _gallery_list("The Den", 20)
+gallery_wild: list[str] = _gallery_list("The Wild", 12)
+gallery_thorn: list[str] = _gallery_list("The Thorn", 19)
+gallery_cage: list[str] = _gallery_list("The Cage", 20)
+gallery_grey: list[str] = _gallery_list("The Grey", 20)
+gallery_happily: list[str] = _gallery_list("Happily Ever After", 20)
