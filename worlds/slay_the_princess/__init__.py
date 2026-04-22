@@ -3,9 +3,9 @@ from typing import List
 from BaseClasses import Region, CollectionState, ItemClassification
 from worlds.AutoWorld import World, WebWorld
 from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
-    blade_princess_item_data_table, blade_chapter_item_data_table#, gallery_item_data_table
+    blade_princess_item_data_table, blade_chapter_item_data_table, gallery_item_data_table
 from .Locations import SlayThePrincessLocation, location_table, others_location_data_table, princess_location_data_table, \
-    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table
+    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table, gallery_location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
@@ -33,6 +33,7 @@ class SlayThePrincessWorld(World):
         "global_chapter_rando": global_chapter_location_data_table,
         "heart_rando": heart_location_data_table,
         "mirror_rando": mirror_location_data_table,
+        "memoriesanity": gallery_location_data_table,
     }
 
     def create_regions(self) -> None:
@@ -99,6 +100,9 @@ class SlayThePrincessWorld(World):
         if self.options.gift_rando:
             item_pool += [self.create_item(ItemName.gift) for _ in range(5)]
 
+        if self.options.memoriesanity == 2:
+            item_pool += [self.create_item(name) for name in gallery_item_data_table.keys()]
+
         item_pool += [self.create_item(ItemName.filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 1)]
         self.multiworld.itempool += item_pool
 
@@ -122,4 +126,5 @@ class SlayThePrincessWorld(World):
             "global_chapter_rando": self.options.global_chapter_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
+            "memoriesanity": self.options.memoriesanity.value,
         }

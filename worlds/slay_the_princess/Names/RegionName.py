@@ -1,14 +1,12 @@
 from worlds.AutoWorld import World
 
-win = "Goal Event Region"
-
 menu = World.origin_region_name
 one = "Chapter I - The Hero and the Princess"
+one_blade = "Chapter I - The Hero and the Princess [Blade Only]"
 chap2 = "Chapter II"
 chap3 = "Chapter III"
 
 adversary = "Chapter II - The Adversary"
-adversary_blade = "Chapter II - The Adversary [Blade Only]"
 tower = "Chapter II - The Tower"
 spectre = "Chapter II - The Spectre"
 nightmare = "Chapter II - The Nightmare"
@@ -16,25 +14,42 @@ razor = "Chapter II - The Razor"
 beast = "Chapter II - The Beast"
 witch = "Chapter II - The Witch"
 stranger = "Chapter II - The Stranger"
-stranger_blade = "Chapter II - The Stranger [Blade Only]"
 prisoner = "Chapter II - The Prisoner"
 damsel = "Chapter II - The Damsel"
 
+adversary_blade = "Chapter II - The Adversary [Blade Only]"
+tower_blade = "Chapter II - The Tower [Blade Only]"
+spectre_blade = "Chapter II - The Spectre [Blade Only]"
+nightmare_blade = "Chapter II - The Nightmare [Blade Only]"
+razor_blade = "Chapter II - The Razor [Blade Only]"
+beast_blade = "Chapter II - The Beast [Blade Only]"
+witch_blade = "Chapter II - The Witch [Blade Only]"
+stranger_blade = "Chapter II - The Stranger [Blade Only]"
+prisoner_blade = "Chapter II - The Prisoner [Blade Only]"
+damsel_blade = "Chapter II - The Damsel [Blade Only]"
+
 needle = "Chapter III - The Eye of the Needle"
+needle_blade = "Chapter III - The Eye of the Needle [Blade Only]"
 needle_hunted = "Chapter III - The Eye of the Needle (Hunted)"
+needle_hunted_blade = "Chapter III - The Eye of the Needle (Hunted) [Blade Only]"
 needle_skeptic = "Chapter III - The Eye of the Needle (Skeptic)"
 
 fury = "Chapter III - The Fury"
 fury_weathered_heart = "Chapter III - The Fury (Weathered Heart)"
-fury_pacifism = "Chapter III - The Fury (Pacifism)"
+fury_cold = "Chapter III - The Fury (Cold)" #Pacifism
 fury_unarmed_broken = "Chapter III - The Fury (Unarmed Broken)"
 fury_unarmed_contrarian = "Chapter III - The Fury (Unarmed Contrarian)"
-fury_other = "Chapter III - The Fury (Other)"
+fury_broken = "Chapter III - The Fury (Broken)" #Other
 fury_tower = "Chapter III - The Fury (Tower)"
+fury_tower_blade = "Chapter III - The Fury (Tower) [Blade Only]"
+fury_broken_cold = "Chapter III - The Fury (Broken & Cold)"
 
 apotheosis = "Chapter III - The Apotheosis"
+apotheosis_blade = "Chapter III - The Apotheosis [Blade Only]"
 apotheosis_contrarian = "Chapter III - The Apotheosis (Contrarian)"
+apotheosis_contrarian_blade = "Chapter III - The Apotheosis (Contrarian) [Blade Only]"
 apotheosis_paranoid = "Chapter III - The Apotheosis (Paranoid)"
+apotheosis_paranoid_blade = "Chapter III - The Apotheosis (Paranoid) [Blade Only]"
 
 dragon = "Chapter III - The Princess and the Dragon"
 dragon_fuse = "Chapter III - The Princess and the Dragon (Fuse)"
@@ -62,8 +77,10 @@ razor_race_paranoid = "Chapter III - The Arms Race (Paranoid)"
 razor_race_stubborn = "Chapter III - The Arms Race (Stubborn)"
 
 den = "Chapter III - Den"
+den_blade = "Chapter III - Den [Blade Only]"
 den_skeptic = "Chapter III - Den (Skeptic)"
 den_stubborn = "Chapter III - Den (Stubborn)"
+den_stubborn_blade = "Chapter III - Den (Stubborn) [Blade Only]"
 
 wild = "Chapter III - The Wild"
 wild_blade = "Chapter III - The Wild [Blade Only]"
@@ -76,19 +93,24 @@ wild_witch_cheated = "Chapter III - The Wild (Cheated)"
 wild_witch_paranoid = "Chapter III - The Wild (Paranoid)"
 
 thorn = "Chapter III - The Thorn"
+thorn_blade = "Chapter III - The Thorn [Blade Only]"
 thorn_smitten = "Chapter III - The Thorn (Smitten)"
+thorn_smitten_blade = "Chapter III - The Thorn (Smitten) [Blade Only]"
 thorn_cheated = "Chapter III - The Thorn (Cheated)"
 
 cage = "Chapter III - The Cage"
 cage_paranoid = "Chapter III - The Cage (Paranoid)"
+cage_paranoid_blade = "Chapter III - The Cage (Paranoid) [Blade Only]"
 cage_cheated = "Chapter III - The Cage (Cheated)"
 cage_broken = "Chapter III - The Cage (Broken)"
+cage_not_paranoid = "Chapter III - The Cage (Not Paranoid)"
 
 grey = "Chapter III - The Grey"
 grey_drowned = "Chapter III - The Grey (Drowned)"
 grey_burned = "Chapter III - The Grey (Burned)"
 
 happily = "Epilogue - Happily Ever After"
+happily_blade = "Epilogue - Happily Ever After [Blade Only]"
 happily_skeptic = "Epilogue - Happily Ever After (Skeptic)"
 happily_opportunist = "Epilogue - Happily Ever After (Opportunist)"
 
@@ -97,4 +119,9 @@ razor_empty = "Chapter IV - The Empty Cup"
 razor_destruction = "Chapter IV - Mutually Assured Destruction"
 
 space_between = "The Space Between"
+restart = "Loop Restart"
 goddess = "The End of Everything"
+goddess_blade = "The End of Everything [Blade Only]"
+new_world = "Your New World"
+
+win = "Goal Event Region"

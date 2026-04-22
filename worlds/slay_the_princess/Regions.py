@@ -3,7 +3,8 @@ from enum import Enum
 
 from BaseClasses import Region
 from .Names import RegionName, ItemName
-from .Rules import has_voice, has_all_voices, has_voices, has_blade, max_reachable_vessels, has_princess
+from .Rules import has_voice, has_all_voices, has_voices, has_blade, max_reachable_vessels, has_princess, \
+    can_reach_new_world
 
 entry = " ENTRY"
 
@@ -29,12 +30,12 @@ class SlayThePrincessRegionData:
 region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.menu: SlayThePrincessRegionData(RegionName.menu, Chapter.meta, False),
     RegionName.one: SlayThePrincessRegionData(RegionName.one, Chapter.one, False),
+    RegionName.one_blade: SlayThePrincessRegionData(RegionName.one, Chapter.one, False),
     RegionName.chap2: SlayThePrincessRegionData(RegionName.chap2, Chapter.two, False),
     RegionName.chap3: SlayThePrincessRegionData(RegionName.chap3, Chapter.three, False),
 
     # Chapters 2
     RegionName.adversary: SlayThePrincessRegionData(RegionName.adversary, Chapter.two),
-    RegionName.adversary_blade: SlayThePrincessRegionData(RegionName.adversary, Chapter.two),
     RegionName.tower: SlayThePrincessRegionData(RegionName.tower, Chapter.two),
     RegionName.spectre: SlayThePrincessRegionData(RegionName.spectre, Chapter.two),
     RegionName.nightmare: SlayThePrincessRegionData(RegionName.nightmare, Chapter.two),
@@ -42,28 +43,46 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.beast: SlayThePrincessRegionData(RegionName.beast, Chapter.two),
     RegionName.witch: SlayThePrincessRegionData(RegionName.witch, Chapter.two),
     RegionName.stranger: SlayThePrincessRegionData(RegionName.stranger, Chapter.two),
-    RegionName.stranger_blade: SlayThePrincessRegionData(RegionName.stranger, Chapter.two),
     RegionName.prisoner: SlayThePrincessRegionData(RegionName.prisoner, Chapter.two),
     RegionName.damsel: SlayThePrincessRegionData(RegionName.damsel, Chapter.two),
 
+    # Chapters 2 Dagger
+    RegionName.adversary_blade: SlayThePrincessRegionData(RegionName.adversary, Chapter.two, False),
+    RegionName.tower_blade: SlayThePrincessRegionData(RegionName.tower, Chapter.two, False),
+    RegionName.spectre_blade: SlayThePrincessRegionData(RegionName.spectre, Chapter.two, False),
+    RegionName.nightmare_blade: SlayThePrincessRegionData(RegionName.nightmare, Chapter.two, False),
+    RegionName.razor_blade: SlayThePrincessRegionData(RegionName.razor, Chapter.two, False),
+    RegionName.beast_blade: SlayThePrincessRegionData(RegionName.beast, Chapter.two, False),
+    RegionName.witch_blade: SlayThePrincessRegionData(RegionName.witch, Chapter.two, False),
+    RegionName.stranger_blade: SlayThePrincessRegionData(RegionName.stranger, Chapter.two, False),
+    RegionName.prisoner_blade: SlayThePrincessRegionData(RegionName.prisoner, Chapter.two, False),
+    RegionName.damsel_blade: SlayThePrincessRegionData(RegionName.damsel, Chapter.two, False),
+
     # Eye of the Needle
     RegionName.needle: SlayThePrincessRegionData(RegionName.needle, Chapter.three),
+    RegionName.needle_blade: SlayThePrincessRegionData(RegionName.needle, Chapter.three, False),
     RegionName.needle_hunted: SlayThePrincessRegionData(RegionName.needle, Chapter.three),
+    RegionName.needle_hunted_blade: SlayThePrincessRegionData(RegionName.needle, Chapter.three, False),
     RegionName.needle_skeptic: SlayThePrincessRegionData(RegionName.needle, Chapter.three),
 
     # Fury
     RegionName.fury: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
     RegionName.fury_weathered_heart: SlayThePrincessRegionData(RegionName.fury, Chapter.three, False),
-    RegionName.fury_pacifism: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
+    RegionName.fury_cold: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
     RegionName.fury_unarmed_broken: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
     RegionName.fury_unarmed_contrarian: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
-    RegionName.fury_other: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
+    RegionName.fury_broken: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
     RegionName.fury_tower: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
+    RegionName.fury_tower_blade: SlayThePrincessRegionData(RegionName.fury, Chapter.three, False),
+    RegionName.fury_broken_cold: SlayThePrincessRegionData(RegionName.fury, Chapter.three, False),
 
     # Apotheosis
     RegionName.apotheosis: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three),
+    RegionName.apotheosis_blade: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three, False),
     RegionName.apotheosis_contrarian: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three),
+    RegionName.apotheosis_contrarian_blade: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three, False),
     RegionName.apotheosis_paranoid: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three),
+    RegionName.apotheosis_paranoid_blade: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three, False),
 
     # Dragon
     RegionName.dragon: SlayThePrincessRegionData(RegionName.dragon, Chapter.three),
@@ -80,7 +99,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Moment of Clarity
     RegionName.clarity: SlayThePrincessRegionData(RegionName.clarity, Chapter.three),
-    RegionName.clarity_blade: SlayThePrincessRegionData(RegionName.clarity, Chapter.three),
+    RegionName.clarity_blade: SlayThePrincessRegionData(RegionName.clarity, Chapter.three, False),
 
     # Razor
     RegionName.razor_chap3: SlayThePrincessRegionData(RegionName.razor_chap3, Chapter.three),
@@ -101,8 +120,10 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Den
     RegionName.den: SlayThePrincessRegionData(RegionName.den, Chapter.three),
+    RegionName.den_blade: SlayThePrincessRegionData(RegionName.den, Chapter.three, False),
     RegionName.den_skeptic: SlayThePrincessRegionData(RegionName.den, Chapter.three),
     RegionName.den_stubborn: SlayThePrincessRegionData(RegionName.den, Chapter.three),
+    RegionName.den_stubborn_blade: SlayThePrincessRegionData(RegionName.den, Chapter.three, False),
 
     # Wild
     RegionName.wild: SlayThePrincessRegionData(RegionName.wild, Chapter.three),
@@ -117,14 +138,18 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Thorn
     RegionName.thorn: SlayThePrincessRegionData(RegionName.thorn, Chapter.three),
+    RegionName.thorn_blade: SlayThePrincessRegionData(RegionName.thorn, Chapter.three, False),
     RegionName.thorn_smitten: SlayThePrincessRegionData(RegionName.thorn, Chapter.three),
+    RegionName.thorn_smitten_blade: SlayThePrincessRegionData(RegionName.thorn, Chapter.three, False),
     RegionName.thorn_cheated: SlayThePrincessRegionData(RegionName.thorn, Chapter.three),
 
     # Cage
     RegionName.cage: SlayThePrincessRegionData(RegionName.cage, Chapter.three),
     RegionName.cage_paranoid: SlayThePrincessRegionData(RegionName.cage, Chapter.three),
+    RegionName.cage_paranoid_blade: SlayThePrincessRegionData(RegionName.cage, Chapter.three, False),
     RegionName.cage_cheated: SlayThePrincessRegionData(RegionName.cage, Chapter.three),
     RegionName.cage_broken: SlayThePrincessRegionData(RegionName.cage, Chapter.three),
+    RegionName.cage_not_paranoid: SlayThePrincessRegionData(RegionName.cage, Chapter.three, False),
 
     # Grey
     RegionName.grey: SlayThePrincessRegionData(RegionName.grey, Chapter.three),
@@ -133,12 +158,16 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # Happily Ever After
     RegionName.happily: SlayThePrincessRegionData(RegionName.happily, Chapter.three),
+    RegionName.happily_blade: SlayThePrincessRegionData(RegionName.happily, Chapter.three, False),
     RegionName.happily_skeptic: SlayThePrincessRegionData(RegionName.happily, Chapter.three),
     RegionName.happily_opportunist: SlayThePrincessRegionData(RegionName.happily, Chapter.three),
 
     # META
     RegionName.space_between: SlayThePrincessRegionData(RegionName.space_between, Chapter.meta, False),
+    RegionName.restart: SlayThePrincessRegionData(RegionName.space_between, Chapter.meta, False),
     RegionName.goddess: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta),
+    RegionName.goddess_blade: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta, False),
+    RegionName.new_world: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta, False),
     RegionName.win: SlayThePrincessRegionData(RegionName.win, Chapter.meta, False),
 
 }
@@ -178,44 +207,19 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.menu].connect(regions[RegionName.one])  # Menu -> Chapter I
 
     regions[RegionName.one].connect(
-        connecting_region=regions[RegionName.adversary + entry],
+        connecting_region=regions[RegionName.one_blade],
         rule=lambda state: has_blade(state, world, ItemName.blade_princess)
-    )  # Chapter I -> Adversary
+    )  # Chapter I -> Blade Only
 
-    regions[RegionName.one].connect(
-        connecting_region=regions[RegionName.tower + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
-    )  # Chapter I -> Tower
-
-    regions[RegionName.one].connect(
-        connecting_region=regions[RegionName.spectre + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
-    )  # Chapter I -> Spectre
-
+    regions[RegionName.one_blade].connect(regions[RegionName.adversary + entry])  # Chapter I -> Adversary
+    regions[RegionName.one_blade].connect(regions[RegionName.tower + entry])  # Chapter I -> Tower
+    regions[RegionName.one_blade].connect(regions[RegionName.spectre + entry])  # Chapter I -> Spectre
     regions[RegionName.one].connect(regions[RegionName.nightmare + entry])  # Chapter I -> Nightmare
-
-    regions[RegionName.one].connect(
-        connecting_region=regions[RegionName.razor + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
-    )  # Chapter I -> Razor
-
-    regions[RegionName.one].connect(
-        connecting_region=regions[RegionName.beast + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
-    )  # Chapter I -> Beast
-
-    regions[RegionName.one].connect(
-        connecting_region=regions[RegionName.witch + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
-    )  # Chapter I -> Witch
-
+    regions[RegionName.one_blade].connect(regions[RegionName.razor + entry])  # Chapter I -> Razor
+    regions[RegionName.one_blade].connect(regions[RegionName.beast + entry])  # Chapter I -> Beast
+    regions[RegionName.one_blade].connect(regions[RegionName.witch + entry])  # Chapter I -> Witch
     regions[RegionName.one].connect(regions[RegionName.stranger + entry])  # Chapter I -> Stranger
-
-    regions[RegionName.one].connect(
-        connecting_region=regions[RegionName.prisoner + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_princess)
-    )  # Chapter I -> Prisoner
-
+    regions[RegionName.one_blade].connect(regions[RegionName.prisoner + entry])  # Chapter I -> Prisoner
     regions[RegionName.one].connect(regions[RegionName.damsel + entry])  # Chapter I -> Damsel
     # endregion
 
@@ -277,10 +281,51 @@ def set_region_rules(world, regions: dict[str, Region]):
         rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
     )  # Chapter II Adversary Blade Only
 
+    regions[RegionName.tower].connect(
+        connecting_region=regions[RegionName.tower_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_tower)
+    )  # Chapter II Tower Blade Only
+
+    regions[RegionName.spectre].connect(
+        connecting_region=regions[RegionName.spectre_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_spectre)
+    )  # Chapter II Spectre Blade Only
+
+    regions[RegionName.nightmare].connect(
+        connecting_region=regions[RegionName.nightmare_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_nightmare)
+    )  # Chapter II Nightmare Blade Only
+
+    regions[RegionName.razor].connect(
+        connecting_region=regions[RegionName.razor_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_razor)
+    )  # Chapter II Razor Blade Only
+
+    regions[RegionName.beast].connect(
+        connecting_region=regions[RegionName.beast_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_beast)
+    )  # Chapter II Beast Blade Only
+
+    regions[RegionName.witch].connect(
+        connecting_region=regions[RegionName.witch_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_witch)
+    )  # Chapter II Witch Blade Only
+
     regions[RegionName.stranger].connect(
         connecting_region=regions[RegionName.stranger_blade],
         rule=lambda state: has_blade(state, world, ItemName.blade_stranger)
     )  # Chapter II Stranger Blade Only
+
+    regions[RegionName.prisoner].connect(
+        connecting_region=regions[RegionName.prisoner_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_prisoner)
+    )  # Chapter II Prisoner Blade Only
+
+    regions[RegionName.damsel].connect(
+        connecting_region=regions[RegionName.damsel_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_damsel)
+    )  # Chapter II Damsel Blade Only
+
     # endregion
 
     # region Chapter 2 -> Chapter 3 Sub Entry
@@ -295,10 +340,10 @@ def set_region_rules(world, regions: dict[str, Region]):
     )
 
     regions[RegionName.adversary].connect(
-        connecting_region=regions[RegionName.fury_other + entry],
+        connecting_region=regions[RegionName.fury_broken + entry],
         rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
     )
-    regions[RegionName.adversary].connect(regions[RegionName.fury_pacifism + entry])
+    regions[RegionName.adversary].connect(regions[RegionName.fury_cold + entry])
     regions[RegionName.adversary].connect(regions[RegionName.fury_unarmed_broken + entry])
     regions[RegionName.adversary].connect(regions[RegionName.fury_unarmed_contrarian + entry])
 
@@ -422,10 +467,10 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.needle_skeptic + entry].connect(regions[RegionName.needle + entry])
 
     # Fury (entry)
-    regions[RegionName.fury_pacifism + entry].connect(regions[RegionName.fury + entry])
+    regions[RegionName.fury_cold + entry].connect(regions[RegionName.fury + entry])
     regions[RegionName.fury_unarmed_broken + entry].connect(regions[RegionName.fury + entry])
     regions[RegionName.fury_unarmed_contrarian + entry].connect(regions[RegionName.fury + entry])
-    regions[RegionName.fury_other + entry].connect(regions[RegionName.fury + entry])
+    regions[RegionName.fury_broken + entry].connect(regions[RegionName.fury + entry])
     regions[RegionName.fury_tower + entry].connect(regions[RegionName.fury + entry])
 
     # Apotheosis (entry)
@@ -497,10 +542,10 @@ def set_region_rules(world, regions: dict[str, Region]):
     )  # Needle Skeptic
 
     # Fury (entry)
-    regions[RegionName.fury_pacifism + entry].connect(
-        connecting_region=regions[RegionName.fury_pacifism],
+    regions[RegionName.fury_cold + entry].connect(
+        connecting_region=regions[RegionName.fury_cold],
         rule=lambda state: has_princess(state, world, ItemName.fury) and has_voices(state, world, [ItemName.stubborn, ItemName.cold])
-    )  # Fury Pacifism
+    )  # Fury Cold
 
     regions[RegionName.fury_unarmed_broken + entry].connect(
         connecting_region=regions[RegionName.fury_unarmed_broken],
@@ -512,10 +557,10 @@ def set_region_rules(world, regions: dict[str, Region]):
         rule=lambda state: has_princess(state, world, ItemName.fury) and has_voices(state, world, [ItemName.stubborn, ItemName.contrarian])
     )  # Fury Unarmed Contrarian
 
-    regions[RegionName.fury_other + entry].connect(
-        connecting_region=regions[RegionName.fury_other],
+    regions[RegionName.fury_broken + entry].connect(
+        connecting_region=regions[RegionName.fury_broken],
         rule=lambda state: has_princess(state, world, ItemName.fury) and has_voices(state, world, [ItemName.stubborn, ItemName.broken])
-    )  # Fury Other
+    )  # Fury Broken
 
     regions[RegionName.fury_tower + entry].connect(
         connecting_region=regions[RegionName.fury_tower],
@@ -707,10 +752,10 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.needle_skeptic].connect(regions[RegionName.needle])
 
     # Fury
-    regions[RegionName.fury_pacifism].connect(regions[RegionName.fury])
+    regions[RegionName.fury_cold].connect(regions[RegionName.fury])
     regions[RegionName.fury_unarmed_broken].connect(regions[RegionName.fury])
     regions[RegionName.fury_unarmed_contrarian].connect(regions[RegionName.fury])
-    regions[RegionName.fury_other].connect(regions[RegionName.fury])
+    regions[RegionName.fury_broken].connect(regions[RegionName.fury])
     regions[RegionName.fury_tower].connect(regions[RegionName.fury_tower])
 
     # Apotheosis
@@ -786,10 +831,70 @@ def set_region_rules(world, regions: dict[str, Region]):
     # endregion
 
     # region Chapter 3 Blade Only
+    regions[RegionName.needle].connect(
+        connecting_region=regions[RegionName.needle_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_needle)
+    )  # Chapter III Needle Blade Only
+
+    regions[RegionName.needle_hunted].connect(
+        connecting_region=regions[RegionName.needle_hunted_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_needle)
+    )  # Chapter III Needle (Hunted) Blade Only
+
+    regions[RegionName.fury_tower].connect(
+        connecting_region=regions[RegionName.fury_tower_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_fury)
+    )  # Chapter III Fury (Tower) Blade Only
+
+    regions[RegionName.apotheosis].connect(
+        connecting_region=regions[RegionName.apotheosis_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_apotheosis)
+    )  # Chapter III Apotheosis Blade Only
+
+    regions[RegionName.apotheosis_contrarian].connect(
+        connecting_region=regions[RegionName.apotheosis_contrarian_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_apotheosis)
+    )  # Chapter III Apotheosis (Contrarian) Blade Only
+
+    regions[RegionName.apotheosis_paranoid].connect(
+        connecting_region=regions[RegionName.apotheosis_paranoid_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_apotheosis)
+    )  # Chapter III Apotheosis (Paranoid) Blade Only
+
+    regions[RegionName.den].connect(
+        connecting_region=regions[RegionName.den_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_den)
+    )  # Chapter III Den Blade Only
+
+    regions[RegionName.den_stubborn].connect(
+        connecting_region=regions[RegionName.den_stubborn_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_den)
+    )  # Chapter III Den (Stubborn) Blade Only
+
     regions[RegionName.wild].connect(
         connecting_region=regions[RegionName.wild_blade],
         rule=lambda state: has_blade(state, world, ItemName.blade_wild)
     )  # Chapter III Wild Blade Only
+
+    regions[RegionName.thorn].connect(
+        connecting_region=regions[RegionName.thorn_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_thorn)
+    )  # Chapter III Thorn Blade Only
+
+    regions[RegionName.thorn_smitten].connect(
+        connecting_region=regions[RegionName.thorn_smitten_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_thorn)
+    )  # Chapter III Thorn (Smitten) Blade Only
+
+    regions[RegionName.cage_paranoid].connect(
+        connecting_region=regions[RegionName.cage_paranoid_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_cage)
+    )  # Chapter III Cage (Paranoid) Blade Only
+
+    regions[RegionName.happily].connect(
+        connecting_region=regions[RegionName.happily_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_happily)
+    )  # Chapter III Happily Ever After Blade Only
 
     regions[RegionName.clarity].connect(
         connecting_region=regions[RegionName.clarity_blade],
@@ -797,13 +902,19 @@ def set_region_rules(world, regions: dict[str, Region]):
     )  # Chapter ??? Clarity Blade Only
     # endregion
 
-    # region Special (Furry Weathered Heart)
-    regions[RegionName.fury_pacifism].connect(regions[RegionName.fury_weathered_heart])
-    regions[RegionName.fury_unarmed_broken].connect(regions[RegionName.fury_weathered_heart])
+    # region Special Furry
+    # Fury Broken or Cold
+    regions[RegionName.fury_cold].connect(regions[RegionName.fury_broken_cold])
+    regions[RegionName.fury_unarmed_broken].connect(regions[RegionName.fury_broken_cold])
+    regions[RegionName.fury_broken].connect(regions[RegionName.fury_broken_cold])
+
+    # Weathered Heart
+    regions[RegionName.fury_broken_cold].connect(regions[RegionName.fury_weathered_heart])
     regions[RegionName.fury_unarmed_contrarian].connect(regions[RegionName.fury_weathered_heart])
-    regions[RegionName.fury_other].connect(regions[RegionName.fury_weathered_heart])
-    regions[RegionName.fury_tower].connect(connecting_region=regions[RegionName.fury_weathered_heart],
-                                           rule=lambda state: has_blade(state, world, ItemName.blade_fury))
+    regions[RegionName.fury_tower].connect(
+        connecting_region=regions[RegionName.fury_weathered_heart],
+        rule=lambda state: has_blade(state, world, ItemName.blade_fury)
+    )
     # endregion
 
     # region Special Dragon
@@ -812,6 +923,12 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.dragon_fuse],
         rule=lambda state: has_blade(state, world, ItemName.blade_dragon)
     )
+    # endregion
+
+    # region Special Cage
+    # Fury Adversary
+    regions[RegionName.cage_broken].connect(regions[RegionName.cage_not_paranoid])
+    regions[RegionName.cage_cheated].connect(regions[RegionName.cage_not_paranoid])
     # endregion
 
     # region The Space Between
@@ -838,11 +955,25 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.grey].connect(regions[RegionName.space_between])
     regions[RegionName.happily].connect(regions[RegionName.space_between])
     regions[RegionName.razor_chap4].connect(regions[RegionName.space_between])
+    # endregion
 
+    # region The Goddess
     regions[RegionName.space_between].connect(regions[RegionName.goddess + entry])
+    regions[RegionName.goddess + entry].connect(
+        connecting_region=regions[RegionName.restart],
+        rule = lambda state: max_reachable_vessels(state, world) > 0 and has_princess(state, world, ItemName.goddess)
+    )
     regions[RegionName.goddess + entry].connect(
         connecting_region=regions[RegionName.goddess],
         rule=lambda state: max_reachable_vessels(state, world) > 4 and has_princess(state, world, ItemName.goddess)
+    )
+    regions[RegionName.goddess].connect(
+        connecting_region=regions[RegionName.goddess_blade],
+        rule=lambda state: has_blade(state, world, ItemName.blade_goddess)
+    )
+    regions[RegionName.goddess].connect(
+        connecting_region=regions[RegionName.new_world],
+        rule=lambda state: can_reach_new_world(state, world)
     )
     regions[RegionName.goddess].connect(regions[RegionName.win])
     # endregion

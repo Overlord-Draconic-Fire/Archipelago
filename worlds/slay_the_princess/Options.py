@@ -70,6 +70,19 @@ class MirrorRando(DefaultOnToggle):
     """
     display_name = "Mirror Rando"
 
+class MemorieSanity(Choice):
+    """
+    Chooses to randomize the memories in the world. (+439 locations/items)
+    - Nothing: Memories are not randomized
+    - Location: Memories are added as check locations, but the items are not shuffled.
+    - Both: Memories are both items and locations
+    """
+    display_name = "Memories Sanity"
+    option_nothing = 0
+    option_location = 1
+    option_both = 2
+    default = 0
+
 
 @dataclass
 class SlayThePrincessOptions(PerGameCommonOptions):
@@ -94,7 +107,8 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     heart_rando: HearthRando
     #heart_grouping: HeartGrouping
     mirror_rando: MirrorRando
-    #memoriesanity: Memoriesanity
+    memoriesanity: MemorieSanity
+    #branchsanity: BranchSanity
 
 slay_the_princess_option_groups = [
     #OptionGroup("Game Options", [
@@ -118,6 +132,7 @@ slay_the_princess_option_groups = [
         HearthRando,
         #HeartGrouping,
         MirrorRando,
-        #Memoriesanity,
+        MemorieSanity,
+        #BranchSanity,
     ]),
 ]
