@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import List
 
 from BaseClasses import CollectionState
@@ -29,33 +30,84 @@ CHAPTER_3_BLADES = {
     ItemName.blade_happily,
 }
 
-VESSEL_GRAPH = {
-    # --- CHAPITRE 2 ---
-    RegionName.adversary: (RegionName.fury, RegionName.tower),
-    RegionName.tower: (RegionName.apotheosis, RegionName.adversary),
-    RegionName.spectre: (RegionName.dragon, RegionName.nightmare),
-    RegionName.nightmare: (RegionName.clarity, RegionName.spectre),
-    RegionName.razor: (RegionName.razor, None),
-    RegionName.beast: (RegionName.den, RegionName.witch),
-    RegionName.witch: (RegionName.thorn, RegionName.beast),
-    RegionName.stranger: (RegionName.stranger, None),
-    RegionName.prisoner: (RegionName.cage, RegionName.damsel),
-    RegionName.damsel: (RegionName.happily, RegionName.prisoner),
-
-    # --- CHAPITRE 3 (terminaux) ---
-    RegionName.needle: (None, None),
-    RegionName.fury: (None, None),
-    RegionName.apotheosis: (None, None),
-    RegionName.dragon: (None, None),
-    RegionName.wraith: (None, None),
-    RegionName.clarity: (None, None),
-    RegionName.den: (None, None),
-    RegionName.wild: (None, None),
-    RegionName.thorn: (None, None),
-    RegionName.cage: (None, None),
-    RegionName.grey: (None, None),
-    RegionName.happily: (None, None),
-}
+# Each group represents one collectible heart, possibly with multiple route variants.
+# Every option is (target_region, prerequisite_regions_to_consume).
+HEART_GROUPS = (
+    ((RegionName.adversary_blade,), (
+        (RegionName.adversary_blade, (RegionName.adversary,)),
+    )),
+    ((RegionName.tower,), (
+        (RegionName.tower, (RegionName.tower,)),
+    )),
+    ((RegionName.spectre,), (
+        (RegionName.spectre, (RegionName.spectre,)),
+    )),
+    ((RegionName.nightmare,), (
+        (RegionName.nightmare, (RegionName.nightmare,)),
+    )),
+    ((RegionName.razor_destruction, RegionName.razor_empty), (
+        (RegionName.razor_destruction, (RegionName.razor, RegionName.razor_chap4)),
+        (RegionName.razor_empty, (RegionName.razor, RegionName.razor_chap4)),
+    )),
+    ((RegionName.beast,), (
+        (RegionName.beast, (RegionName.beast,)),
+    )),
+    ((RegionName.witch,), (
+        (RegionName.witch, (RegionName.witch,)),
+    )),
+    ((RegionName.stranger_blade,), (
+        (RegionName.stranger_blade, (RegionName.stranger,)),
+    )),
+    ((RegionName.prisoner,), (
+        (RegionName.prisoner, (RegionName.prisoner,)),
+    )),
+    ((RegionName.damsel,), (
+        (RegionName.damsel, (RegionName.damsel,)),
+    )),
+    ((RegionName.needle,), (
+        (RegionName.needle, (RegionName.adversary, RegionName.needle)),
+    )),
+    ((RegionName.fury_weathered_heart, RegionName.fury,), (
+        (RegionName.fury_weathered_heart, (RegionName.adversary, RegionName.fury)),
+        (RegionName.fury_weathered_heart, (RegionName.tower, RegionName.fury)),
+        (RegionName.fury, (RegionName.adversary, RegionName.fury)),
+        (RegionName.fury, (RegionName.tower, RegionName.fury)),
+    )),
+    ((RegionName.apotheosis,), (
+        (RegionName.apotheosis, (RegionName.tower, RegionName.apotheosis)),
+    )),
+    ((RegionName.dragon, RegionName.dragon_fuse), (
+        (RegionName.dragon, (RegionName.spectre, RegionName.dragon)),
+        (RegionName.dragon_fuse, (RegionName.spectre, RegionName.dragon)),
+    )),
+    ((RegionName.wraith,), (
+        (RegionName.wraith, (RegionName.spectre, RegionName.wraith)),
+        (RegionName.wraith, (RegionName.nightmare, RegionName.wraith)),
+    )),
+    ((RegionName.clarity_blade,), (
+        (RegionName.clarity_blade, (RegionName.nightmare, RegionName.clarity)),
+    )),
+    ((RegionName.den,), (
+        (RegionName.den, (RegionName.beast, RegionName.den)),
+    )),
+    ((RegionName.wild, RegionName.wild_blade), (
+        (RegionName.wild, (RegionName.beast, RegionName.wild)),
+        (RegionName.wild_blade, (RegionName.witch, RegionName.wild)),
+    )),
+    ((RegionName.thorn,), (
+        (RegionName.thorn, (RegionName.witch, RegionName.thorn)),
+    )),
+    ((RegionName.cage,), (
+        (RegionName.cage, (RegionName.prisoner, RegionName.cage)),
+    )),
+    ((RegionName.grey_burned, RegionName.grey_drowned), (
+        (RegionName.grey_burned, (RegionName.damsel, RegionName.grey)),
+        (RegionName.grey_drowned, (RegionName.prisoner, RegionName.grey)),
+    )),
+    ((RegionName.happily,), (
+        (RegionName.happily, (RegionName.damsel, RegionName.happily)),
+    )),
+)
 
 
 def has_blade(state: CollectionState, world, blade: str) -> bool:
@@ -97,40 +149,49 @@ def has_all_voices(state: CollectionState, world) -> bool:
     return world.options.chapter_access in [0, 1] or has_voices(state, world, [ItemName.stubborn, ItemName.broken, ItemName.cold, ItemName.paranoid, ItemName.cheated, ItemName.hunted, ItemName.opportunist, ItemName.contrarian, ItemName.skeptic, ItemName.smitten])
 
 
+def can_reach_region_without(state: CollectionState, world, target_region: str, blocked_regions: frozenset[str]) -> bool:
+    if target_region in blocked_regions:
+        return False
+
+    starting_region = world.multiworld.get_region(RegionName.menu, world.player)
+    queue = [starting_region]
+    visited = {starting_region.name}
+
+    while queue:
+        region = queue.pop()
+        if region.name == target_region:
+            return True
+
+        for entrance in region.exits:
+            next_region = entrance.connected_region
+            if next_region is None or next_region.name in blocked_regions or next_region.name in visited:
+                continue
+            if entrance.can_reach(state):
+                visited.add(next_region.name)
+                queue.append(next_region)
+
+    return False
+
+
 def max_reachable_vessels(state: CollectionState, world) -> int:
-    reachable = {
-        r for r in VESSEL_GRAPH if state.can_reach(r, "Region", world.player)
-    }
 
-    used = set()
-    count = 0
+    if max_count <= 0:
 
-    for chap2 in reachable:
-        if chap2 in used:
-            continue
+    @lru_cache(maxsize=None)
+    def search(blocked_regions: frozenset[str], group_index: int) -> int:
 
-        chap3, sister = VESSEL_GRAPH[chap2]
+        for index in range(group_index, len(HEART_GROUPS)):
 
-        used.add(chap2)
+            if all(target_region in blocked_regions for target_region in target_variants):
 
-        if chap3 and chap3 in reachable:
-            used.add(chap3)
-            count += 1
-        elif sister and sister in reachable:
-            used.add(sister)
-            count += 1
-        elif chap2 == chap3:
-            count += 1
+            for target_region, required_regions in options:
+                if target_region in blocked_regions:
+                    continue
+                if not can_reach_region_without(state, world, target_region, blocked_regions):
 
-        if count >= 5:
-            break
+                next_blocked = blocked_regions.union(target_variants).union(required_regions)
 
-    if world.options.gift_rando:
-        max_count = state.count(ItemName.gift, world.player)
-    else:
-        max_count = 5
 
-    return min(count, max_count)
 
 
 def test_goal(state: CollectionState, world) -> bool:
