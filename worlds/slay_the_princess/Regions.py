@@ -330,44 +330,23 @@ def set_region_rules(world, regions: dict[str, Region]):
 
     # region Chapter 2 -> Chapter 3 Sub Entry
     # Adversary → Needle / Fury (entry)
-    regions[RegionName.adversary].connect(
-        connecting_region=regions[RegionName.needle_hunted + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
-    )
-    regions[RegionName.adversary].connect(
-        connecting_region=regions[RegionName.needle_skeptic + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
-    )
+    regions[RegionName.adversary_blade].connect(regions[RegionName.needle_hunted + entry])
+    regions[RegionName.adversary_blade].connect(regions[RegionName.needle_skeptic + entry])
 
-    regions[RegionName.adversary].connect(
-        connecting_region=regions[RegionName.fury_broken + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_adversary)
-    )
+    regions[RegionName.adversary_blade].connect(regions[RegionName.fury_broken + entry])
     regions[RegionName.adversary].connect(regions[RegionName.fury_cold + entry])
     regions[RegionName.adversary].connect(regions[RegionName.fury_unarmed_broken + entry])
     regions[RegionName.adversary].connect(regions[RegionName.fury_unarmed_contrarian + entry])
 
     # Tower → Apotheosis / Fury Tower (entry)
-    regions[RegionName.tower].connect(
-        connecting_region=regions[RegionName.fury_tower + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_tower)
-    )
+    regions[RegionName.tower_blade].connect(regions[RegionName.fury_tower + entry])
 
-    regions[RegionName.tower].connect(
-        connecting_region=regions[RegionName.apotheosis_contrarian + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_tower)
-    )
+    regions[RegionName.tower_blade].connect(regions[RegionName.apotheosis_contrarian + entry])
     regions[RegionName.tower].connect(regions[RegionName.apotheosis_paranoid + entry])
 
     # Spectre → Dragon / Wraith (entry)
-    regions[RegionName.spectre].connect(
-        connecting_region=regions[RegionName.dragon_kind + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_spectre)
-    )
-    regions[RegionName.spectre].connect(
-        connecting_region=regions[RegionName.dragon_harsh + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_spectre)
-    )
+    regions[RegionName.spectre_blade].connect(regions[RegionName.dragon_kind + entry])
+    regions[RegionName.spectre_blade].connect(regions[RegionName.dragon_harsh + entry])
 
     regions[RegionName.spectre].connect(regions[RegionName.wraith_cheated + entry])
     regions[RegionName.spectre].connect(regions[RegionName.wraith_paranoid + entry])
@@ -375,90 +354,47 @@ def set_region_rules(world, regions: dict[str, Region]):
     # Nightmare → Clarity / Wraith (entry)
     regions[RegionName.nightmare].connect(regions[RegionName.clarity + entry])
 
-    regions[RegionName.nightmare].connect(
-        connecting_region=regions[RegionName.wraith_cold + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_nightmare)
-    )
-    regions[RegionName.nightmare].connect(
-        connecting_region=regions[RegionName.wraith_opportunist + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_nightmare)
-    )
+    regions[RegionName.nightmare_blade].connect(regions[RegionName.wraith_cold + entry])
+    regions[RegionName.nightmare_blade].connect(regions[RegionName.wraith_opportunist + entry])
 
     # Razor → No Way / Race (entry)
     regions[RegionName.razor].connect(regions[RegionName.razor_no_way_broken + entry])
     regions[RegionName.razor].connect(regions[RegionName.razor_no_way_paranoid + entry])
     regions[RegionName.razor].connect(regions[RegionName.razor_no_way_stubborn + entry])
 
-    regions[RegionName.razor].connect(
-        connecting_region=regions[RegionName.razor_race_broken + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_razor)
-    )
-    regions[RegionName.razor].connect(
-        connecting_region=regions[RegionName.razor_race_paranoid + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_razor)
-    )
-    regions[RegionName.razor].connect(
-        connecting_region=regions[RegionName.razor_race_stubborn + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_razor)
-    )
+    regions[RegionName.razor_blade].connect(regions[RegionName.razor_race_broken + entry])
+    regions[RegionName.razor_blade].connect(regions[RegionName.razor_race_paranoid + entry])
+    regions[RegionName.razor_blade].connect(regions[RegionName.razor_race_stubborn + entry])
 
     # Beast → Den / Wild (entry)
     regions[RegionName.beast].connect(regions[RegionName.den_skeptic + entry])
-    regions[RegionName.beast].connect(
-        connecting_region=regions[RegionName.den_stubborn + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_beast)
-    )
+    regions[RegionName.beast_blade].connect(regions[RegionName.den_stubborn + entry])
 
     regions[RegionName.beast].connect(regions[RegionName.wild_beast_broken + entry])
     regions[RegionName.beast].connect(regions[RegionName.wild_beast_contrarian + entry])
-    regions[RegionName.beast].connect(
-        connecting_region=regions[RegionName.wild_beast_opportunist + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_beast)
-    )
-    regions[RegionName.beast].connect(
-        connecting_region=regions[RegionName.wild_beast_stubborn + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_beast)
-    )
+    regions[RegionName.beast_blade].connect(regions[RegionName.wild_beast_opportunist + entry])
+    regions[RegionName.beast_blade].connect(regions[RegionName.wild_beast_stubborn + entry])
 
     # Witch → Thorn / Wild (entry)
-    regions[RegionName.witch].connect(
-        connecting_region=regions[RegionName.thorn_smitten + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_witch)
-    )
-    regions[RegionName.witch].connect(
-        connecting_region=regions[RegionName.thorn_cheated + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_witch)
-    )
+    regions[RegionName.witch_blade].connect(regions[RegionName.thorn_smitten + entry])
+    regions[RegionName.witch_blade].connect(regions[RegionName.thorn_cheated + entry])
 
-    regions[RegionName.witch].connect(
-        connecting_region=regions[RegionName.wild_witch_stubborn + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_witch))
-    regions[RegionName.witch].connect(
-        connecting_region=regions[RegionName.wild_witch_cheated + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_witch))
+    regions[RegionName.witch_blade].connect(regions[RegionName.wild_witch_stubborn + entry])
+    regions[RegionName.witch_blade].connect(regions[RegionName.wild_witch_cheated + entry])
     regions[RegionName.witch].connect(regions[RegionName.wild_witch_paranoid + entry])
 
     # Prisoner → Cage / Grey (entry)
-    regions[RegionName.prisoner].connect(
-        connecting_region=regions[RegionName.cage_paranoid + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_prisoner)
-    )
+    regions[RegionName.prisoner_blade].connect(regions[RegionName.cage_paranoid + entry])
     regions[RegionName.prisoner].connect(regions[RegionName.cage_cheated + entry])
     regions[RegionName.prisoner].connect(regions[RegionName.cage_broken + entry])
 
-    regions[RegionName.prisoner].connect(
-        connecting_region=regions[RegionName.grey_drowned + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_prisoner)
-    )
+    regions[RegionName.prisoner_blade].connect(regions[RegionName.grey_drowned + entry])
 
     # Damsel → Happily / Grey Burned (entry)
     regions[RegionName.damsel].connect(regions[RegionName.happily_skeptic + entry])
     regions[RegionName.damsel].connect(regions[RegionName.happily_opportunist + entry])
 
-    regions[RegionName.damsel].connect(
-        connecting_region=regions[RegionName.grey_burned + entry],
-        rule=lambda state: has_blade(state, world, ItemName.blade_damsel)
-    )
+    regions[RegionName.damsel_blade].connect(regions[RegionName.grey_burned + entry])
     # endregion
 
     # region Chapter 3 Sub Entry -> Main Entry

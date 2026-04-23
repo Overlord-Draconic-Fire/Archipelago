@@ -70,6 +70,7 @@ class MirrorRando(DefaultOnToggle):
     """
     display_name = "Mirror Rando"
 
+
 class MemorieSanity(Choice):
     """
     Chooses to randomize the memories in the world. (+439 locations/items)
