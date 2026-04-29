@@ -547,33 +547,33 @@ def set_region_rules(world, regions: dict[str, Region]):
     # Razor No Way (entry)
     regions[RegionName.razor_no_way_broken + entry].connect(
         connecting_region=regions[RegionName.razor_no_way_broken],
-        rule=lambda state: has_princess(state, world, ItemName.razor) and has_voices(state, world, [ItemName.cheated, ItemName.contrarian, ItemName.broken])
+        rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
     )  # Razor No Way Broken
 
     regions[RegionName.razor_no_way_paranoid + entry].connect(
         connecting_region=regions[RegionName.razor_no_way_paranoid],
-        rule=lambda state: has_princess(state, world, ItemName.razor) and has_voices(state, world, [ItemName.cheated, ItemName.contrarian, ItemName.paranoid])
+        rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
     )  # Razor No Way Paranoid
 
     regions[RegionName.razor_no_way_stubborn + entry].connect(
         connecting_region=regions[RegionName.razor_no_way_stubborn],
-        rule=lambda state: has_princess(state, world, ItemName.razor) and has_voices(state, world, [ItemName.cheated, ItemName.contrarian, ItemName.stubborn])
+        rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
     )  # Razor No Way Stubborn
 
     # Razor Race (entry)
     regions[RegionName.razor_race_broken + entry].connect(
         connecting_region=regions[RegionName.razor_race_broken],
-        rule=lambda state: has_princess(state, world, ItemName.razor) and has_voices(state, world, [ItemName.cheated, ItemName.hunted, ItemName.broken])
+        rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
     )  # Razor Race Broken
 
     regions[RegionName.razor_race_paranoid + entry].connect(
         connecting_region=regions[RegionName.razor_race_paranoid],
-        rule=lambda state: has_princess(state, world, ItemName.razor) and has_voices(state, world, [ItemName.cheated, ItemName.hunted, ItemName.paranoid])
+        rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
     )  # Razor Race Paranoid
 
     regions[RegionName.razor_race_stubborn + entry].connect(
         connecting_region=regions[RegionName.razor_race_stubborn],
-        rule=lambda state: has_princess(state, world, ItemName.razor) and has_voices(state, world, [ItemName.cheated, ItemName.hunted, ItemName.stubborn])
+        rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
     )  # Razor Race Stubborn
 
     # Den (entry)
