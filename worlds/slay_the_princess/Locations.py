@@ -1,8 +1,10 @@
 from typing import Dict, NamedTuple, Optional, Callable, Any
 
 from BaseClasses import Location, CollectionState
+from .DataTypes import SlayThePrincessLocationData
 from .Names import ItemName, LocationName, RegionName
-from .Rules import max_reachable_vessels, has_blade, can_reach_oblivion
+from .Rules import has_blade, can_reach_oblivion
+from .TokenSystem import max_reachable_vessels
 
 offset: int = 63900000
 specials: int = 10
@@ -13,16 +15,6 @@ memories: int = 10000
 entry = " ENTRY"
 
 
-class SlayThePrincessLocation(Location):
-    game = "Slay The Princess"
-
-
-class SlayThePrincessLocationData(NamedTuple):
-    region: str
-    address: Optional[int] = None
-    rule: Optional[Callable[[CollectionState, Any], bool]] = None
-
-
 others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.win: SlayThePrincessLocationData(RegionName.win),
 }
@@ -30,19 +22,19 @@ others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.mirror1: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 0,
-        rule=lambda state, world: max_reachable_vessels(state, world) > 0),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.mirror2: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 1,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 1) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 2) and state.has(ItemName.goddess, world.player))),
     LocationName.mirror3: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 2,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 2) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 3) and state.has(ItemName.goddess, world.player))),
     LocationName.mirror4: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 3,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 3) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 4) and state.has(ItemName.goddess, world.player))),
     LocationName.mirror5: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 4,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 4) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 5) and state.has(ItemName.goddess, world.player))),
 }
 
 princess_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -137,19 +129,19 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_spaceBetween[3]: SlayThePrincessLocationData(RegionName.space_between, offset + memories + 103),
     LocationName.gallery_spaceBetween[4]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 104,
-        rule=lambda state, world: max_reachable_vessels(state, world) > 0),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_spaceBetween[5]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 105,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 1) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 2) and state.has(ItemName.goddess, world.player))),
     LocationName.gallery_spaceBetween[6]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 106,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 2) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 3) and state.has(ItemName.goddess, world.player))),
     LocationName.gallery_spaceBetween[7]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 107,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 3) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 4) and state.has(ItemName.goddess, world.player))),
     LocationName.gallery_spaceBetween[8]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 108,
-        rule=lambda state, world: (max_reachable_vessels(state, world) > 4) and state.has(ItemName.goddess, world.player)),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 5) and state.has(ItemName.goddess, world.player))),
     LocationName.gallery_spaceBetween[9]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 109,
         rule=lambda state, world: can_reach_oblivion(state, world)),

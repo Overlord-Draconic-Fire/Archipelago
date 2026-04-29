@@ -3,8 +3,8 @@ from enum import Enum
 
 from BaseClasses import Region
 from .Names import RegionName, ItemName
-from .Rules import has_voice, has_all_voices, has_voices, has_blade, max_reachable_vessels, has_princess, \
-    can_reach_new_world
+from .Rules import has_voice, has_all_voices, has_voices, has_blade, has_princess
+from .TokenSystem import max_reachable_vessels, can_reach_new_world
 
 entry = " ENTRY"
 
@@ -149,6 +149,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.cage_cheated: SlayThePrincessRegionData(RegionName.cage, Chapter.three),
     RegionName.cage_broken: SlayThePrincessRegionData(RegionName.cage, Chapter.three),
     RegionName.cage_not_paranoid: SlayThePrincessRegionData(RegionName.cage, Chapter.three, False),
+    RegionName.cage_new_world: SlayThePrincessRegionData(RegionName.cage, Chapter.three, False),
 
     # Grey
     RegionName.grey: SlayThePrincessRegionData(RegionName.grey, Chapter.three),
@@ -831,7 +832,6 @@ def set_region_rules(world, regions: dict[str, Region]):
     # region Special Furry
     # Fury Broken or Cold
     regions[RegionName.fury_cold].connect(regions[RegionName.fury_broken_cold])
-    regions[RegionName.fury_unarmed_broken].connect(regions[RegionName.fury_broken_cold])
     regions[RegionName.fury_broken].connect(regions[RegionName.fury_broken_cold])
 
     # Weathered Heart
@@ -854,6 +854,9 @@ def set_region_rules(world, regions: dict[str, Region]):
     # region Special Cage
     regions[RegionName.cage_broken].connect(regions[RegionName.cage_not_paranoid])
     regions[RegionName.cage_cheated].connect(regions[RegionName.cage_not_paranoid])
+
+    regions[RegionName.cage_not_paranoid].connect(regions[RegionName.cage_new_world])
+    regions[RegionName.cage_paranoid_blade].connect(regions[RegionName.cage_new_world])
     # endregion
 
     # region The Space Between
@@ -886,11 +889,11 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.space_between].connect(regions[RegionName.goddess + entry])
     regions[RegionName.goddess + entry].connect(
         connecting_region=regions[RegionName.restart],
-        rule = lambda state: max_reachable_vessels(state, world) > 0 and has_princess(state, world, ItemName.goddess)
+        rule = lambda state: max_reachable_vessels(state, world,1) and has_princess(state, world, ItemName.goddess)
     )
     regions[RegionName.goddess + entry].connect(
         connecting_region=regions[RegionName.goddess],
-        rule=lambda state: max_reachable_vessels(state, world) > 4 and has_princess(state, world, ItemName.goddess)
+        rule=lambda state: max_reachable_vessels(state, world, 5) and has_princess(state, world, ItemName.goddess)
     )
     regions[RegionName.goddess].connect(
         connecting_region=regions[RegionName.goddess_blade],

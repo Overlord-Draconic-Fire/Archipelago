@@ -103,6 +103,7 @@ cage_paranoid_blade = "Chapter III - The Cage (Paranoid) [Blade Only]"
 cage_cheated = "Chapter III - The Cage (Cheated)"
 cage_broken = "Chapter III - The Cage (Broken)"
 cage_not_paranoid = "Chapter III - The Cage (Not Paranoid)"
+cage_new_world = "Chapter III - The Cage (New World)"
 
 grey = "Chapter III - The Grey"
 grey_drowned = "Chapter III - The Grey (Drowned)"

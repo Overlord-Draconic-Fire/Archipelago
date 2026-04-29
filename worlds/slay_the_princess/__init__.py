@@ -2,14 +2,16 @@ from typing import List
 
 from BaseClasses import Region, CollectionState, ItemClassification
 from worlds.AutoWorld import World, WebWorld
+from .DataTypes import SlayThePrincessLocation
 from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
     blade_princess_item_data_table, blade_chapter_item_data_table, gallery_item_data_table
-from .Locations import SlayThePrincessLocation, location_table, others_location_data_table, princess_location_data_table, \
+from .Locations import location_table, others_location_data_table, princess_location_data_table, \
     global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table, gallery_location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
 from .Rules import has_blade
+from .TokenSystem import create_token, rando_entrance, fill_region_tokens
 
 
 class SlayThePrincessWeb(WebWorld):
@@ -35,6 +37,13 @@ class SlayThePrincessWorld(World):
         "mirror_rando": mirror_location_data_table,
         "memoriesanity": gallery_location_data_table,
     }
+
+    def generate_early(self) -> None:
+        self.explicit_indirect_conditions = False
+
+        rando_entrance(self)
+        fill_region_tokens()
+
 
     def create_regions(self) -> None:
         # Create regions
@@ -68,6 +77,7 @@ class SlayThePrincessWorld(World):
                 if location_data.region == region_name
             }, SlayThePrincessLocation)
 
+        create_token(self)
         self.create_goal_region()
 
     def create_goal_region(self) -> None:
@@ -115,6 +125,7 @@ class SlayThePrincessWorld(World):
             location.access_rule = (lambda state, rule=location_data.rule: rule(state, self))
 
     def connect_entrances(self) -> None:
+        """Method to finalize the source and target regions of the World's entrances"""
         pass
 
     def fill_slot_data(self):
