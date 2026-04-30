@@ -30,6 +30,7 @@ class SlayThePrincessWorld(World):
     options: SlayThePrincessOptions
     location_name_to_id = location_table
     item_name_to_id = item_table
+    active_location_data_table = {}
     optional_location_tables = {
         "chapter_rando": princess_location_data_table,
         "global_chapter_rando": global_chapter_location_data_table,
@@ -63,17 +64,17 @@ class SlayThePrincessWorld(World):
         set_region_rules(self, regions)
 
         # Build active locations table from always-on + option-gated tables.
-        active_location_data_table = dict(others_location_data_table)
+        self.active_location_data_table = dict(others_location_data_table)
         for option_name, data_table in self.optional_location_tables.items():
             if getattr(self.options, option_name):
-                active_location_data_table.update(data_table)
+                self.active_location_data_table.update(data_table)
 
         # Create locations.
         for region_name, region_data in regions.items():
             region = self.multiworld.get_region(region_name, self.player)
 
             region.add_locations({
-                location_name: location_data.address for location_name, location_data in active_location_data_table.items()
+                location_name: location_data.address for location_name, location_data in self.active_location_data_table.items()
                 if location_data.region == region_name
             }, SlayThePrincessLocation)
 
@@ -117,7 +118,7 @@ class SlayThePrincessWorld(World):
         self.multiworld.itempool += item_pool
 
     def set_rules(self) -> None:
-        for location_name, location_data in location_data_table.items():
+        for location_name, location_data in self.active_location_data_table.items():
             if location_data.rule is None:
                 continue
 

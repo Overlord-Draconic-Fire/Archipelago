@@ -57,11 +57,11 @@ class GlobalChapterRando(DefaultOnToggle):
     display_name = "Global Chapter Rando"
 
 
-class HearthRando(DefaultOnToggle):
+class HeartRando(DefaultOnToggle):
     """
-    Add hearths (vessels) as check locations in the world. (+29 locations)
+    Add hearts (vessels) as check locations in the world. (+29 locations)
     """
-    display_name = "Hearth Rando"
+    display_name = "Heart Rando"
 
 
 class MirrorRando(DefaultOnToggle):
@@ -105,7 +105,7 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     #Location
     chapter_rando: ChapterRando
     global_chapter_rando: GlobalChapterRando
-    heart_rando: HearthRando
+    heart_rando: HeartRando
     #heart_grouping: HeartGrouping
     mirror_rando: MirrorRando
     memoriesanity: MemorieSanity
@@ -130,7 +130,7 @@ slay_the_princess_option_groups = [
     OptionGroup("Location Options", [
         ChapterRando,
         GlobalChapterRando,
-        HearthRando,
+        HeartRando,
         #HeartGrouping,
         MirrorRando,
         MemorieSanity,
