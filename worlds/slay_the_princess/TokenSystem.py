@@ -427,6 +427,16 @@ def create_token(world: World) -> None:
         )
 
 
+BLADE_ONLY_SUFFIX = " [Blade Only]"
+
+
+def _token_group(token: str) -> str:
+    region = EVENT_LOCATIONS[token].region
+    if region.endswith(BLADE_ONLY_SUFFIX):
+        return region[:-len(BLADE_ONLY_SUFFIX)]
+    return region
+
+
 def max_reset(state: CollectionState, world, regions: set[str], want: int) -> bool:
     from .Regions import region_data_table, Chapter
 
@@ -434,33 +444,32 @@ def max_reset(state: CollectionState, world, regions: set[str], want: int) -> bo
     if max_count < want:
         return False
 
-    owned_tokens = {token for token in EVENT_LOCATIONS.keys() if state.has(token, world.player)}
+    owned_tokens = {token for token in EVENT_LOCATIONS if state.has(token, world.player)}
 
     chap2_regions = {r for r in regions if region_data_table[r].chapter == Chapter.two}
     chap3_regions = {r for r in regions if region_data_table[r].chapter == Chapter.three}
 
-    usable_chap2 = {REGION_TO_TOKEN[r]["main"] for r in chap2_regions if REGION_TO_TOKEN[r]["main"] in owned_tokens}
+    usable_chap2 = {_token_group(REGION_TO_TOKEN[r]["main"]) for r in chap2_regions if REGION_TO_TOKEN[r]["main"] in owned_tokens}
 
     if len(usable_chap2) >= want:
         return True
 
-    owned_tokens -= usable_chap2
     usable_chap3 = 0
-    used_tokens = set()
+    used_tokens = set(usable_chap2)
     candidates = []
     for r in chap3_regions:
         main = REGION_TO_TOKEN[r]["main"]
         if main in owned_tokens:
-            available_extras = [e for e in REGION_TO_TOKEN[r]["extra"] if e in owned_tokens]
+            available_extras = {e for e in REGION_TO_TOKEN[r]["extra"] if e in owned_tokens and _token_group(e) not in used_tokens}
             if available_extras:
                 candidates.append((r, available_extras))
     candidates.sort(key=lambda x: len(x[1]))
     for r, extras in candidates:
         main = REGION_TO_TOKEN[r]["main"]
         if main not in used_tokens:
-            available_extras = [e for e in extras if e not in used_tokens]
+            available_extras = {e for e in extras if e not in used_tokens}
             if available_extras:
-                to_consume_extra = available_extras[0]
+                to_consume_extra = next(iter(available_extras))
                 used_tokens.add(main)
                 used_tokens.add(to_consume_extra)
                 usable_chap3 += 1
