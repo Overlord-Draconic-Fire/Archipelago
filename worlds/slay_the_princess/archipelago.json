@@ -3,5 +3,5 @@
     "game": "Slay The Princess",
 	"authors": ["Onilaf"],
     "minimum_ap_version": "0.6.7",
-    "world_version": "0.3.0"
+    "world_version": "0.5.1"
 }

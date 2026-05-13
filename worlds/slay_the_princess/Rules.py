@@ -22,6 +22,7 @@ CHAPTER_3_BLADES = {
     ItemName.blade_fury,
     ItemName.blade_apotheosis,
     ItemName.blade_dragon,
+    ItemName.blade_clarity,
     ItemName.blade_den,
     ItemName.blade_wild,
     ItemName.blade_thorn,
