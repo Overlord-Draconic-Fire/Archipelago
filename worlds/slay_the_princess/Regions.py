@@ -611,17 +611,17 @@ def set_region_rules(world, regions: dict[str, Region]):
 
     regions[RegionName.wild_witch_stubborn + entry].connect(
         connecting_region=regions[RegionName.wild_witch_stubborn],
-        rule=lambda state: has_princess(state, world, ItemName.witch) and has_voices(state, world, [ItemName.opportunist, ItemName.stubborn])
+        rule=lambda state: has_princess(state, world, ItemName.wild) and has_voices(state, world, [ItemName.opportunist, ItemName.stubborn])
     )  # Wild Witch Stubborn
 
     regions[RegionName.wild_witch_cheated + entry].connect(
         connecting_region=regions[RegionName.wild_witch_cheated],
-        rule=lambda state: has_princess(state, world, ItemName.witch) and has_voices(state, world, [ItemName.opportunist, ItemName.cheated])
+        rule=lambda state: has_princess(state, world, ItemName.wild) and has_voices(state, world, [ItemName.opportunist, ItemName.cheated])
     )  # Wild Witch Cheated
 
     regions[RegionName.wild_witch_paranoid + entry].connect(
         connecting_region=regions[RegionName.wild_witch_paranoid],
-        rule=lambda state: has_princess(state, world, ItemName.witch) and has_voices(state, world, [ItemName.opportunist, ItemName.paranoid])
+        rule=lambda state: has_princess(state, world, ItemName.wild) and has_voices(state, world, [ItemName.opportunist, ItemName.paranoid])
     )  # Wild Witch Paranoid
 
     # Thorn (entry)
