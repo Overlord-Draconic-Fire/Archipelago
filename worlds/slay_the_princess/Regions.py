@@ -105,7 +105,6 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.razor_no_way: SlayThePrincessRegionData(RegionName.razor_no_way, Chapter.three),
     RegionName.razor_no_way_broken: SlayThePrincessRegionData(RegionName.razor_no_way, Chapter.three),
     RegionName.razor_no_way_paranoid: SlayThePrincessRegionData(RegionName.razor_no_way, Chapter.three),
-    RegionName.razor_no_way_stubborn: SlayThePrincessRegionData(RegionName.razor_no_way, Chapter.three),
 
     RegionName.razor_race: SlayThePrincessRegionData(RegionName.razor_race, Chapter.three),
     RegionName.razor_race_broken: SlayThePrincessRegionData(RegionName.razor_race, Chapter.three),
@@ -359,7 +358,6 @@ def set_region_rules(world, regions: dict[str, Region]):
     # Razor → No Way / Race (entry)
     regions[RegionName.razor].connect(regions[RegionName.razor_no_way_broken + entry])
     regions[RegionName.razor].connect(regions[RegionName.razor_no_way_paranoid + entry])
-    regions[RegionName.razor].connect(regions[RegionName.razor_no_way_stubborn + entry])
 
     regions[RegionName.razor_blade].connect(regions[RegionName.razor_race_broken + entry])
     regions[RegionName.razor_blade].connect(regions[RegionName.razor_race_paranoid + entry])
@@ -424,7 +422,6 @@ def set_region_rules(world, regions: dict[str, Region]):
     # Razor No Way (entry)
     regions[RegionName.razor_no_way_broken + entry].connect(regions[RegionName.razor_no_way + entry])
     regions[RegionName.razor_no_way_paranoid + entry].connect(regions[RegionName.razor_no_way + entry])
-    regions[RegionName.razor_no_way_stubborn + entry].connect(regions[RegionName.razor_no_way + entry])
 
     # Razor Race (entry)
     regions[RegionName.razor_race_broken + entry].connect(regions[RegionName.razor_race + entry])
@@ -555,11 +552,6 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.razor_no_way_paranoid],
         rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
     )  # Razor No Way Paranoid
-
-    regions[RegionName.razor_no_way_stubborn + entry].connect(
-        connecting_region=regions[RegionName.razor_no_way_stubborn],
-        rule=lambda state: has_princess(state, world, ItemName.razor) and has_all_voices(state, world)
-    )  # Razor No Way Stubborn
 
     # Razor Race (entry)
     regions[RegionName.razor_race_broken + entry].connect(
@@ -704,7 +696,6 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.razor_no_way].connect(regions[RegionName.razor_chap3])
     regions[RegionName.razor_no_way_broken].connect(regions[RegionName.razor_no_way])
     regions[RegionName.razor_no_way_paranoid].connect(regions[RegionName.razor_no_way])
-    regions[RegionName.razor_no_way_stubborn].connect(regions[RegionName.razor_no_way])
 
     # Razor Race
     regions[RegionName.razor_race].connect(regions[RegionName.razor_chap3])

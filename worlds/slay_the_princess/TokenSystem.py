@@ -222,7 +222,6 @@ REGION_TO_ENTRANCES = {
     RegionName.razor_chap4: {
         RegionName.razor_no_way_broken,
         RegionName.razor_no_way_paranoid,
-        RegionName.razor_no_way_stubborn,
         RegionName.razor_race_broken,
         RegionName.razor_race_paranoid,
         RegionName.razor_race_stubborn,
@@ -312,7 +311,6 @@ ENTRANCE = {
 
     RegionName.razor_no_way_broken: RegionName.razor_no_way_broken,
     RegionName.razor_no_way_paranoid: RegionName.razor_no_way_paranoid,
-    RegionName.razor_no_way_stubborn: RegionName.razor_no_way_stubborn,
 
     RegionName.razor_race_broken: RegionName.razor_race_broken,
     RegionName.razor_race_paranoid: RegionName.razor_race_paranoid,
@@ -376,7 +374,6 @@ ENTRANCE_TO_TOKEN = {
     # Razor
     RegionName.razor_no_way_broken: TokenName.razor,
     RegionName.razor_no_way_paranoid: TokenName.razor,
-    RegionName.razor_no_way_stubborn: TokenName.razor,
 
     RegionName.razor_race_broken: TokenName.razor_blade,
     RegionName.razor_race_paranoid: TokenName.razor_blade,
