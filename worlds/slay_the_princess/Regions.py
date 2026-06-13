@@ -735,14 +735,8 @@ def set_region_rules(world, regions: dict[str, Region]):
     # endregion
 
     # region Chapter 3 + 4 Razor
-    regions[RegionName.razor_no_way].connect(
-        connecting_region=regions[RegionName.razor_empty],
-        rule=lambda state: has_all_voices(state, world)
-    )
-    regions[RegionName.razor_race].connect(
-        connecting_region=regions[RegionName.razor_destruction],
-        rule=lambda state: has_all_voices(state, world)
-    )
+    regions[RegionName.razor_no_way].connect(regions[RegionName.razor_empty])
+    regions[RegionName.razor_race].connect(regions[RegionName.razor_destruction])
 
     regions[RegionName.razor_empty].connect(regions[RegionName.razor_chap4])
     regions[RegionName.razor_destruction].connect(regions[RegionName.razor_chap4])
