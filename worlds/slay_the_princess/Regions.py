@@ -903,5 +903,6 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.new_world],
         rule=lambda state: can_reach_new_world(state, world)
     )
+
     regions[RegionName.goddess].connect(regions[RegionName.win])
     # endregion

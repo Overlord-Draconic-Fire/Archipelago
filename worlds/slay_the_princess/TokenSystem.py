@@ -92,13 +92,35 @@ NEW_WORLD_REGIONS = {
     RegionName.razor_chap4,
 }
 
+OBLIVION_REGIONS = {
+    RegionName.adversary,
+    RegionName.tower,
+    RegionName.spectre,
+    RegionName.nightmare,
+    RegionName.beast,
+    RegionName.witch,
+    RegionName.stranger,
+    RegionName.prisoner,
+    RegionName.damsel,
+    RegionName.needle,
+    RegionName.fury,
+    RegionName.wraith,
+    RegionName.clarity,
+    RegionName.den,
+    RegionName.thorn,
+    RegionName.cage,
+    RegionName.grey,
+}
+
 REGION_TO_TOKEN = {
+    RegionName.adversary: {"main": TokenName.adversary, "extra": set()},
     RegionName.adversary_blade: {"main": TokenName.adversary_blade, "extra": set()},
     RegionName.tower: {"main": TokenName.tower, "extra": set()},
     RegionName.spectre: {"main": TokenName.spectre, "extra": set()},
     RegionName.nightmare: {"main": TokenName.nightmare, "extra": set()},
     RegionName.beast: {"main": TokenName.beast, "extra": set()},
     RegionName.witch: {"main": TokenName.witch, "extra": set()},
+    RegionName.stranger: {"main": TokenName.stranger, "extra": set()},
     RegionName.stranger_blade: {"main": TokenName.stranger_blade, "extra": set()},
     RegionName.prisoner: {"main": TokenName.prisoner, "extra": set()},
     RegionName.damsel: {"main": TokenName.damsel, "extra": set()},
@@ -107,6 +129,7 @@ REGION_TO_TOKEN = {
     RegionName.apotheosis: {"main": TokenName.apotheosis, "extra": set()},
     RegionName.dragon: {"main": TokenName.dragon, "extra": set()},
     RegionName.wraith: {"main": TokenName.wraith, "extra": set()},
+    RegionName.clarity: {"main": TokenName.clarity, "extra": set()},
     RegionName.clarity_blade: {"main": TokenName.clarity_blade, "extra": set()},
     RegionName.den: {"main": TokenName.den, "extra": set()},
     RegionName.wild: {"main": TokenName.wild, "extra": set()},
@@ -441,7 +464,7 @@ def max_reset(state: CollectionState, world, regions: set[str], want: int) -> bo
     from .Regions import region_data_table, Chapter
 
     max_count = state.count(ItemName.gift, world.player) if world.options.gift_rando else 5
-    if max_count < want:
+    if max_count < want and regions != OBLIVION_REGIONS:
         return False
 
     owned_tokens = {token for token in EVENT_LOCATIONS if state.has(token, world.player)}
@@ -485,3 +508,7 @@ def max_reachable_vessels(state: CollectionState, world, want: int) -> bool:
 
 def can_reach_new_world(state: CollectionState, world) -> bool:
     return max_reset(state, world, NEW_WORLD_REGIONS, 5)
+
+
+def can_reach_oblivion(state: CollectionState, world) -> bool:
+    return max_reset(state, world, OBLIVION_REGIONS, 6)

@@ -61,3 +61,23 @@ cage_new_world = "EVENT " + RegionName.cage_new_world
 #grey = "EVENT " + RegionName.grey
 happily_blade = "EVENT " + RegionName.happily_blade
 #razor_chap4 = "EVENT " + RegionName.razor_chap4
+
+# OBLIVION_REGIONS
+#adversary = "EVENT " + RegionName.adversary
+#tower = "EVENT " + RegionName.tower
+#spectre = "EVENT " + RegionName.spectre
+#nightmare = "EVENT " + RegionName.nightmare
+#beast = "EVENT " + RegionName.beast
+#witch = "EVENT " + RegionName.witch
+stranger = "EVENT " + RegionName.stranger
+#prisoner = "EVENT " + RegionName.prisoner
+#damsel = "EVENT " + RegionName.damsel
+
+#needle = "EVENT " + RegionName.needle
+#fury = "EVENT " + RegionName.fury
+#wraith = "EVENT " + RegionName.wraith
+clarity = "EVENT " + RegionName.clarity
+#den = "EVENT " + RegionName.den
+#thorn = "EVENT " + RegionName.thorn
+#cage = "EVENT " + RegionName.cage
+#grey = "EVENT " + RegionName.grey

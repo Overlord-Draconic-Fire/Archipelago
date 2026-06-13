@@ -3,8 +3,8 @@ from typing import Dict, NamedTuple, Optional, Callable, Any
 from BaseClasses import Location, CollectionState
 from .DataTypes import SlayThePrincessLocationData
 from .Names import ItemName, LocationName, RegionName
-from .Rules import has_blade, can_reach_oblivion
-from .TokenSystem import max_reachable_vessels
+from .Rules import has_blade
+from .TokenSystem import max_reachable_vessels, can_reach_oblivion
 
 offset: int = 63900000
 specials: int = 10
