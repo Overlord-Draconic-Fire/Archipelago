@@ -628,10 +628,10 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         RegionName.wild, offset + memories + 2008,
         rule=lambda state, world: state.can_reach_region(RegionName.restart, world.player)),
     LocationName.gallery_wild[9]: SlayThePrincessLocationData(
-        RegionName.wild, offset + memories + 2009,
+        RegionName.wild_blade, offset + memories + 2009,
         rule=lambda state, world: state.can_reach_region(RegionName.restart, world.player)),
     LocationName.gallery_wild[10]: SlayThePrincessLocationData(
-        RegionName.wild, offset + memories + 2010,
+        RegionName.wild_blade, offset + memories + 2010,
         rule=lambda state, world: state.can_reach_region(RegionName.restart, world.player)),
     LocationName.gallery_wild[11]: SlayThePrincessLocationData(
         RegionName.wild, offset + memories + 2011,
