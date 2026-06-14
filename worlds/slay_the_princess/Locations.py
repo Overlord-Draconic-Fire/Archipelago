@@ -129,7 +129,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_spaceBetween[3]: SlayThePrincessLocationData(RegionName.space_between, offset + memories + 103),
     LocationName.gallery_spaceBetween[4]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 104,
-        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1) and state.has(ItemName.goddess, world.player)),
     LocationName.gallery_spaceBetween[5]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 105,
         rule=lambda state, world: (max_reachable_vessels(state, world, 2) and state.has(ItemName.goddess, world.player))),
@@ -141,7 +141,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         rule=lambda state, world: (max_reachable_vessels(state, world, 4) and state.has(ItemName.goddess, world.player))),
     LocationName.gallery_spaceBetween[8]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 108,
-        rule=lambda state, world: (max_reachable_vessels(state, world, 5) and state.has(ItemName.goddess, world.player))),
+        rule=lambda state, world: (max_reachable_vessels(state, world, 4) and state.has(ItemName.goddess, world.player))),
     LocationName.gallery_spaceBetween[9]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 109,
         rule=lambda state, world: can_reach_oblivion(state, world)),
