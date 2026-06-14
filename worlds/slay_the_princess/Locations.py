@@ -338,7 +338,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_witch[8]: SlayThePrincessLocationData(RegionName.witch_blade, offset + memories + 908),
     LocationName.gallery_witch[9]: SlayThePrincessLocationData(RegionName.witch_blade, offset + memories + 909),
     LocationName.gallery_witch[10]: SlayThePrincessLocationData(RegionName.witch, offset + memories + 910),
-    LocationName.gallery_witch[11]: SlayThePrincessLocationData(RegionName.witch, offset + memories + 911),
+    LocationName.gallery_witch[11]: SlayThePrincessLocationData(RegionName.witch_blade, offset + memories + 911),
     LocationName.gallery_witch[12]: SlayThePrincessLocationData(RegionName.witch, offset + memories + 912),
     LocationName.gallery_witch[13]: SlayThePrincessLocationData(RegionName.witch, offset + memories + 913),
     LocationName.gallery_witch[14]: SlayThePrincessLocationData(RegionName.witch, offset + memories + 914),
