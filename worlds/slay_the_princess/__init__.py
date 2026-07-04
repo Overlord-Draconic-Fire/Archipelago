@@ -52,7 +52,7 @@ class SlayThePrincessWorld(World):
     }
 
     def generate_early(self) -> None:
-        self.explicit_indirect_conditions = False
+        #DEBUG!!! remettre quand rando entrance ? self.explicit_indirect_conditions = False
 
         rando_entrance(self)
         fill_region_tokens()

@@ -509,3 +509,8 @@ def can_reach_new_world(state: CollectionState, world) -> bool:
 
 def can_reach_oblivion(state: CollectionState, world) -> bool:
     return max_reset(state, world, OBLIVION_REGIONS, 6)
+
+
+def max_reachable_reset(state: CollectionState, world, number: int) -> bool:
+    from worlds.slay_the_princess.Rules import has_princess
+    return max_reachable_vessels(state, world, number) and has_princess(state, world, ItemName.goddess)
