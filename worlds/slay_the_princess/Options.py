@@ -4,6 +4,24 @@ import random
 from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle
 from worlds.AutoWorld import World
 
+class DeathLink(Choice):
+    """
+    Determines how DeathLink behaves.
+    - Nothing: DeathLink is disabled.
+    - Only Receive: You can receive DeathLinks from other players, but your deaths are never sent.
+    - On Archipelago Death: Sends a DeathLink when you become stuck because you are missing required progression items.
+    - On Real Death: Sends a DeathLink whenever the protagonist dies during the story. Warning: other players won't like Razor...
+    - Both: Combines Archipelago Death and Real Death behaviors.
+    """
+    display_name = "Death Link"
+    option_nothing = 0
+    option_only_receive = 1
+    option_on_archipelago_death = 2
+    option_on_real_death = 3
+    option_both = 4
+    default = 0
+
+
 class ChapterAccessRando(Choice):
     """
     Determines which items are required to access chapters and shuffles them into the item pool.
@@ -82,13 +100,14 @@ class MemorieSanity(Choice):
     option_nothing = 0
     option_location = 1
     option_both = 2
-    default = 0
+    default = 1
 
 
 @dataclass
 class SlayThePrincessOptions(PerGameCommonOptions):
     #Game Options
     #goal: Goal
+    death_link: DeathLink
     #entrance_rando: EntranceRando
 
     #Item
@@ -112,10 +131,11 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     #branchsanity: BranchSanity
 
 slay_the_princess_option_groups = [
-    #OptionGroup("Game Options", [
+    OptionGroup("Game Options", [
         #Goal,
+        DeathLink
         #EntranceRando,
-    #]),
+    ]),
     OptionGroup("Item Options", [
         ChapterAccessRando,
         #CouplePrincessesAndVoices

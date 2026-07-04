@@ -142,6 +142,7 @@ class SlayThePrincessWorld(World):
 
     def fill_slot_data(self):
         return {
+            "death_link": self.options.death_link.value,
             "chapter_access": self.options.chapter_access.value,
             "pristine_blade_rando": self.options.pristine_blade_rando.value,
             "gift_rando": self.options.gift_rando.value,
