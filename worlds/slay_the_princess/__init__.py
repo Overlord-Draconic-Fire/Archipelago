@@ -38,13 +38,24 @@ class SlayThePrincessWorld(World):
         "mirror_rando": mirror_location_data_table,
         "memoriesanity": gallery_location_data_table,
     }
+    item_name_groups = {
+        "Pristine Blade": ( {ItemName.blade} | set(blade_chapter_item_data_table.keys()) | set(blade_princess_item_data_table.keys())),
+        "Princess": set(princess_item_data_table.keys()),
+        "Voice": set(voice_item_data_table.keys()),
+        "Gallery": set(gallery_item_data_table.keys())
+    }
+    location_name_groups = {
+        "Mirror": set(mirror_location_data_table.keys()),
+        "Chapter": (set(global_chapter_location_data_table) | set(princess_location_data_table.keys())),
+        "Heart": set(heart_location_data_table.keys()),
+        "Gallery": set(gallery_location_data_table.keys())
+    }
 
     def generate_early(self) -> None:
         self.explicit_indirect_conditions = False
 
         rando_entrance(self)
         fill_region_tokens()
-
 
     def create_regions(self) -> None:
         # Create regions
