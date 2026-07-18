@@ -516,8 +516,8 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         RegionName.apotheosis, offset + memories + 1520,
         rule=lambda state, world: max_reachable_reset(state, world, 5)),
 
-    LocationName.gallery_dragon[1]: SlayThePrincessLocationData(RegionName.dragon, offset + memories + 1601),
-    LocationName.gallery_dragon[2]: SlayThePrincessLocationData(RegionName.dragon, offset + memories + 1602),
+    LocationName.gallery_dragon[1]: SlayThePrincessLocationData(RegionName.spectre_blade, offset + memories + 1601),
+    LocationName.gallery_dragon[2]: SlayThePrincessLocationData(RegionName.spectre_blade, offset + memories + 1602),
     LocationName.gallery_dragon[3]: SlayThePrincessLocationData(RegionName.dragon, offset + memories + 1603),
     LocationName.gallery_dragon[4]: SlayThePrincessLocationData(RegionName.dragon, offset + memories + 1604),
     LocationName.gallery_dragon[5]: SlayThePrincessLocationData(RegionName.dragon, offset + memories + 1605),
