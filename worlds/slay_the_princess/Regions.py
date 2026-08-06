@@ -68,6 +68,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     # Fury
     RegionName.fury: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
     RegionName.fury_weathered_heart: SlayThePrincessRegionData(RegionName.fury, Chapter.three, False),
+    RegionName.fury_unwound_heart: SlayThePrincessRegionData(RegionName.fury, Chapter.three, False),
     RegionName.fury_cold: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
     RegionName.fury_contrarian: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
     RegionName.fury_broken: SlayThePrincessRegionData(RegionName.fury, Chapter.three),
@@ -676,7 +677,7 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.fury_cold].connect(regions[RegionName.fury])
     regions[RegionName.fury_contrarian].connect(regions[RegionName.fury])
     regions[RegionName.fury_broken].connect(regions[RegionName.fury])
-    regions[RegionName.fury_tower].connect(regions[RegionName.fury_tower])
+    regions[RegionName.fury_tower].connect(regions[RegionName.fury])
 
     # Apotheosis
     regions[RegionName.apotheosis_contrarian].connect(regions[RegionName.apotheosis])
@@ -826,6 +827,11 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.fury_weathered_heart],
         rule=lambda state: has_blade(state, world, ItemName.blade_fury)
     )
+    # endregion
+
+    # Unwound Heart
+    regions[RegionName.fury_contrarian].connect(regions[RegionName.fury_unwound_heart])
+    regions[RegionName.fury_tower].connect(regions[RegionName.fury_unwound_heart])
     # endregion
 
     # region Special Dragon

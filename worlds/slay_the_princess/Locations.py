@@ -85,7 +85,7 @@ heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 
     LocationName.needle_heart: SlayThePrincessLocationData(RegionName.needle, offset + heart + 11),
     LocationName.fury_heart_weathered: SlayThePrincessLocationData(RegionName.fury_weathered_heart, offset + heart + 12),
-    LocationName.fury_heart_unwound: SlayThePrincessLocationData(RegionName.fury, offset + heart + 13),
+    LocationName.fury_heart_unwound: SlayThePrincessLocationData(RegionName.fury_unwound_heart, offset + heart + 13),
     LocationName.apotheosis_heart: SlayThePrincessLocationData(RegionName.apotheosis, offset + heart + 14),
     LocationName.dragon_heart_main: SlayThePrincessLocationData(RegionName.dragon, offset + heart + 15),
     LocationName.dragon_heart_stencil: SlayThePrincessLocationData(RegionName.dragon_fuse, offset + heart + 16),
@@ -480,10 +480,10 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_fury[16]: SlayThePrincessLocationData(RegionName.fury, offset + memories + 1416),
     LocationName.gallery_fury[17]: SlayThePrincessLocationData(RegionName.fury_broken_cold, offset + memories + 1417),
     LocationName.gallery_fury[18]: SlayThePrincessLocationData(
-        RegionName.fury, offset + memories + 1418,
+        RegionName.fury_weathered_heart, offset + memories + 1418,
         rule=lambda state, world: max_reachable_reset(state, world, 1)),
     LocationName.gallery_fury[19]: SlayThePrincessLocationData(
-        RegionName.fury, offset + memories + 1419,
+        RegionName.fury_unwound_heart, offset + memories + 1419,
         rule=lambda state, world: max_reachable_reset(state, world, 1)),
     LocationName.gallery_fury[20]: SlayThePrincessLocationData(
         RegionName.fury, offset + memories + 1420,

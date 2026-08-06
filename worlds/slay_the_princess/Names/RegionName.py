@@ -36,6 +36,7 @@ needle_skeptic = "Chapter III - The Eye of the Needle (Skeptic)"
 
 fury = "Chapter III - The Fury"
 fury_weathered_heart = "Chapter III - The Fury (Weathered Heart)"
+fury_unwound_heart = "Chapter III - The Fury (Unwound Heart)"
 fury_cold = "Chapter III - The Fury (Cold)" #Pacifism
 fury_contrarian = "Chapter III - The Fury (Contrarian)"
 fury_broken = "Chapter III - The Fury (Broken)" #Other

@@ -10,7 +10,7 @@ class DeathLink(Choice):
     - Nothing: DeathLink is disabled.
     - Only Receive: You can receive DeathLinks from other players, but your deaths are never sent.
     - On Archipelago Death: Sends a DeathLink when you become stuck because you are missing required progression items.
-    - On Real Death: Sends a DeathLink whenever the protagonist dies during the story. Warning: other players won't like Razor...
+    - On Real Death: Sends a DeathLink whenever the protagonist dies during the story.
     - Both: Combines Archipelago Death and Real Death behaviors.
     """
     display_name = "Death Link"
