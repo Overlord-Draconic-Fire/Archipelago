@@ -131,11 +131,6 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     #branchsanity: BranchSanity
 
 slay_the_princess_option_groups = [
-    OptionGroup("Game Options", [
-        #Goal,
-        DeathLink
-        #EntranceRando,
-    ]),
     OptionGroup("Item Options", [
         ChapterAccessRando,
         #CouplePrincessesAndVoices
