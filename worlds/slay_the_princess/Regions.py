@@ -880,11 +880,11 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.space_between].connect(regions[RegionName.goddess + entry])
     regions[RegionName.goddess + entry].connect(
         connecting_region=regions[RegionName.restart],
-        rule = lambda state: max_reachable_vessels(state, world,1) and has_princess(state, world, ItemName.goddess)
+        rule = lambda state: max_reachable_vessels(state, world, 1)
     )
     regions[RegionName.goddess + entry].connect(
         connecting_region=regions[RegionName.goddess],
-        rule=lambda state: max_reachable_vessels(state, world, 5) and has_princess(state, world, ItemName.goddess)
+        rule=lambda state: max_reachable_vessels(state, world, 5)
     )
     regions[RegionName.goddess].connect(
         connecting_region=regions[RegionName.goddess_blade],

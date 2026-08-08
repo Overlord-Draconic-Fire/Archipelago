@@ -61,6 +61,13 @@ class GiftRando(DefaultOnToggle):
     display_name = "Gift Rando"
 
 
+class NarratorRando(DefaultOnToggle):
+    """
+    Shuffles the narrator into the item pool as a progression item required to talk with him in the mirror in the space between. (+1 items)
+    """
+    display_name = "Narrator Rando"
+
+
 class ChapterRando(DefaultOnToggle):
     """
     Add entering a chapter for the first time as check locations in the world. (+23 locations)
@@ -117,7 +124,7 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     pristine_blade_rando: PristineBladeRando
     #force_chapter1_blade: ForceChapter1BladeRando
     gift_rando: GiftRando
-    #narrator_rando: NarratorRando
+    narrator_rando: NarratorRando
     #good_oblivion_ending: GoodOblivionEnding
     #saves_rando: SavesRando
 

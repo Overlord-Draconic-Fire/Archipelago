@@ -71,3 +71,6 @@ def has_voices(state: CollectionState, world, voices: List[str]) -> bool:
 
 def has_all_voices(state: CollectionState, world) -> bool:
     return world.options.chapter_access in [0, 1] or has_voices(state, world, [ItemName.stubborn, ItemName.broken, ItemName.cold, ItemName.paranoid, ItemName.cheated, ItemName.hunted, ItemName.opportunist, ItemName.contrarian, ItemName.skeptic, ItemName.smitten])
+
+def has_narrator(state: CollectionState, world) -> bool:
+    return not world.options.narrator_rando or state.has(ItemName.narrator, world.player)

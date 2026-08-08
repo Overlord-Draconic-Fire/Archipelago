@@ -24,6 +24,7 @@ other_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.filler: SlayThePrincessItemData(offset + 0, ItemClassification.filler),
     ItemName.mirror: SlayThePrincessItemData(offset + other + 1, ItemClassification.progression),
     ItemName.gift: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression),
+    ItemName.narrator: SlayThePrincessItemData(offset + other + 3, ItemClassification.progression),
 }
 
 blade_item_data_table: Dict[str, SlayThePrincessItemData] = {

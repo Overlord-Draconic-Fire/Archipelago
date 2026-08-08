@@ -4,7 +4,7 @@ from BaseClasses import Location, CollectionState
 from .DataTypes import SlayThePrincessLocationData
 from .Names import ItemName, LocationName, RegionName
 from .Rules import has_blade, has_princess
-from .TokenSystem import max_reachable_vessels, can_reach_oblivion, max_reachable_reset
+from .TokenSystem import max_reachable_vessels, can_reach_oblivion
 
 offset: int = 63900000
 specials: int = 10
@@ -22,19 +22,19 @@ others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.mirror1: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 0,
-        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1, False)),
     LocationName.mirror2: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 1,
-        rule=lambda state, world: max_reachable_reset(state, world, 2)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 2)),
     LocationName.mirror3: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 2,
-        rule=lambda state, world: max_reachable_reset(state, world, 3)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 3)),
     LocationName.mirror4: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 3,
-        rule=lambda state, world: max_reachable_reset(state, world, 4)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 4)),
     LocationName.mirror5: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 4,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5, False)),
 }
 
 princess_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -129,19 +129,17 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_spaceBetween[3]: SlayThePrincessLocationData(RegionName.space_between, offset + memories + 103),
     LocationName.gallery_spaceBetween[4]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 104,
-        rule=lambda state, world: max_reachable_reset(state, world, 2)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 2)),
     LocationName.gallery_spaceBetween[5]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 105,
-        rule=lambda state, world: max_reachable_reset(state, world, 3)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 3)),
     LocationName.gallery_spaceBetween[6]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 106,
-        rule=lambda state, world: max_reachable_reset(state, world, 4)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 4)),
     LocationName.gallery_spaceBetween[7]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 107,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
-    LocationName.gallery_spaceBetween[8]: SlayThePrincessLocationData(
-        RegionName.space_between, offset + memories + 108,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5, False)),
+    LocationName.gallery_spaceBetween[8]: SlayThePrincessLocationData(RegionName.goddess, offset + memories + 108),
     LocationName.gallery_spaceBetween[9]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 109,
         rule=lambda state, world: can_reach_oblivion(state, world)),
@@ -194,13 +192,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_adversary[17]: SlayThePrincessLocationData(RegionName.adversary_blade, offset + memories + 317),
     LocationName.gallery_adversary[18]: SlayThePrincessLocationData(
         RegionName.adversary_blade, offset + memories + 318,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_adversary[19]: SlayThePrincessLocationData(
         RegionName.adversary_blade, offset + memories + 319,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_adversary[20]: SlayThePrincessLocationData(
         RegionName.adversary_blade, offset + memories + 320,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_tower[1]: SlayThePrincessLocationData(RegionName.tower, offset + memories + 401),
     LocationName.gallery_tower[2]: SlayThePrincessLocationData(RegionName.tower, offset + memories + 402),
@@ -214,13 +212,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_tower[10]: SlayThePrincessLocationData(RegionName.tower_blade, offset + memories + 410),
     LocationName.gallery_tower[11]: SlayThePrincessLocationData(
         RegionName.tower, offset + memories + 411,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_tower[12]: SlayThePrincessLocationData(
         RegionName.tower, offset + memories + 412,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_tower[13]: SlayThePrincessLocationData(
         RegionName.tower, offset + memories + 413,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_spectre[1]: SlayThePrincessLocationData(RegionName.spectre, offset + memories + 501),
     LocationName.gallery_spectre[2]: SlayThePrincessLocationData(RegionName.spectre, offset + memories + 502),
@@ -239,13 +237,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_spectre[15]: SlayThePrincessLocationData(RegionName.spectre, offset + memories + 515),
     LocationName.gallery_spectre[16]: SlayThePrincessLocationData(
         RegionName.spectre, offset + memories + 516,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_spectre[17]: SlayThePrincessLocationData(
         RegionName.spectre, offset + memories + 517,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_spectre[18]: SlayThePrincessLocationData(
         RegionName.spectre, offset + memories + 518,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_nightmare[1]: SlayThePrincessLocationData(RegionName.nightmare, offset + memories + 601),
     LocationName.gallery_nightmare[2]: SlayThePrincessLocationData(RegionName.nightmare, offset + memories + 602),
@@ -265,13 +263,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_nightmare[16]: SlayThePrincessLocationData(RegionName.nightmare, offset + memories + 616),
     LocationName.gallery_nightmare[17]: SlayThePrincessLocationData(
         RegionName.nightmare, offset + memories + 617,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_nightmare[18]: SlayThePrincessLocationData(
         RegionName.nightmare, offset + memories + 618,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_nightmare[19]: SlayThePrincessLocationData(
         RegionName.nightmare, offset + memories + 619,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_razor[1]: SlayThePrincessLocationData(RegionName.razor, offset + memories + 701),
     LocationName.gallery_razor[2]: SlayThePrincessLocationData(RegionName.razor, offset + memories + 702),
@@ -290,19 +288,19 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_razor[15]: SlayThePrincessLocationData(RegionName.razor_empty, offset + memories + 715),
     LocationName.gallery_razor[16]: SlayThePrincessLocationData(
         RegionName.razor_destruction, offset + memories + 716,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_razor[17]: SlayThePrincessLocationData(
         RegionName.razor_destruction, offset + memories + 717,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_razor[18]: SlayThePrincessLocationData(
         RegionName.razor_empty, offset + memories + 718,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_razor[19]: SlayThePrincessLocationData(
         RegionName.razor_empty, offset + memories + 719,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_razor[20]: SlayThePrincessLocationData(
         RegionName.razor_chap4, offset + memories + 720,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_beast[1]: SlayThePrincessLocationData(RegionName.beast, offset + memories + 801),
     LocationName.gallery_beast[2]: SlayThePrincessLocationData(RegionName.beast, offset + memories + 802),
@@ -320,13 +318,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_beast[14]: SlayThePrincessLocationData(RegionName.beast, offset + memories + 814),
     LocationName.gallery_beast[15]: SlayThePrincessLocationData(
         RegionName.beast, offset + memories + 815,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_beast[16]: SlayThePrincessLocationData(
         RegionName.beast, offset + memories + 816,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_beast[17]: SlayThePrincessLocationData(
         RegionName.beast, offset + memories + 817,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_witch[1]: SlayThePrincessLocationData(RegionName.witch, offset + memories + 901),
     LocationName.gallery_witch[2]: SlayThePrincessLocationData(RegionName.witch, offset + memories + 902),
@@ -346,16 +344,16 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_witch[16]: SlayThePrincessLocationData(RegionName.witch_blade, offset + memories + 916),
     LocationName.gallery_witch[17]: SlayThePrincessLocationData(
         RegionName.witch, offset + memories + 917,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_witch[18]: SlayThePrincessLocationData(
         RegionName.witch, offset + memories + 918,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_witch[19]: SlayThePrincessLocationData(
         RegionName.witch, offset + memories + 919,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
     LocationName.gallery_witch[20]: SlayThePrincessLocationData(
         RegionName.witch, offset + memories + 920,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_stranger[1]: SlayThePrincessLocationData(RegionName.stranger, offset + memories + 1001),
     LocationName.gallery_stranger[2]: SlayThePrincessLocationData(RegionName.stranger, offset + memories + 1002),
@@ -368,13 +366,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_stranger[9]: SlayThePrincessLocationData(RegionName.stranger_blade, offset + memories + 1009),
     LocationName.gallery_stranger[10]: SlayThePrincessLocationData(
         RegionName.stranger_blade, offset + memories + 1010,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_stranger[11]: SlayThePrincessLocationData(
         RegionName.stranger_blade, offset + memories + 1011,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_stranger[12]: SlayThePrincessLocationData(
         RegionName.stranger_blade, offset + memories + 1012,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_prisoner[1]: SlayThePrincessLocationData(RegionName.prisoner, offset + memories + 1101),
     LocationName.gallery_prisoner[2]: SlayThePrincessLocationData(RegionName.prisoner, offset + memories + 1102),
@@ -390,19 +388,19 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_prisoner[12]: SlayThePrincessLocationData(RegionName.prisoner, offset + memories + 1112),
     LocationName.gallery_prisoner[13]: SlayThePrincessLocationData(
         RegionName.prisoner, offset + memories + 1113,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_prisoner[14]: SlayThePrincessLocationData(
         RegionName.prisoner, offset + memories + 1114,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_prisoner[15]: SlayThePrincessLocationData(
         RegionName.prisoner, offset + memories + 1115,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_prisoner[16]: SlayThePrincessLocationData(
         RegionName.prisoner, offset + memories + 1116,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_prisoner[17]: SlayThePrincessLocationData(
         RegionName.prisoner, offset + memories + 1117,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_damsel[1]: SlayThePrincessLocationData(RegionName.damsel, offset + memories + 1201),
     LocationName.gallery_damsel[2]: SlayThePrincessLocationData(RegionName.damsel, offset + memories + 1202),
@@ -422,16 +420,16 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_damsel[16]: SlayThePrincessLocationData(RegionName.damsel, offset + memories + 1216),
     LocationName.gallery_damsel[17]: SlayThePrincessLocationData(
         RegionName.damsel, offset + memories + 1217,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_damsel[18]: SlayThePrincessLocationData(
         RegionName.damsel, offset + memories + 1218,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_damsel[19]: SlayThePrincessLocationData(
         RegionName.damsel, offset + memories + 1219,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_damsel[20]: SlayThePrincessLocationData(
         RegionName.damsel, offset + memories + 1220,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_needle[1]: SlayThePrincessLocationData(RegionName.needle, offset + memories + 1301),
     LocationName.gallery_needle[2]: SlayThePrincessLocationData(RegionName.needle, offset + memories + 1302),
@@ -452,13 +450,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_needle[17]: SlayThePrincessLocationData(RegionName.needle, offset + memories + 1317),
     LocationName.gallery_needle[18]: SlayThePrincessLocationData(
         RegionName.needle, offset + memories + 1318,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_needle[19]: SlayThePrincessLocationData(
         RegionName.needle, offset + memories + 1319,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_needle[20]: SlayThePrincessLocationData(
         RegionName.needle, offset + memories + 1320,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_fury[1]: SlayThePrincessLocationData(RegionName.fury, offset + memories + 1401),
     LocationName.gallery_fury[2]: SlayThePrincessLocationData(RegionName.fury, offset + memories + 1402),
@@ -481,13 +479,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_fury[17]: SlayThePrincessLocationData(RegionName.fury_broken_cold, offset + memories + 1417),
     LocationName.gallery_fury[18]: SlayThePrincessLocationData(
         RegionName.fury_weathered_heart, offset + memories + 1418,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_fury[19]: SlayThePrincessLocationData(
         RegionName.fury_unwound_heart, offset + memories + 1419,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_fury[20]: SlayThePrincessLocationData(
         RegionName.fury, offset + memories + 1420,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_apotheosis[1]: SlayThePrincessLocationData(RegionName.apotheosis, offset + memories + 1501),
     LocationName.gallery_apotheosis[2]: SlayThePrincessLocationData(RegionName.apotheosis, offset + memories + 1502),
@@ -508,13 +506,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_apotheosis[17]: SlayThePrincessLocationData(RegionName.apotheosis, offset + memories + 1517),
     LocationName.gallery_apotheosis[18]: SlayThePrincessLocationData(
         RegionName.apotheosis, offset + memories + 1518,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_apotheosis[19]: SlayThePrincessLocationData(
         RegionName.apotheosis, offset + memories + 1519,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_apotheosis[20]: SlayThePrincessLocationData(
         RegionName.apotheosis, offset + memories + 1520,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_dragon[1]: SlayThePrincessLocationData(RegionName.spectre_blade, offset + memories + 1601),
     LocationName.gallery_dragon[2]: SlayThePrincessLocationData(RegionName.spectre_blade, offset + memories + 1602),
@@ -536,16 +534,16 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_dragon[16]: SlayThePrincessLocationData(RegionName.dragon, offset + memories + 1616),
     LocationName.gallery_dragon[17]: SlayThePrincessLocationData(
         RegionName.dragon, offset + memories + 1617,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_dragon[18]: SlayThePrincessLocationData(
         RegionName.dragon, offset + memories + 1618,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_dragon[19]: SlayThePrincessLocationData(
         RegionName.dragon, offset + memories + 1619,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_dragon[20]: SlayThePrincessLocationData(
         RegionName.dragon, offset + memories + 1620,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_wraith[1]: SlayThePrincessLocationData(RegionName.wraith, offset + memories + 1701),
     LocationName.gallery_wraith[2]: SlayThePrincessLocationData(RegionName.wraith, offset + memories + 1702),
@@ -557,13 +555,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_wraith[8]: SlayThePrincessLocationData(RegionName.wraith, offset + memories + 1708),
     LocationName.gallery_wraith[9]: SlayThePrincessLocationData(
         RegionName.wraith, offset + memories + 1709,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_wraith[10]: SlayThePrincessLocationData(
         RegionName.wraith, offset + memories + 1710,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_wraith[11]: SlayThePrincessLocationData(
         RegionName.wraith, offset + memories + 1711,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_clarity[1]: SlayThePrincessLocationData(RegionName.clarity, offset + memories + 1801),
     LocationName.gallery_clarity[2]: SlayThePrincessLocationData(RegionName.clarity, offset + memories + 1802),
@@ -578,13 +576,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_clarity[11]: SlayThePrincessLocationData(RegionName.clarity_blade, offset + memories + 1811),
     LocationName.gallery_clarity[12]: SlayThePrincessLocationData(
         RegionName.clarity_blade, offset + memories + 1812,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_clarity[13]: SlayThePrincessLocationData(
         RegionName.clarity_blade, offset + memories + 1813,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_clarity[14]: SlayThePrincessLocationData(
         RegionName.clarity_blade, offset + memories + 1814,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_den[1]: SlayThePrincessLocationData(RegionName.den, offset + memories + 1901),
     LocationName.gallery_den[2]: SlayThePrincessLocationData(RegionName.den, offset + memories + 1902),
@@ -607,13 +605,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_den[17]: SlayThePrincessLocationData(RegionName.den_stubborn_blade, offset + memories + 1917),
     LocationName.gallery_den[18]: SlayThePrincessLocationData(
         RegionName.den, offset + memories + 1918,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_den[19]: SlayThePrincessLocationData(
         RegionName.den, offset + memories + 1919,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_den[20]: SlayThePrincessLocationData(
         RegionName.den, offset + memories + 1920,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_wild[1]: SlayThePrincessLocationData(RegionName.wild, offset + memories + 2001),
     LocationName.gallery_wild[2]: SlayThePrincessLocationData(RegionName.wild, offset + memories + 2002),
@@ -623,22 +621,22 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_wild[6]: SlayThePrincessLocationData(RegionName.wild_blade, offset + memories + 2006),
     LocationName.gallery_wild[7]: SlayThePrincessLocationData(
         RegionName.wild, offset + memories + 2007,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_wild[8]: SlayThePrincessLocationData(
         RegionName.wild, offset + memories + 2008,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_wild[9]: SlayThePrincessLocationData(
         RegionName.wild_blade, offset + memories + 2009,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_wild[10]: SlayThePrincessLocationData(
         RegionName.wild_blade, offset + memories + 2010,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_wild[11]: SlayThePrincessLocationData(
         RegionName.wild, offset + memories + 2011,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
     LocationName.gallery_wild[12]: SlayThePrincessLocationData(
         RegionName.wild, offset + memories + 2012,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_thorn[1]: SlayThePrincessLocationData(RegionName.thorn, offset + memories + 2101),
     LocationName.gallery_thorn[2]: SlayThePrincessLocationData(RegionName.thorn, offset + memories + 2102),
@@ -658,13 +656,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_thorn[16]: SlayThePrincessLocationData(RegionName.thorn_smitten_blade, offset + memories + 2116),
     LocationName.gallery_thorn[17]: SlayThePrincessLocationData(
         RegionName.thorn, offset + memories + 2117,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_thorn[18]: SlayThePrincessLocationData(
         RegionName.thorn, offset + memories + 2118,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_thorn[19]: SlayThePrincessLocationData(
         RegionName.thorn, offset + memories + 2119,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_cage[1]: SlayThePrincessLocationData(RegionName.cage, offset + memories + 2201),
     LocationName.gallery_cage[2]: SlayThePrincessLocationData(RegionName.cage, offset + memories + 2202),
@@ -685,13 +683,13 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_cage[17]: SlayThePrincessLocationData(RegionName.cage_paranoid_blade, offset + memories + 2217),
     LocationName.gallery_cage[18]: SlayThePrincessLocationData(
         RegionName.cage, offset + memories + 2218,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_cage[19]: SlayThePrincessLocationData(
         RegionName.cage, offset + memories + 2219,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_cage[20]: SlayThePrincessLocationData(
         RegionName.cage, offset + memories + 2220,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_grey[1]: SlayThePrincessLocationData(RegionName.grey_drowned, offset + memories + 2301),
     LocationName.gallery_grey[2]: SlayThePrincessLocationData(RegionName.grey_burned, offset + memories + 2302),
@@ -709,22 +707,22 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_grey[14]: SlayThePrincessLocationData(RegionName.grey_burned, offset + memories + 2314),
     LocationName.gallery_grey[15]: SlayThePrincessLocationData(
         RegionName.grey_burned, offset + memories + 2315,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_grey[16]: SlayThePrincessLocationData(
         RegionName.grey_burned, offset + memories + 2316,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_grey[17]: SlayThePrincessLocationData(
         RegionName.grey_drowned, offset + memories + 2317,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_grey[18]: SlayThePrincessLocationData(
         RegionName.grey_drowned, offset + memories + 2318,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_grey[19]: SlayThePrincessLocationData(
         RegionName.grey_burned, offset + memories + 2319,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
     LocationName.gallery_grey[20]: SlayThePrincessLocationData(
         RegionName.grey_drowned, offset + memories + 2320,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_happily[1]: SlayThePrincessLocationData(RegionName.happily, offset + memories + 2401),
     LocationName.gallery_happily[2]: SlayThePrincessLocationData(RegionName.happily, offset + memories + 2402),
@@ -744,16 +742,16 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_happily[16]: SlayThePrincessLocationData(RegionName.happily, offset + memories + 2416),
     LocationName.gallery_happily[17]: SlayThePrincessLocationData(
         RegionName.happily, offset + memories + 2417,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_happily[18]: SlayThePrincessLocationData(
         RegionName.happily, offset + memories + 2418,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
     LocationName.gallery_happily[19]: SlayThePrincessLocationData(
         RegionName.happily, offset + memories + 2419,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
     LocationName.gallery_happily[20]: SlayThePrincessLocationData(
         RegionName.happily, offset + memories + 2420,
-        rule=lambda state, world: max_reachable_reset(state, world, 5)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 }
 
 location_data_table: Dict[str, SlayThePrincessLocationData] = {**others_location_data_table,

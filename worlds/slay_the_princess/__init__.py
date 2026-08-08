@@ -122,6 +122,9 @@ class SlayThePrincessWorld(World):
         if self.options.gift_rando:
             item_pool += [self.create_item(ItemName.gift) for _ in range(5)]
 
+        if self.options.narrator_rando:
+            item_pool += [self.create_item(ItemName.narrator)]
+
         if self.options.memoriesanity == 2:
             item_pool += [self.create_item(name) for name in gallery_item_data_table.keys()]
 
