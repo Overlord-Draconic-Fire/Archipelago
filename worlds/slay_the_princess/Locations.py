@@ -129,19 +129,19 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_spaceBetween[3]: SlayThePrincessLocationData(RegionName.space_between, offset + memories + 103),
     LocationName.gallery_spaceBetween[4]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 104,
-        rule=lambda state, world: max_reachable_reset(state, world, 1)),
+        rule=lambda state, world: max_reachable_reset(state, world, 2)),
     LocationName.gallery_spaceBetween[5]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 105,
-        rule=lambda state, world: max_reachable_reset(state, world, 2)),
+        rule=lambda state, world: max_reachable_reset(state, world, 3)),
     LocationName.gallery_spaceBetween[6]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 106,
-        rule=lambda state, world: max_reachable_reset(state, world, 3)),
+        rule=lambda state, world: max_reachable_reset(state, world, 4)),
     LocationName.gallery_spaceBetween[7]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 107,
-        rule=lambda state, world: max_reachable_reset(state, world, 4)),
+        rule=lambda state, world: max_reachable_reset(state, world, 5)),
     LocationName.gallery_spaceBetween[8]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 108,
-        rule=lambda state, world: max_reachable_reset(state, world, 4)),
+        rule=lambda state, world: max_reachable_reset(state, world, 5)),
     LocationName.gallery_spaceBetween[9]: SlayThePrincessLocationData(
         RegionName.space_between, offset + memories + 109,
         rule=lambda state, world: can_reach_oblivion(state, world)),
