@@ -106,7 +106,7 @@ basic_heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.clarity_heart: SlayThePrincessLocationData(RegionName.clarity_blade, offset + heart + 18),
     LocationName.den_heart: SlayThePrincessLocationData(RegionName.den, offset + heart + 19),
     LocationName.thorn_heart: SlayThePrincessLocationData(RegionName.thorn, offset + heart + 22),
-    LocationName.cage_heart_open: SlayThePrincessLocationData(RegionName.cage, offset + heart + 23),
+    LocationName.cage_heart: SlayThePrincessLocationData(RegionName.cage, offset + heart + 23),
     LocationName.happily_heart: SlayThePrincessLocationData(RegionName.happily, offset + heart + 26),
 }
 
