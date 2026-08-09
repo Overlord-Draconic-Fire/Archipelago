@@ -91,7 +91,7 @@ global_chapter_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.chap3: SlayThePrincessLocationData(RegionName.chap3, offset + princess + 24)
 }
 
-heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+basic_heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.adversary_heart: SlayThePrincessLocationData(RegionName.adversary_blade, offset + heart + 0),
     LocationName.tower_heart: SlayThePrincessLocationData(RegionName.tower, offset + heart + 1),
     LocationName.spectre_heart: SlayThePrincessLocationData(RegionName.spectre, offset + heart + 2),
@@ -99,30 +99,46 @@ heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.beast_heart: SlayThePrincessLocationData(RegionName.beast, offset + heart + 4),
     LocationName.witch_heart: SlayThePrincessLocationData(RegionName.witch, offset + heart + 5),
     LocationName.stranger_heart: SlayThePrincessLocationData(RegionName.stranger_blade, offset + heart + 6),
+
+    LocationName.needle_heart: SlayThePrincessLocationData(RegionName.needle, offset + heart + 11),
+    LocationName.apotheosis_heart: SlayThePrincessLocationData(RegionName.apotheosis, offset + heart + 14),
+    LocationName.wraith_heart: SlayThePrincessLocationData(RegionName.wraith, offset + heart + 17),
+    LocationName.clarity_heart: SlayThePrincessLocationData(RegionName.clarity_blade, offset + heart + 18),
+    LocationName.den_heart: SlayThePrincessLocationData(RegionName.den, offset + heart + 19),
+    LocationName.thorn_heart: SlayThePrincessLocationData(RegionName.thorn, offset + heart + 22),
+    LocationName.cage_heart_open: SlayThePrincessLocationData(RegionName.cage, offset + heart + 23),
+    LocationName.happily_heart: SlayThePrincessLocationData(RegionName.happily, offset + heart + 26),
+}
+
+double_heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.prisoner_heart_patient: SlayThePrincessLocationData(RegionName.prisoner, offset + heart + 7),
     LocationName.prisoner_heart_clever: SlayThePrincessLocationData(RegionName.prisoner, offset + heart + 8),
     LocationName.damsel_heart_gentle: SlayThePrincessLocationData(RegionName.damsel, offset + heart + 9),
     LocationName.damsel_heart_pliable: SlayThePrincessLocationData(RegionName.damsel, offset + heart + 10),
 
-    LocationName.needle_heart: SlayThePrincessLocationData(RegionName.needle, offset + heart + 11),
     LocationName.fury_heart_weathered: SlayThePrincessLocationData(RegionName.fury_weathered_heart, offset + heart + 12),
     LocationName.fury_heart_unwound: SlayThePrincessLocationData(RegionName.fury_unwound_heart, offset + heart + 13),
-    LocationName.apotheosis_heart: SlayThePrincessLocationData(RegionName.apotheosis, offset + heart + 14),
     LocationName.dragon_heart_main: SlayThePrincessLocationData(RegionName.dragon, offset + heart + 15),
     LocationName.dragon_heart_stencil: SlayThePrincessLocationData(RegionName.dragon_fuse, offset + heart + 16),
-    LocationName.wraith_heart: SlayThePrincessLocationData(RegionName.wraith, offset + heart + 17),
-    LocationName.clarity_heart: SlayThePrincessLocationData(RegionName.clarity_blade, offset + heart + 18),
-    LocationName.den_heart: SlayThePrincessLocationData(RegionName.den, offset + heart + 19),
     LocationName.wild_heart_curious: SlayThePrincessLocationData(RegionName.wild, offset + heart + 20),
     LocationName.wild_heart_scarred: SlayThePrincessLocationData(RegionName.wild_blade, offset + heart + 21),
-    LocationName.thorn_heart: SlayThePrincessLocationData(RegionName.thorn, offset + heart + 22),
-    LocationName.cage_heart_open: SlayThePrincessLocationData(RegionName.cage, offset + heart + 23),
     LocationName.grey_heart_bright: SlayThePrincessLocationData(RegionName.grey_burned, offset + heart + 24),
     LocationName.grey_heart_deep: SlayThePrincessLocationData(RegionName.grey_drowned, offset + heart + 25),
-    LocationName.happily_heart: SlayThePrincessLocationData(RegionName.happily, offset + heart + 26),
 
     LocationName.razor_heart_iron: SlayThePrincessLocationData(RegionName.razor_destruction, offset + heart + 27),
     LocationName.razor_heart_free: SlayThePrincessLocationData(RegionName.razor_empty, offset + heart + 28),
+}
+
+simple_heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+    LocationName.prisoner_heart: SlayThePrincessLocationData(RegionName.prisoner, offset + heart + 29),
+    LocationName.damsel_heart: SlayThePrincessLocationData(RegionName.damsel, offset + heart + 30),
+
+    LocationName.fury_heart: SlayThePrincessLocationData(RegionName.fury, offset + heart + 31),
+    LocationName.dragon_heart: SlayThePrincessLocationData(RegionName.dragon, offset + heart + 32),
+    LocationName.wild_heart: SlayThePrincessLocationData(RegionName.wild, offset + heart + 33),
+    LocationName.grey_heart: SlayThePrincessLocationData(RegionName.grey, offset + heart + 34),
+
+    LocationName.razor_heart: SlayThePrincessLocationData(RegionName.razor_chap4, offset + heart + 35),
 }
 
 gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -780,7 +796,9 @@ location_data_table: Dict[str, SlayThePrincessLocationData] = {**others_location
                                                                **mirror_location_data_table,
                                                                **princess_location_data_table,
                                                                **global_chapter_location_data_table,
-                                                               **heart_location_data_table,
+                                                               **basic_heart_location_data_table,
+                                                               **double_heart_location_data_table,
+                                                               **simple_heart_location_data_table,
                                                                **gallery_location_data_table}
 
 location_table = {name: data.address for name, data in location_data_table.items() if data.address is not None}

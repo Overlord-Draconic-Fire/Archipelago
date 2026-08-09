@@ -6,8 +6,9 @@ from .DataTypes import SlayThePrincessLocation
 from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
     blade_princess_item_data_table, blade_chapter_item_data_table, gallery_item_data_table
 from .Locations import location_table, others_location_data_table, princess_location_data_table, \
-    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table, \
-    gallery_location_data_table, oblivion_location_data_table
+    global_chapter_location_data_table, mirror_location_data_table, location_data_table, gallery_location_data_table, \
+    oblivion_location_data_table, basic_heart_location_data_table, double_heart_location_data_table, \
+    simple_heart_location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
@@ -33,7 +34,6 @@ class SlayThePrincessWorld(World):
     item_name_to_id = item_table
     active_location_data_table = {}
     optional_location_tables = {
-        "heart_rando": heart_location_data_table,
         "mirror_rando": mirror_location_data_table,
         "oblivion_rando": oblivion_location_data_table,
         "memoriesanity": gallery_location_data_table,
@@ -85,6 +85,13 @@ class SlayThePrincessWorld(World):
             self.active_location_data_table.update(princess_location_data_table)
         if self.options.chapter_rando.value in [2, 3]:
             self.active_location_data_table.update(global_chapter_location_data_table)
+
+        if self.options.heart_rando.value == 1:
+            self.active_location_data_table.update(basic_heart_location_data_table)
+            self.active_location_data_table.update(double_heart_location_data_table)
+        if self.options.heart_rando.value == 2:
+            self.active_location_data_table.update(basic_heart_location_data_table)
+            self.active_location_data_table.update(simple_heart_location_data_table)
 
         # Create locations.
         for region_name, region_data in regions.items():

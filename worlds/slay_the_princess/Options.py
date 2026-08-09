@@ -72,7 +72,7 @@ class ChapterRando(Choice):
     """
     Chooses to randomize entering a chapter in the world.
     - Nothing: Entering a chapter is not random.
-    - Chapter: Entering a chapter for the first time is acheck locations in the world. (+23 locations)
+    - Chapter: Entering a chapter for the first time is a check locations in the world. (+23 locations)
     - Global: Entering a global chapter (2 and 3) for the first time is a check locations in the world. (+2 locations)
     - Both: Entering chapter and global chapter are check locations in the world. (+25 locations)
     """
@@ -84,11 +84,19 @@ class ChapterRando(Choice):
     default = 3
 
 
-class HeartRando(DefaultOnToggle):
+class HeartRando(Choice):
     """
-    Add hearts (vessels) as check locations in the world. (+29 locations)
+    Chooses to randomize hearts in the world.
+    - Nothing: Hearts are not random.
+    - Heart: Hearts are check locations in the world. (+29 locations)
+    - Vessel: For example, for Damsel: "A Gentle Heart" and "A Pliable Heart" are combined into a single location
+              Chapter affected: Razor, Prisoner, Damsel, Fury, Dragon, Wild, Grey. (+22 locations)
     """
     display_name = "Heart Rando"
+    option_nothing = 0
+    option_heart = 1
+    option_vessel = 2
+    default = 1
 
 
 class MirrorRando(DefaultOnToggle):
