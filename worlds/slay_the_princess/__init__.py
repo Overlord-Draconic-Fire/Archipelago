@@ -33,8 +33,6 @@ class SlayThePrincessWorld(World):
     item_name_to_id = item_table
     active_location_data_table = {}
     optional_location_tables = {
-        "chapter_rando": princess_location_data_table,
-        "global_chapter_rando": global_chapter_location_data_table,
         "heart_rando": heart_location_data_table,
         "mirror_rando": mirror_location_data_table,
         "oblivion_rando": oblivion_location_data_table,
@@ -82,6 +80,11 @@ class SlayThePrincessWorld(World):
         for option_name, data_table in self.optional_location_tables.items():
             if getattr(self.options, option_name):
                 self.active_location_data_table.update(data_table)
+
+        if self.options.chapter_rando.value in [1, 3]:
+            self.active_location_data_table.update(princess_location_data_table)
+        if self.options.chapter_rando.value in [2, 3]:
+            self.active_location_data_table.update(global_chapter_location_data_table)
 
         # Create locations.
         for region_name, region_data in regions.items():
@@ -154,7 +157,6 @@ class SlayThePrincessWorld(World):
             "gift_rando": self.options.gift_rando.value,
             "narrator_rando": self.options.narrator_rando.value,
             "chapter_rando": self.options.chapter_rando.value,
-            "global_chapter_rando": self.options.global_chapter_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
             "oblivion_rando": self.options.oblivion_rando.value,

@@ -68,18 +68,20 @@ class NarratorRando(DefaultOnToggle):
     display_name = "Narrator Rando"
 
 
-class ChapterRando(DefaultOnToggle):
+class ChapterRando(Choice):
     """
-    Add entering a chapter for the first time as check locations in the world. (+23 locations)
+    Chooses to randomize entering a chapter in the world.
+    - Nothing: Entering a chapter is not random.
+    - Chapter: Entering a chapter for the first time is acheck locations in the world. (+23 locations)
+    - Global: Entering a global chapter (2 and 3) for the first time is a check locations in the world. (+2 locations)
+    - Both: Entering chapter and global chapter are check locations in the world. (+25 locations)
     """
     display_name = "Chapter Rando"
-
-
-class GlobalChapterRando(DefaultOnToggle):
-    """
-    Add entering a global chapter (2 and 3) as check locations in the world. (+2 locations)
-    """
-    display_name = "Global Chapter Rando"
+    option_nothing = 0
+    option_chapter = 1
+    option_global = 2
+    option_both = 3
+    default = 3
 
 
 class HeartRando(DefaultOnToggle):
@@ -136,7 +138,6 @@ class SlayThePrincessOptions(PerGameCommonOptions):
 
     #Location
     chapter_rando: ChapterRando
-    global_chapter_rando: GlobalChapterRando
     heart_rando: HeartRando
     #heart_grouping: HeartGrouping
     mirror_rando: MirrorRando
@@ -157,7 +158,6 @@ slay_the_princess_option_groups = [
     ]),
     OptionGroup("Location Options", [
         ChapterRando,
-        GlobalChapterRando,
         HeartRando,
         #HeartGrouping,
         MirrorRando,
