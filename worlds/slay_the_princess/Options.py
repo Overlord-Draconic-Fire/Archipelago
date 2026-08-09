@@ -54,6 +54,13 @@ class PristineBladeRando(Choice):
     default = 3
 
 
+class PristineSwordRando(DefaultOnToggle):
+    """
+    Shuffles the pristine sword in the apotheosis chapter into the item pool. (+1 items)
+    """
+    display_name = "Pristine Sword Rando"
+
+
 class GiftRando(DefaultOnToggle):
     """
     Shuffles gifts into the item pool as progression items required to complete loops. (+5 items)
@@ -136,9 +143,8 @@ class SlayThePrincessOptions(PerGameCommonOptions):
 
     #Item
     chapter_access: ChapterAccessRando
-    #couple_princesses_and_voices: CouplePrincessesAndVoices
-    #all_voices_chapter: AllVoicesChapter
     pristine_blade_rando: PristineBladeRando
+    pristine_sword_rando: PristineSwordRando
     #force_chapter1_blade: ForceChapter1BladeRando
     gift_rando: GiftRando
     narrator_rando: NarratorRando
@@ -147,18 +153,15 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     #Location
     chapter_rando: ChapterRando
     heart_rando: HeartRando
-    #heart_grouping: HeartGrouping
     mirror_rando: MirrorRando
     oblivion_rando: OblivionRando
     memoriesanity: MemorieSanity
-    #branchsanity: BranchSanity
 
 slay_the_princess_option_groups = [
     OptionGroup("Item Options", [
         ChapterAccessRando,
-        #CouplePrincessesAndVoices
-        #AllVoicesChapter
         PristineBladeRando,
+        PristineSwordRando,
         #ForceChapter1BladeRando,
         GiftRando,
         NarratorRando,
@@ -167,10 +170,8 @@ slay_the_princess_option_groups = [
     OptionGroup("Location Options", [
         ChapterRando,
         HeartRando,
-        #HeartGrouping,
         MirrorRando,
         OblivionRando,
         MemorieSanity,
-        #BranchSanity,
     ]),
 ]

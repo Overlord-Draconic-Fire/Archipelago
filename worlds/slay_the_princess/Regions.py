@@ -3,7 +3,7 @@ from enum import Enum
 
 from BaseClasses import Region
 from .Names import RegionName, ItemName
-from .Rules import has_voice, has_all_voices, has_voices, has_blade, has_princess
+from .Rules import has_voice, has_all_voices, has_voices, has_blade, has_princess, has_sword
 from .TokenSystem import max_reachable_vessels, can_reach_new_world
 
 entry = " ENTRY"
@@ -83,6 +83,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.apotheosis_contrarian_blade: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three, False),
     RegionName.apotheosis_paranoid: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three),
     RegionName.apotheosis_paranoid_blade: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three, False),
+    RegionName.apotheosis_paranoid_sword: SlayThePrincessRegionData(RegionName.apotheosis, Chapter.three, False),
 
     # Dragon
     RegionName.dragon: SlayThePrincessRegionData(RegionName.dragon, Chapter.three),
@@ -774,6 +775,11 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.apotheosis_paranoid_blade],
         rule=lambda state: has_blade(state, world, ItemName.blade_apotheosis)
     )  # Chapter III Apotheosis (Paranoid) Blade Only
+
+    regions[RegionName.apotheosis_paranoid_blade].connect(
+        connecting_region=regions[RegionName.apotheosis_paranoid_sword],
+        rule=lambda state: has_sword(state, world)
+    )  # Chapter III Apotheosis (Paranoid) Sword Only
 
     regions[RegionName.den].connect(
         connecting_region=regions[RegionName.den_blade],

@@ -25,10 +25,8 @@ other_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.mirror: SlayThePrincessItemData(offset + other + 1, ItemClassification.progression),
     ItemName.gift: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression),
     ItemName.narrator: SlayThePrincessItemData(offset + other + 3, ItemClassification.progression),
-}
-
-blade_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.blade: SlayThePrincessItemData(offset + blade + 0, ItemClassification.progression),
+    ItemName.sword: SlayThePrincessItemData(offset + blade + 28, ItemClassification.progression),
 }
 
 blade_chapter_item_data_table: Dict[str, SlayThePrincessItemData] = {
@@ -572,7 +570,6 @@ gallery_item_data_table: Dict[str, SlayThePrincessItemData] = {
 }
 
 item_data_table: Dict[str, SlayThePrincessItemData] = {**other_item_data_table,
-                                                       **blade_item_data_table,
                                                        **blade_chapter_item_data_table,
                                                        **blade_princess_item_data_table,
                                                        **princess_item_data_table,

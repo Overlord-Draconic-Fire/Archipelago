@@ -127,10 +127,12 @@ class SlayThePrincessWorld(World):
 
         if self.options.pristine_blade_rando == 1:
             item_pool += [self.create_item(ItemName.blade)]
-        if self.options.pristine_blade_rando == 2:
+        elif self.options.pristine_blade_rando == 2:
             item_pool += [self.create_item(name) for name in blade_chapter_item_data_table.keys()]
-        if self.options.pristine_blade_rando == 3:
+        elif self.options.pristine_blade_rando == 3:
             item_pool += [self.create_item(name) for name in blade_princess_item_data_table.keys()]
+        if self.options.pristine_sword_rando:
+            item_pool += [self.create_item(ItemName.sword)]
 
         if self.options.gift_rando:
             item_pool += [self.create_item(ItemName.gift) for _ in range(5)]

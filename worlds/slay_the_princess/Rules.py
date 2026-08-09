@@ -50,6 +50,8 @@ def has_blade(state: CollectionState, world, blade: str) -> bool:
 
     return state.has(blade, world.player)
 
+def has_sword(state: CollectionState, world) -> bool:
+    return not world.options.pristine_sword_rando or state.has(ItemName.sword, world.player)
 
 def has_princess(state: CollectionState, world, princess: str) -> bool:
     return world.options.chapter_access in [0, 2] or state.has(princess, world.player)

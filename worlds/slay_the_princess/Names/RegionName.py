@@ -50,6 +50,7 @@ apotheosis_contrarian = "Chapter III - The Apotheosis (Contrarian)"
 apotheosis_contrarian_blade = "Chapter III - The Apotheosis (Contrarian) [Blade Only]"
 apotheosis_paranoid = "Chapter III - The Apotheosis (Paranoid)"
 apotheosis_paranoid_blade = "Chapter III - The Apotheosis (Paranoid) [Blade Only]"
+apotheosis_paranoid_sword = "Chapter III - The Apotheosis (Paranoid) [Sword Only]"
 
 dragon = "Chapter III - The Princess and the Dragon"
 dragon_fuse = "Chapter III - The Princess and the Dragon (Fuse)"
