@@ -119,6 +119,7 @@ razor_empty = "Chapter IV - The Empty Cup"
 razor_destruction = "Chapter IV - Mutually Assured Destruction"
 
 space_between = "The Space Between"
+oblivion = "The Oblivion"
 restart = "Loop Restart"
 goddess = "The End of Everything"
 goddess_blade = "The End of Everything [Blade Only]"

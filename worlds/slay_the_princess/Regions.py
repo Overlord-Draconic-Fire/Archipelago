@@ -164,6 +164,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
 
     # META
     RegionName.space_between: SlayThePrincessRegionData(RegionName.space_between, Chapter.meta, False),
+    RegionName.oblivion: SlayThePrincessRegionData(RegionName.oblivion, Chapter.meta, False),
     RegionName.restart: SlayThePrincessRegionData(RegionName.space_between, Chapter.meta, False),
     RegionName.goddess: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta),
     RegionName.goddess_blade: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta, False),
@@ -874,6 +875,27 @@ def set_region_rules(world, regions: dict[str, Region]):
     regions[RegionName.grey].connect(regions[RegionName.space_between])
     regions[RegionName.happily].connect(regions[RegionName.space_between])
     regions[RegionName.razor_chap4].connect(regions[RegionName.space_between])
+    # endregion
+
+    # region The Space Between
+    regions[RegionName.adversary].connect(regions[RegionName.oblivion])
+    regions[RegionName.tower].connect(regions[RegionName.oblivion])
+    regions[RegionName.spectre].connect(regions[RegionName.oblivion])
+    regions[RegionName.nightmare].connect(regions[RegionName.oblivion])
+    regions[RegionName.beast].connect(regions[RegionName.oblivion])
+    regions[RegionName.witch].connect(regions[RegionName.oblivion])
+    regions[RegionName.stranger].connect(regions[RegionName.oblivion])
+    regions[RegionName.prisoner].connect(regions[RegionName.oblivion])
+    regions[RegionName.damsel].connect(regions[RegionName.oblivion])
+
+    regions[RegionName.needle].connect(regions[RegionName.oblivion])
+    regions[RegionName.fury].connect(regions[RegionName.oblivion])
+    regions[RegionName.wraith].connect(regions[RegionName.oblivion])
+    regions[RegionName.clarity].connect(regions[RegionName.oblivion])
+    regions[RegionName.den].connect(regions[RegionName.oblivion])
+    regions[RegionName.thorn].connect(regions[RegionName.oblivion])
+    regions[RegionName.cage].connect(regions[RegionName.oblivion])
+    regions[RegionName.grey].connect(regions[RegionName.oblivion])
     # endregion
 
     # region The Goddess

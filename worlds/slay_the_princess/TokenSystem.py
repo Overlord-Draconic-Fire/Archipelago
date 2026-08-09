@@ -475,6 +475,8 @@ def max_reset(state: CollectionState, world, regions: set[str], want: int, skip_
     usable_chap2 = {_token_group(REGION_TO_TOKEN[r]["main"]) for r in chap2_regions if REGION_TO_TOKEN[r]["main"] in owned_tokens}
 
     if len(usable_chap2) >= want:
+        if regions == OBLIVION_REGIONS and want == 1 and usable_chap2 == {RegionName.stranger}:
+            return False
         return True
 
     usable_chap3 = 0
@@ -516,5 +518,5 @@ def can_reach_new_world(state: CollectionState, world) -> bool:
     return max_reset(state, world, NEW_WORLD_REGIONS, 5)
 
 
-def can_reach_oblivion(state: CollectionState, world) -> bool:
-    return max_reset(state, world, OBLIVION_REGIONS, 6)
+def can_reach_oblivion(state: CollectionState, world, want: int) -> bool:
+    return max_reset(state, world, OBLIVION_REGIONS, want)

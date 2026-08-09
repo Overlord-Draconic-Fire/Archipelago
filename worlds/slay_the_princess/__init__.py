@@ -6,7 +6,8 @@ from .DataTypes import SlayThePrincessLocation
 from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
     blade_princess_item_data_table, blade_chapter_item_data_table, gallery_item_data_table
 from .Locations import location_table, others_location_data_table, princess_location_data_table, \
-    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table, gallery_location_data_table
+    global_chapter_location_data_table, heart_location_data_table, mirror_location_data_table, location_data_table, \
+    gallery_location_data_table, oblivion_location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
@@ -36,6 +37,7 @@ class SlayThePrincessWorld(World):
         "global_chapter_rando": global_chapter_location_data_table,
         "heart_rando": heart_location_data_table,
         "mirror_rando": mirror_location_data_table,
+        "oblivion_rando": oblivion_location_data_table,
         "memoriesanity": gallery_location_data_table,
     }
     item_name_groups = {
@@ -46,6 +48,7 @@ class SlayThePrincessWorld(World):
     }
     location_name_groups = {
         "Mirror": set(mirror_location_data_table.keys()),
+        "Oblivion": set(oblivion_location_data_table.keys()),
         "Chapter": (set(global_chapter_location_data_table) | set(princess_location_data_table.keys())),
         "Heart": set(heart_location_data_table.keys()),
         "Gallery": set(gallery_location_data_table.keys())
@@ -154,5 +157,6 @@ class SlayThePrincessWorld(World):
             "global_chapter_rando": self.options.global_chapter_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
+            "oblivion_rando": self.options.oblivion_rando.value,
             "memoriesanity": self.options.memoriesanity.value,
         }

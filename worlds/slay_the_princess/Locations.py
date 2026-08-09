@@ -19,6 +19,27 @@ others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.win: SlayThePrincessLocationData(RegionName.win),
 }
 
+oblivion_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+    LocationName.oblivion1: SlayThePrincessLocationData(
+        RegionName.oblivion, offset + mirror + 0,
+        rule=lambda state, world: can_reach_oblivion(state, world, 1)),
+    LocationName.oblivion2: SlayThePrincessLocationData(
+        RegionName.oblivion, offset + mirror + 1,
+        rule=lambda state, world: can_reach_oblivion(state, world, 2)),
+    LocationName.oblivion3: SlayThePrincessLocationData(
+        RegionName.oblivion, offset + mirror + 2,
+        rule=lambda state, world: can_reach_oblivion(state, world, 3)),
+    LocationName.oblivion4: SlayThePrincessLocationData(
+        RegionName.oblivion, offset + mirror + 3,
+        rule=lambda state, world: can_reach_oblivion(state, world, 4)),
+    LocationName.oblivion5: SlayThePrincessLocationData(
+        RegionName.oblivion, offset + mirror + 4,
+        rule=lambda state, world: can_reach_oblivion(state, world, 5)),
+    LocationName.oblivion6: SlayThePrincessLocationData(
+        RegionName.oblivion, offset + mirror + 4,
+        rule=lambda state, world: can_reach_oblivion(state, world, 6)),
+}
+
 mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.mirror1: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 0,
@@ -141,8 +162,8 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         rule=lambda state, world: max_reachable_vessels(state, world, 5, False)),
     LocationName.gallery_spaceBetween[8]: SlayThePrincessLocationData(RegionName.goddess, offset + memories + 108),
     LocationName.gallery_spaceBetween[9]: SlayThePrincessLocationData(
-        RegionName.space_between, offset + memories + 109,
-        rule=lambda state, world: can_reach_oblivion(state, world)),
+        RegionName.oblivion, offset + memories + 109,
+        rule=lambda state, world: can_reach_oblivion(state, world, 6)),
 
     LocationName.gallery_finale[1]: SlayThePrincessLocationData(RegionName.goddess, offset + memories + 201),
     LocationName.gallery_finale[2]: SlayThePrincessLocationData(RegionName.goddess, offset + memories + 202),
@@ -755,6 +776,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 }
 
 location_data_table: Dict[str, SlayThePrincessLocationData] = {**others_location_data_table,
+                                                               **oblivion_location_data_table,
                                                                **mirror_location_data_table,
                                                                **princess_location_data_table,
                                                                **global_chapter_location_data_table,

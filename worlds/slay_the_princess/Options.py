@@ -96,6 +96,13 @@ class MirrorRando(DefaultOnToggle):
     display_name = "Mirror Rando"
 
 
+class OblivionRando(DefaultOnToggle):
+    """
+    Add all oblivion step as check locations in the world. (+6 location)
+    """
+    display_name = "Oblivion Rando"
+
+
 class MemorieSanity(Choice):
     """
     Chooses to randomize the memories in the world. (+439 locations/items)
@@ -125,7 +132,6 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     #force_chapter1_blade: ForceChapter1BladeRando
     gift_rando: GiftRando
     narrator_rando: NarratorRando
-    #good_oblivion_ending: GoodOblivionEnding
     #saves_rando: SavesRando
 
     #Location
@@ -134,6 +140,7 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     heart_rando: HeartRando
     #heart_grouping: HeartGrouping
     mirror_rando: MirrorRando
+    oblivion_rando: OblivionRando
     memoriesanity: MemorieSanity
     #branchsanity: BranchSanity
 
@@ -145,7 +152,6 @@ slay_the_princess_option_groups = [
         PristineBladeRando,
         #ForceChapter1BladeRando,
         GiftRando,
-        #GoodOblivionEnding,
         NarratorRando,
         #SavesRando,
     ]),
@@ -155,6 +161,7 @@ slay_the_princess_option_groups = [
         HeartRando,
         #HeartGrouping,
         MirrorRando,
+        OblivionRando,
         MemorieSanity,
         #BranchSanity,
     ]),
