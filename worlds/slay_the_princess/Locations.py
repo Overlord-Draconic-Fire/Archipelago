@@ -9,6 +9,7 @@ from .TokenSystem import max_reachable_vessels, can_reach_oblivion
 offset: int = 63900000
 specials: int = 10
 mirror: int = 20
+oblivion: int = 30
 princess: int = 100
 heart: int = 200
 memories: int = 10000
@@ -21,22 +22,22 @@ others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 
 oblivion_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.oblivion1: SlayThePrincessLocationData(
-        RegionName.oblivion, offset + mirror + 0,
+        RegionName.oblivion, offset + oblivion + 0,
         rule=lambda state, world: can_reach_oblivion(state, world, 1)),
     LocationName.oblivion2: SlayThePrincessLocationData(
-        RegionName.oblivion, offset + mirror + 1,
+        RegionName.oblivion, offset + oblivion + 1,
         rule=lambda state, world: can_reach_oblivion(state, world, 2)),
     LocationName.oblivion3: SlayThePrincessLocationData(
-        RegionName.oblivion, offset + mirror + 2,
+        RegionName.oblivion, offset + oblivion + 2,
         rule=lambda state, world: can_reach_oblivion(state, world, 3)),
     LocationName.oblivion4: SlayThePrincessLocationData(
-        RegionName.oblivion, offset + mirror + 3,
+        RegionName.oblivion, offset + oblivion + 3,
         rule=lambda state, world: can_reach_oblivion(state, world, 4)),
     LocationName.oblivion5: SlayThePrincessLocationData(
-        RegionName.oblivion, offset + mirror + 4,
+        RegionName.oblivion, offset + oblivion + 4,
         rule=lambda state, world: can_reach_oblivion(state, world, 5)),
     LocationName.oblivion6: SlayThePrincessLocationData(
-        RegionName.oblivion, offset + mirror + 4,
+        RegionName.oblivion, offset + oblivion + 4,
         rule=lambda state, world: can_reach_oblivion(state, world, 6)),
 }
 
