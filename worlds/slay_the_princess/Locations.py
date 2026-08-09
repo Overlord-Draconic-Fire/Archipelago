@@ -22,19 +22,19 @@ others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.mirror1: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 0,
-        rule=lambda state, world: max_reachable_vessels(state, world, 1, False)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 1, False, skip_minus_one=True)),
     LocationName.mirror2: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 1,
-        rule=lambda state, world: max_reachable_vessels(state, world, 2)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 2, skip_minus_one=True)),
     LocationName.mirror3: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 2,
-        rule=lambda state, world: max_reachable_vessels(state, world, 3)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 3, skip_minus_one=True)),
     LocationName.mirror4: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 3,
-        rule=lambda state, world: max_reachable_vessels(state, world, 4)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 4, skip_minus_one=True)),
     LocationName.mirror5: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 4,
-        rule=lambda state, world: max_reachable_vessels(state, world, 5, False)),
+        rule=lambda state, world: max_reachable_vessels(state, world, 5, False, skip_minus_one=True)),
 }
 
 princess_location_data_table: Dict[str, SlayThePrincessLocationData] = {

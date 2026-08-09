@@ -460,10 +460,10 @@ def _token_group(token: str) -> str:
     return region
 
 
-def max_reset(state: CollectionState, world, regions: set[str], want: int) -> bool:
+def max_reset(state: CollectionState, world, regions: set[str], want: int, skip_minus_one: bool = False) -> bool:
     from .Regions import region_data_table, Chapter
 
-    max_count = state.count(ItemName.gift, world.player) if world.options.gift_rando else 5
+    max_count = (state.count(ItemName.gift, world.player) + int(skip_minus_one)) if world.options.gift_rando else 5
     if max_count < want and regions != OBLIVION_REGIONS:
         return False
 
@@ -502,14 +502,14 @@ def max_reset(state: CollectionState, world, regions: set[str], want: int) -> bo
     return False
 
 
-def max_reachable_vessels(state: CollectionState, world, want: int, entity: bool = True) -> bool:
+def max_reachable_vessels(state: CollectionState, world, want: int, entity: bool = True, skip_minus_one: bool = False) -> bool:
     from worlds.slay_the_princess.Rules import has_princess
     if not entity and want == 1:
-        return max_reset(state, world, RESET_REGIONS, want)
+        return max_reset(state, world, RESET_REGIONS, want, skip_minus_one)
     elif entity and want == 5:
         from worlds.slay_the_princess.Rules import has_narrator
-        return max_reset(state, world, RESET_REGIONS, want) and has_princess(state, world, ItemName.goddess) and has_narrator(state, world)
-    return max_reset(state, world, RESET_REGIONS, want) and has_princess(state, world, ItemName.goddess)
+        return max_reset(state, world, RESET_REGIONS, want, skip_minus_one) and has_princess(state, world, ItemName.goddess) and has_narrator(state, world)
+    return max_reset(state, world, RESET_REGIONS, want, skip_minus_one) and has_princess(state, world, ItemName.goddess)
 
 
 def can_reach_new_world(state: CollectionState, world) -> bool:
