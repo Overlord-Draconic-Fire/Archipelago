@@ -51,7 +51,7 @@ class PristineBladeRando(Choice):
     option_one_blade = 1
     option_chapter_blade = 2
     option_princess_blade = 3
-    default = 1
+    default = 3
 
 
 class GiftRando(DefaultOnToggle):
@@ -63,7 +63,7 @@ class GiftRando(DefaultOnToggle):
 
 class NarratorRando(DefaultOnToggle):
     """
-    Shuffles the narrator into the item pool as a progression item required to talk with him in the mirror in the space between. (+1 items)
+    Shuffles the narrator into the item pool as an item required to talk with him in the mirror in the space between. (+1 items)
     """
     display_name = "Narrator Rando"
 
@@ -107,7 +107,7 @@ class MemorieSanity(Choice):
     option_nothing = 0
     option_location = 1
     option_both = 2
-    default = 1
+    default = 2
 
 
 @dataclass
@@ -145,8 +145,8 @@ slay_the_princess_option_groups = [
         PristineBladeRando,
         #ForceChapter1BladeRando,
         GiftRando,
-        #NarratorRando,
         #GoodOblivionEnding,
+        NarratorRando,
         #SavesRando,
     ]),
     OptionGroup("Location Options", [

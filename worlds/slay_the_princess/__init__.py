@@ -128,7 +128,7 @@ class SlayThePrincessWorld(World):
         if self.options.memoriesanity == 2:
             item_pool += [self.create_item(name) for name in gallery_item_data_table.keys()]
 
-        item_pool += [self.create_item(ItemName.filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 1)]
+        item_pool += [self.create_item(ItemName.filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 45)] # 44 Event Token à ne pas compter + Victory Condition !
         self.multiworld.itempool += item_pool
 
     def set_rules(self) -> None:
@@ -149,6 +149,7 @@ class SlayThePrincessWorld(World):
             "chapter_access": self.options.chapter_access.value,
             "pristine_blade_rando": self.options.pristine_blade_rando.value,
             "gift_rando": self.options.gift_rando.value,
+            "narrator_rando": self.options.narrator_rando.value,
             "chapter_rando": self.options.chapter_rando.value,
             "global_chapter_rando": self.options.global_chapter_rando.value,
             "heart_rando": self.options.heart_rando.value,
