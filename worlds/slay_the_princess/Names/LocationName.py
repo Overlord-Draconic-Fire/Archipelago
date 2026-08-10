@@ -88,7 +88,7 @@ happily_heart = "An Honest Heart"
 # Gallery
 def _gallery_list(route_name, count) -> list[str]:
     # Index 0 is intentionally empty so callers can use 1-based gallery indexes.
-    return [""] + [f"{route_name} (Gallery {i})" for i in range(1, count + 1)]
+    return [""] + [f"Gallery - {route_name} [{i}]" for i in range(1, count + 1)]
 
 # Beginnings & Endings
 gallery_princess: list[str] = _gallery_list("The Hero and the Princess", 18)
