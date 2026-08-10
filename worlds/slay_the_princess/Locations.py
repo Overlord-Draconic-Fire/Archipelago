@@ -37,7 +37,7 @@ oblivion_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         RegionName.oblivion, offset + oblivion + 4,
         rule=lambda state, world: can_reach_oblivion(state, world, 5)),
     LocationName.oblivion6: SlayThePrincessLocationData(
-        RegionName.oblivion, offset + oblivion + 4,
+        RegionName.oblivion, offset + oblivion + 5,
         rule=lambda state, world: can_reach_oblivion(state, world, 6)),
 }
 
