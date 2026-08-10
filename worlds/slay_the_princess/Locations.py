@@ -632,7 +632,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_den[8]: SlayThePrincessLocationData(
         RegionName.den_skeptic, offset + memories + 1908,
         rule=lambda state, world: has_blade(state, world, ItemName.blade_den)),
-    LocationName.gallery_den[9]: SlayThePrincessLocationData(RegionName.den, offset + memories + 1909),
+    LocationName.gallery_den[9]: SlayThePrincessLocationData(RegionName.den_skeptic, offset + memories + 1909),
     LocationName.gallery_den[10]: SlayThePrincessLocationData(RegionName.den_skeptic, offset + memories + 1910),
     LocationName.gallery_den[11]: SlayThePrincessLocationData(RegionName.den_skeptic, offset + memories + 1911),
     LocationName.gallery_den[12]: SlayThePrincessLocationData(RegionName.den_skeptic, offset + memories + 1912),
