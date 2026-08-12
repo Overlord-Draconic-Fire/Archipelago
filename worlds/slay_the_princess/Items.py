@@ -23,21 +23,21 @@ class SlayThePrincessItemData(NamedTuple):
 other_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.filler: SlayThePrincessItemData(offset + 0, ItemClassification.filler),
     ItemName.mirror: SlayThePrincessItemData(offset + other + 1, ItemClassification.progression),
-    ItemName.gift: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression),
+    ItemName.gift: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression_skip_balancing),
     ItemName.narrator: SlayThePrincessItemData(offset + other + 3, ItemClassification.progression),
-    ItemName.blade: SlayThePrincessItemData(offset + blade + 0, ItemClassification.progression),
+    ItemName.blade: SlayThePrincessItemData(offset + blade + 0, ItemClassification.progression | ItemClassification.useful),
     ItemName.sword: SlayThePrincessItemData(offset + blade + 28, ItemClassification.progression),
 }
 
 blade_chapter_item_data_table: Dict[str, SlayThePrincessItemData] = {
-    ItemName.blade1: SlayThePrincessItemData(offset + blade + 1, ItemClassification.progression),
+    ItemName.blade1: SlayThePrincessItemData(offset + blade + 1, ItemClassification.progression | ItemClassification.useful),
     ItemName.blade2: SlayThePrincessItemData(offset + blade + 2, ItemClassification.progression),
     ItemName.blade3: SlayThePrincessItemData(offset + blade + 3, ItemClassification.progression),
     ItemName.blade4: SlayThePrincessItemData(offset + blade + 4, ItemClassification.progression),
 }
 
 blade_princess_item_data_table: Dict[str, SlayThePrincessItemData] = {
-    ItemName.blade_princess: SlayThePrincessItemData(offset + blade + 5, ItemClassification.progression),
+    ItemName.blade_princess: SlayThePrincessItemData(offset + blade + 5, ItemClassification.progression | ItemClassification.useful),
     ItemName.blade_adversary: SlayThePrincessItemData(offset + blade + 6, ItemClassification.progression),
     ItemName.blade_tower: SlayThePrincessItemData(offset + blade + 7, ItemClassification.progression),
     ItemName.blade_spectre: SlayThePrincessItemData(offset + blade + 8, ItemClassification.progression),

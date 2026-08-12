@@ -5,10 +5,9 @@ from worlds.AutoWorld import World, WebWorld
 from .DataTypes import SlayThePrincessLocation
 from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
     blade_princess_item_data_table, blade_chapter_item_data_table, gallery_item_data_table
-from .Locations import location_table, others_location_data_table, princess_location_data_table, \
-    global_chapter_location_data_table, mirror_location_data_table, location_data_table, gallery_location_data_table, \
-    oblivion_location_data_table, basic_heart_location_data_table, double_heart_location_data_table, \
-    simple_heart_location_data_table
+from .Locations import location_table, princess_location_data_table, global_chapter_location_data_table, \
+    location_data_table, gallery_location_data_table, mirror_location_data_table, oblivion_location_data_table, \
+    basic_heart_location_data_table, double_heart_location_data_table, simple_heart_location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
@@ -76,7 +75,6 @@ class SlayThePrincessWorld(World):
         set_region_rules(self, regions)
 
         # Build active locations table from always-on + option-gated tables.
-        self.active_location_data_table = dict(others_location_data_table)
         for option_name, data_table in self.optional_location_tables.items():
             if getattr(self.options, option_name):
                 self.active_location_data_table.update(data_table)
@@ -106,13 +104,20 @@ class SlayThePrincessWorld(World):
         self.create_goal_region()
 
     def create_goal_region(self) -> None:
-        # Credit (autre que good et oblivion)
+        location = LocationName.victory_condition
+        item = ItemName.end_our_song
+        region = self.multiworld.get_region(RegionName.goddess, self.player)
+        if self.options.goal == 1:
+            item = ItemName.end_your_new_world
+            region = self.multiworld.get_region(RegionName.new_world, self.player)
+        elif self.options.goal == 2:
+            item = ItemName.end_oblivion
+            region = self.multiworld.get_region(RegionName.oblivion, self.player)
 
-        # region.add_locations for LocationName.win !!!
-
-        victory_location = self.multiworld.get_location(LocationName.win, self.player)
-        victory_location.place_locked_item(SlayThePrincessItem(ItemName.credits_reached, ItemClassification.progression, None, self.player))
-        self.multiworld.completion_condition[self.player] = lambda state: state.has(ItemName.credits_reached, self.player)
+        region.add_locations({location: None}, SlayThePrincessLocation)
+        victory_location = self.multiworld.get_location(location, self.player)
+        victory_location.place_locked_item(SlayThePrincessItem(item, ItemClassification.progression, None, self.player))
+        self.multiworld.completion_condition[self.player] = lambda state: state.has(item, self.player)
 
     def create_item(self, name: str) -> SlayThePrincessItem:
         return SlayThePrincessItem(name, item_data_table[name].type, item_data_table[name].code, self.player)
@@ -160,6 +165,7 @@ class SlayThePrincessWorld(World):
 
     def fill_slot_data(self):
         return {
+            "goal": self.options.goal.value,
             "death_link": self.options.death_link.value,
             "chapter_access": self.options.chapter_access.value,
             "pristine_blade_rando": self.options.pristine_blade_rando.value,

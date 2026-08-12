@@ -170,8 +170,6 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.goddess: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta),
     RegionName.goddess_blade: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta, False),
     RegionName.new_world: SlayThePrincessRegionData(RegionName.goddess, Chapter.meta, False),
-    RegionName.win: SlayThePrincessRegionData(RegionName.win, Chapter.meta, False),
-
 }
 
 
@@ -922,6 +920,4 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.new_world],
         rule=lambda state: can_reach_new_world(state, world)
     )
-
-    regions[RegionName.goddess].connect(regions[RegionName.win])
     # endregion

@@ -4,6 +4,19 @@ import random
 from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle
 from worlds.AutoWorld import World
 
+class Goal(Choice):
+    """
+    Chooses which of the three possible endings to pursue:
+    - Our Song: Complete the game's classic ending after collecting five vessels.
+    - Your New World: Collect five vessels through violent or hostile outcomes and destroy her without outside help.
+    - Oblivion: Reject the Princess and refuse to enter the cabin, ultimately choosing oblivion.
+    """
+    display_name = "Goal"
+    option_our_song = 0
+    option_your_new_world = 1
+    option_oblivion = 2
+    default = 0
+
 class DeathLink(Choice):
     """
     Determines how DeathLink behaves.
@@ -137,7 +150,7 @@ class MemorieSanity(Choice):
 @dataclass
 class SlayThePrincessOptions(PerGameCommonOptions):
     #Game Options
-    #goal: Goal
+    goal: Goal
     death_link: DeathLink
     #entrance_rando: EntranceRando
 

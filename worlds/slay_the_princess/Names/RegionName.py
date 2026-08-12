@@ -125,5 +125,3 @@ restart = "Loop Restart"
 goddess = "The End of Everything"
 goddess_blade = "The End of Everything [Blade Only]"
 new_world = "Your New World"
-
-win = "Goal Event Region"

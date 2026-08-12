@@ -1,4 +1,4 @@
-win = "Victory Condition"
+victory_condition = "Victory Condition"
 
 # Chapter
 chap2 = "Reach Chapter 2"

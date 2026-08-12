@@ -15,11 +15,6 @@ heart: int = 200
 memories: int = 10000
 entry = " ENTRY"
 
-
-others_location_data_table: Dict[str, SlayThePrincessLocationData] = {
-    LocationName.win: SlayThePrincessLocationData(RegionName.win),
-}
-
 oblivion_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.oblivion1: SlayThePrincessLocationData(
         RegionName.oblivion, offset + oblivion + 0,
@@ -792,8 +787,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 }
 
-location_data_table: Dict[str, SlayThePrincessLocationData] = {**others_location_data_table,
-                                                               **oblivion_location_data_table,
+location_data_table: Dict[str, SlayThePrincessLocationData] = {**oblivion_location_data_table,
                                                                **mirror_location_data_table,
                                                                **princess_location_data_table,
                                                                **global_chapter_location_data_table,

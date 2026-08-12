@@ -1,5 +1,7 @@
 # Event
-credits_reached = "The End of Everything"
+end_our_song = "Our Song"
+end_your_new_world = "Your New World"
+end_oblivion = "Just as you once were nothing..."
 
 filler = "A Filler item"
 mirror = "The Mirror"
