@@ -116,10 +116,14 @@ class SlayThePrincessWorld(World):
 
         region.add_locations({location: None}, SlayThePrincessLocation)
         victory_location = self.multiworld.get_location(location, self.player)
+        if self.options.memories_hunt > 0:
+            victory_location.access_rule = lambda state: state.has_from_list(gallery_item_data_table, self.player, self.options.memories_hunt.value)
         victory_location.place_locked_item(SlayThePrincessItem(item, ItemClassification.progression, None, self.player))
         self.multiworld.completion_condition[self.player] = lambda state: state.has(item, self.player)
 
-    def create_item(self, name: str) -> SlayThePrincessItem:
+    def create_item(self, name: str, memories_hunt = False) -> SlayThePrincessItem:
+        if memories_hunt:
+            return SlayThePrincessItem(name, ItemClassification.progression_deprioritized_skip_balancing, item_data_table[name].code, self.player)
         return SlayThePrincessItem(name, item_data_table[name].type, item_data_table[name].code, self.player)
 
     def create_items(self) -> None:
@@ -146,7 +150,7 @@ class SlayThePrincessWorld(World):
             item_pool += [self.create_item(ItemName.narrator)]
 
         if self.options.memoriesanity == 2:
-            item_pool += [self.create_item(name) for name in gallery_item_data_table.keys()]
+            item_pool += [self.create_item(name, self.options.memories_hunt > 0) for name in gallery_item_data_table.keys()]
 
         item_pool += [self.create_item(ItemName.filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 45)] # 44 Event Token à ne pas compter + Victory Condition !
         self.multiworld.itempool += item_pool
@@ -166,6 +170,7 @@ class SlayThePrincessWorld(World):
     def fill_slot_data(self):
         return {
             "goal": self.options.goal.value,
+            "memories_hunt": self.options.memories_hunt.value,
             "death_link": self.options.death_link.value,
             "chapter_access": self.options.chapter_access.value,
             "pristine_blade_rando": self.options.pristine_blade_rando.value,

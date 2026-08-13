@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import random
 
-from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle
+from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle, Range
 from worlds.AutoWorld import World
 
 class Goal(Choice):
@@ -16,6 +16,19 @@ class Goal(Choice):
     option_your_new_world = 1
     option_oblivion = 2
     default = 0
+
+
+class MemoriesHunt(Range):
+    """
+    Determines how many gallery images must be collected before the game can be completed.
+    - 0: No memories are required, just complete the goal.
+    - 1-439: The specified number of memories must be collected before completion.
+    """
+    display_name = "Memories Hunt"
+    range_start = 0
+    range_end = 439
+    default = 0
+
 
 class DeathLink(Choice):
     """
@@ -151,6 +164,7 @@ class MemorieSanity(Choice):
 class SlayThePrincessOptions(PerGameCommonOptions):
     #Game Options
     goal: Goal
+    memories_hunt: MemoriesHunt
     death_link: DeathLink
     #entrance_rando: EntranceRando
 
@@ -158,7 +172,6 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     chapter_access: ChapterAccessRando
     pristine_blade_rando: PristineBladeRando
     pristine_sword_rando: PristineSwordRando
-    #force_chapter1_blade: ForceChapter1BladeRando
     gift_rando: GiftRando
     narrator_rando: NarratorRando
     #saves_rando: SavesRando
@@ -175,7 +188,6 @@ slay_the_princess_option_groups = [
         ChapterAccessRando,
         PristineBladeRando,
         PristineSwordRando,
-        #ForceChapter1BladeRando,
         GiftRando,
         NarratorRando,
         #SavesRando,
