@@ -32,6 +32,7 @@ class SlayThePrincessWorld(World):
     location_name_to_id = location_table
     item_name_to_id = item_table
     active_location_data_table = {}
+    nb_filler = 0
     optional_location_tables = {
         "mirror_rando": mirror_location_data_table,
         "oblivion_rando": oblivion_location_data_table,
@@ -159,7 +160,8 @@ class SlayThePrincessWorld(World):
         if self.options.save_slot_rando == -2:
             type_of_filler = ItemName.save
 
-        item_pool += [self.create_item(type_of_filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 45)] # 44 Event Token à ne pas compter + Victory Condition !
+        self.nb_filler = len(list(self.get_locations())) - len(item_pool) - 45
+        item_pool += [self.create_item(type_of_filler) for _ in range(self.nb_filler)] # 44 Event Token à ne pas compter + Victory Condition !
         self.multiworld.itempool += item_pool
 
     def set_rules(self) -> None:
@@ -175,6 +177,10 @@ class SlayThePrincessWorld(World):
         pass
 
     def fill_slot_data(self):
+        save_slot_data = self.options.save_slot_rando.value
+        if save_slot_data == -2:
+            save_slot_data = self.nb_filler
+
         return {
             "goal": self.options.goal.value,
             "memories_hunt": self.options.memories_hunt.value,
@@ -183,7 +189,7 @@ class SlayThePrincessWorld(World):
             "pristine_blade_rando": self.options.pristine_blade_rando.value,
             "gift_rando": self.options.gift_rando.value,
             "narrator_rando": self.options.narrator_rando.value,
-            "save_slot_rando": self.options.save_slot_rando.value,
+            "save_slot_rando": save_slot_data,
             "chapter_rando": self.options.chapter_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
