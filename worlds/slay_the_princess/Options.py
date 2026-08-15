@@ -101,6 +101,20 @@ class NarratorRando(DefaultOnToggle):
     display_name = "Narrator Rando"
 
 
+class SaveSlotRando(Range): #RandomCharmCosts for exemple
+    """
+    Shuffles save slots into the item pool, indicating the number of possible saves
+    It's just a slot, you can save multiple times to the same slot if you want
+
+    Set to -1 so it's not randomized (you will have 5 pages of 6 slots (30 in total) available)
+    Set to -2 so that all filler items become save slot items (= number of locations - number of items)
+    """
+    display_name = "Save Slot Rando"
+    range_start = -2
+    range_end = 30
+    default = -1
+
+
 class ChapterRando(Choice):
     """
     Chooses to randomize entering a chapter in the world.
@@ -174,7 +188,7 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     pristine_sword_rando: PristineSwordRando
     gift_rando: GiftRando
     narrator_rando: NarratorRando
-    #saves_rando: SavesRando
+    save_slot_rando: SaveSlotRando
 
     #Location
     chapter_rando: ChapterRando
@@ -190,7 +204,7 @@ slay_the_princess_option_groups = [
         PristineSwordRando,
         GiftRando,
         NarratorRando,
-        #SavesRando,
+        SaveSlotRando,
     ]),
     OptionGroup("Location Options", [
         ChapterRando,

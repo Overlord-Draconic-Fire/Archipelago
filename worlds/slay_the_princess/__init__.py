@@ -152,7 +152,14 @@ class SlayThePrincessWorld(World):
         if self.options.memoriesanity == 2:
             item_pool += [self.create_item(name, self.options.memories_hunt > 0) for name in gallery_item_data_table.keys()]
 
-        item_pool += [self.create_item(ItemName.filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 45)] # 44 Event Token à ne pas compter + Victory Condition !
+        if self.options.save_slot_rando >= 0:
+            item_pool += [self.create_item(ItemName.save) for _ in range(self.options.save_slot_rando)]
+
+        type_of_filler = ItemName.filler
+        if self.options.save_slot_rando == -2:
+            type_of_filler = ItemName.save
+
+        item_pool += [self.create_item(type_of_filler) for _ in range(len(list(self.get_locations())) - len(item_pool) - 45)] # 44 Event Token à ne pas compter + Victory Condition !
         self.multiworld.itempool += item_pool
 
     def set_rules(self) -> None:
@@ -176,6 +183,7 @@ class SlayThePrincessWorld(World):
             "pristine_blade_rando": self.options.pristine_blade_rando.value,
             "gift_rando": self.options.gift_rando.value,
             "narrator_rando": self.options.narrator_rando.value,
+            "save_slot_rando": self.options.save_slot_rando.value,
             "chapter_rando": self.options.chapter_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
