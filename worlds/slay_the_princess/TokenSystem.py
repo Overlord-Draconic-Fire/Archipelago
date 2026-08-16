@@ -1,56 +1,21 @@
 from BaseClasses import ItemClassification, CollectionState
 from worlds.AutoWorld import World
-from .DataTypes import SlayThePrincessLocationData, SlayThePrincessLocation
+from .DataTypes import SlayThePrincessLocation
 from .Items import SlayThePrincessItem
-from .Names import LocationName, RegionName, TokenName, ItemName
+from .Names import RegionName, TokenName, ItemName
 
-EVENT_LOCATIONS = {
-    TokenName.one: SlayThePrincessLocationData(RegionName.one),
-    TokenName.one_blade: SlayThePrincessLocationData(RegionName.one_blade),
-    TokenName.adversary: SlayThePrincessLocationData(RegionName.adversary),
-    TokenName.adversary_blade: SlayThePrincessLocationData(RegionName.adversary_blade),
-    TokenName.tower: SlayThePrincessLocationData(RegionName.tower),
-    TokenName.tower_blade: SlayThePrincessLocationData(RegionName.tower_blade),
-    TokenName.spectre: SlayThePrincessLocationData(RegionName.spectre),
-    TokenName.spectre_blade: SlayThePrincessLocationData(RegionName.spectre_blade),
-    TokenName.nightmare: SlayThePrincessLocationData(RegionName.nightmare),
-    TokenName.nightmare_blade: SlayThePrincessLocationData(RegionName.nightmare_blade),
-    TokenName.razor: SlayThePrincessLocationData(RegionName.razor),
-    TokenName.razor_blade: SlayThePrincessLocationData(RegionName.razor_blade),
-    TokenName.beast: SlayThePrincessLocationData(RegionName.beast),
-    TokenName.beast_blade: SlayThePrincessLocationData(RegionName.beast_blade),
-    TokenName.witch: SlayThePrincessLocationData(RegionName.witch),
-    TokenName.witch_blade: SlayThePrincessLocationData(RegionName.witch_blade),
-    TokenName.stranger: SlayThePrincessLocationData(RegionName.stranger),
-    TokenName.stranger_blade: SlayThePrincessLocationData(RegionName.stranger_blade),
-    TokenName.prisoner: SlayThePrincessLocationData(RegionName.prisoner),
-    TokenName.prisoner_blade: SlayThePrincessLocationData(RegionName.prisoner_blade),
-    TokenName.damsel: SlayThePrincessLocationData(RegionName.damsel),
-    TokenName.damsel_blade: SlayThePrincessLocationData(RegionName.damsel_blade),
-
-    TokenName.needle: SlayThePrincessLocationData(RegionName.needle),
-    TokenName.fury: SlayThePrincessLocationData(RegionName.fury),
-    TokenName.apotheosis: SlayThePrincessLocationData(RegionName.apotheosis),
-    TokenName.dragon: SlayThePrincessLocationData(RegionName.dragon),
-    TokenName.wraith: SlayThePrincessLocationData(RegionName.wraith),
-    TokenName.clarity: SlayThePrincessLocationData(RegionName.clarity),
-    TokenName.clarity_blade: SlayThePrincessLocationData(RegionName.clarity_blade),
-    TokenName.den: SlayThePrincessLocationData(RegionName.den),
-    TokenName.wild: SlayThePrincessLocationData(RegionName.wild),
-    TokenName.thorn: SlayThePrincessLocationData(RegionName.thorn),
-    TokenName.cage: SlayThePrincessLocationData(RegionName.cage),
-    TokenName.grey: SlayThePrincessLocationData(RegionName.grey),
-    TokenName.happily: SlayThePrincessLocationData(RegionName.happily),
-    TokenName.razor_chap4: SlayThePrincessLocationData(RegionName.razor_chap4),
-
-    TokenName.needle_hunted_blade: SlayThePrincessLocationData(RegionName.needle_hunted_blade),
-    TokenName.fury_weathered_heart: SlayThePrincessLocationData(RegionName.fury_weathered_heart),
-    TokenName.dragon_kind: SlayThePrincessLocationData(RegionName.dragon_kind),
-    TokenName.den_blade: SlayThePrincessLocationData(RegionName.den_blade),
-    TokenName.wild_blade: SlayThePrincessLocationData(RegionName.wild_blade),
-    TokenName.thorn_blade: SlayThePrincessLocationData(RegionName.thorn_blade),
-    TokenName.cage_new_world: SlayThePrincessLocationData(RegionName.cage_new_world),
-    TokenName.happily_blade: SlayThePrincessLocationData(RegionName.happily_blade),
+SECONDARY_REGIONS = {
+    RegionName.one,
+    RegionName.one_blade,
+    RegionName.tower_blade,
+    RegionName.spectre_blade,
+    RegionName.nightmare_blade,
+    RegionName.razor,
+    RegionName.razor_blade,
+    RegionName.beast_blade,
+    RegionName.witch_blade,
+    RegionName.prisoner_blade,
+    RegionName.damsel_blade,
 }
 
 RESET_REGIONS = {
@@ -114,6 +79,8 @@ OBLIVION_REGIONS = {
     RegionName.cage,
     RegionName.grey,
 }
+
+EVENT_LOCATIONS = SECONDARY_REGIONS | RESET_REGIONS | NEW_WORLD_REGIONS | OBLIVION_REGIONS
 
 REGION_TO_TOKEN = {
     RegionName.adversary: {"main": TokenName.adversary, "extra": set()},
@@ -440,8 +407,9 @@ def fill_region_tokens():
 
 
 def create_token(world: World) -> None:
-    for token_name, location_data in EVENT_LOCATIONS.items():
-        world.multiworld.get_region(location_data.region, world.player).add_locations(
+    for region_name in EVENT_LOCATIONS:
+        token_name = "EVENT " + region_name
+        world.multiworld.get_region(region_name, world.player).add_locations(
             {token_name: None}, SlayThePrincessLocation
         )
 
@@ -454,7 +422,7 @@ BLADE_ONLY_SUFFIX = " [Blade Only]"
 
 
 def _token_group(token: str) -> str:
-    region = EVENT_LOCATIONS[token].region
+    region = token.removeprefix("EVENT ")
     if region.endswith(BLADE_ONLY_SUFFIX):
         return region[:-len(BLADE_ONLY_SUFFIX)]
     return region
@@ -467,7 +435,7 @@ def max_reset(state: CollectionState, world, regions: set[str], want: int, skip_
     if max_count < want and regions != OBLIVION_REGIONS:
         return False
 
-    owned_tokens = {token for token in EVENT_LOCATIONS if state.has(token, world.player)}
+    owned_tokens = {"EVENT " + region for region in EVENT_LOCATIONS if state.has("EVENT " + region, world.player)}
 
     chap2_regions = {r for r in regions if region_data_table[r].chapter == Chapter.two}
     chap3_regions = {r for r in regions if region_data_table[r].chapter == Chapter.three}
