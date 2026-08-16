@@ -53,8 +53,8 @@ class ChapterAccessRando(Choice):
     Determines which items are required to access chapters and shuffles them into the item pool.
     - Nothing: No items added, you can enter a chapter just like in the base game.
     - Princess: You will only need the princess item to enter a chapter (+23 items)
-    - Voices: You will need the princess and voice items to access a chapter. (+10 items)
-    - Both: Chapter access items are completely randomized (+33 items)
+    - Voices: You will only need the voice items to access a chapter (+10 items)
+    - Both: You will need the princess and voice items to access a chapter (+33 items)
     """
     display_name = "Chapter Access Rando"
     option_nothing = 0
