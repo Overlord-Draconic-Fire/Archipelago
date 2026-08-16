@@ -188,17 +188,17 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_finale[9]: SlayThePrincessLocationData(RegionName.goddess, offset + memories + 209),
     LocationName.gallery_finale[10]: SlayThePrincessLocationData(RegionName.goddess, offset + memories + 210),
     LocationName.gallery_finale[11]: SlayThePrincessLocationData(
-        RegionName.goddess, offset + memories + 211,
-        rule=lambda state, world: state.can_reach_region(RegionName.stranger_blade, world.player)),
+        RegionName.stranger_blade, offset + memories + 211,
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
     LocationName.gallery_finale[12]: SlayThePrincessLocationData(
-        RegionName.goddess_blade, offset + memories + 212,
-        rule=lambda state, world: state.can_reach_region(RegionName.stranger_blade, world.player)),
+        RegionName.stranger_blade, offset + memories + 212,
+        rule=lambda state, world: max_reachable_vessels(state, world, 5) and has_blade(state, world, ItemName.blade_goddess)),
     LocationName.gallery_finale[13]: SlayThePrincessLocationData(
-        RegionName.goddess, offset + memories + 213,
-        rule=lambda state, world: state.can_reach_region(RegionName.stranger_blade, world.player)),
+        RegionName.stranger_blade, offset + memories + 213,
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
     LocationName.gallery_finale[14]: SlayThePrincessLocationData(
-        RegionName.goddess_blade, offset + memories + 214,
-        rule=lambda state, world: state.can_reach_region(RegionName.stranger_blade, world.player)),
+        RegionName.stranger_blade, offset + memories + 214,
+        rule=lambda state, world: max_reachable_vessels(state, world, 5) and has_blade(state, world, ItemName.blade_goddess)),
     LocationName.gallery_finale[15]: SlayThePrincessLocationData(RegionName.goddess_blade, offset + memories + 215),
     LocationName.gallery_finale[16]: SlayThePrincessLocationData(RegionName.new_world, offset + memories + 216),
     LocationName.gallery_finale[17]: SlayThePrincessLocationData(RegionName.new_world, offset + memories + 217),
