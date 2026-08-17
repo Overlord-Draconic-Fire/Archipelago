@@ -107,7 +107,7 @@ class SaveSlotRando(Range): #RandomCharmCosts for exemple
     It's just a slot, you can save multiple times to the same slot if you want
 
     Set to -1 so it's not randomized (you will have 5 pages of 6 slots (30 in total) available)
-    Set to -2 so that all filler items become save slot items (= number of locations - number of items)
+    Set to -2 so that all filler items become save slot items (= number of locations - number of items) [max 30]
     """
     display_name = "Save Slot Rando"
     range_start = -2
