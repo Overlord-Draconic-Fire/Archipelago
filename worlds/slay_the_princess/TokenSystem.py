@@ -418,13 +418,9 @@ def create_token(world: World) -> None:
         )
 
 
-BLADE_ONLY_SUFFIX = " [Blade Only]"
-
-
 def _token_group(token: str) -> str:
-    region = token.removeprefix("EVENT ")
-    if region.endswith(BLADE_ONLY_SUFFIX):
-        return region[:-len(BLADE_ONLY_SUFFIX)]
+    region_blade = token.removeprefix("EVENT ")
+    region = region_blade.removesuffix(" [Blade Only]")
     return region
 
 
