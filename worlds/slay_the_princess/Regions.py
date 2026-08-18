@@ -828,10 +828,7 @@ def set_region_rules(world, regions: dict[str, Region]):
     # Weathered Heart
     regions[RegionName.fury_broken_cold].connect(regions[RegionName.fury_weathered_heart])
     regions[RegionName.fury_contrarian].connect(regions[RegionName.fury_weathered_heart])
-    regions[RegionName.fury_tower].connect(
-        connecting_region=regions[RegionName.fury_weathered_heart],
-        rule=lambda state: has_blade(state, world, ItemName.blade_fury)
-    )
+    regions[RegionName.fury_tower_blade].connect(regions[RegionName.fury_weathered_heart])
     # endregion
 
     # Unwound Heart
