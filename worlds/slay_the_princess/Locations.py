@@ -9,7 +9,8 @@ from .TokenSystem import max_reachable_vessels, can_reach_oblivion
 offset: int = 63900000
 specials: int = 10
 mirror: int = 20
-oblivion: int = 30
+gift: int = 30
+oblivion: int = 40
 princess: int = 100
 heart: int = 200
 memories: int = 10000
@@ -52,6 +53,24 @@ mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.mirror5: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 4,
         rule=lambda state, world: max_reachable_vessels(state, world, 5, False, skip_minus_one=True)),
+}
+
+gift_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+    LocationName.gift1: SlayThePrincessLocationData(
+        RegionName.space_between, offset + gift + 0,
+        rule=lambda state, world: max_reachable_vessels(state, world, 1)),
+    LocationName.gift2: SlayThePrincessLocationData(
+        RegionName.space_between, offset + gift + 1,
+        rule=lambda state, world: max_reachable_vessels(state, world, 2)),
+    LocationName.gift3: SlayThePrincessLocationData(
+        RegionName.space_between, offset + gift + 2,
+        rule=lambda state, world: max_reachable_vessels(state, world, 3)),
+    LocationName.gift4: SlayThePrincessLocationData(
+        RegionName.space_between, offset + gift + 3,
+        rule=lambda state, world: max_reachable_vessels(state, world, 4)),
+    LocationName.gift5: SlayThePrincessLocationData(
+        RegionName.space_between, offset + gift + 4,
+        rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 }
 
 princess_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -789,6 +808,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 
 location_data_table: Dict[str, SlayThePrincessLocationData] = {**oblivion_location_data_table,
                                                                **mirror_location_data_table,
+                                                               **gift_location_data_table,
                                                                **princess_location_data_table,
                                                                **global_chapter_location_data_table,
                                                                **basic_heart_location_data_table,

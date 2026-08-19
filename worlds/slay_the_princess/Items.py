@@ -23,7 +23,7 @@ class SlayThePrincessItemData(NamedTuple):
 other_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.filler: SlayThePrincessItemData(offset + 0, ItemClassification.filler),
     ItemName.mirror: SlayThePrincessItemData(offset + other + 1, ItemClassification.progression),
-    ItemName.gift: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression_skip_balancing),
+    ItemName.invitation: SlayThePrincessItemData(offset + other + 2, ItemClassification.progression_skip_balancing),
     ItemName.narrator: SlayThePrincessItemData(offset + other + 3, ItemClassification.progression),
     ItemName.save: SlayThePrincessItemData(offset + other + 4, ItemClassification.useful | ItemClassification.deprioritized | ItemClassification.skip_balancing),
     ItemName.blade: SlayThePrincessItemData(offset + blade + 0, ItemClassification.progression | ItemClassification.useful),

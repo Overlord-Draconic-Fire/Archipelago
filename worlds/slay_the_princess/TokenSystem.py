@@ -427,7 +427,7 @@ def _token_group(token: str) -> str:
 def max_reset(state: CollectionState, world, regions: set[str], want: int, skip_minus_one: bool = False) -> bool:
     from .Regions import region_data_table, Chapter
 
-    max_count = (state.count(ItemName.gift, world.player) + int(skip_minus_one)) if world.options.gift_rando else 5
+    max_count = (state.count(ItemName.invitation, world.player) + int(skip_minus_one)) if world.options.gift_rando in [1, 3] else 5
     if max_count < want and regions != OBLIVION_REGIONS:
         return False
 

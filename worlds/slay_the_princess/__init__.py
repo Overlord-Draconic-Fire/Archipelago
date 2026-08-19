@@ -7,7 +7,8 @@ from .Items import SlayThePrincessItem, item_table, princess_item_data_table, it
     blade_princess_item_data_table, blade_chapter_item_data_table, gallery_item_data_table
 from .Locations import location_table, princess_location_data_table, global_chapter_location_data_table, \
     location_data_table, gallery_location_data_table, mirror_location_data_table, oblivion_location_data_table, \
-    basic_heart_location_data_table, double_heart_location_data_table, simple_heart_location_data_table
+    basic_heart_location_data_table, double_heart_location_data_table, simple_heart_location_data_table, \
+    gift_location_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
@@ -92,6 +93,9 @@ class SlayThePrincessWorld(World):
             self.active_location_data_table.update(basic_heart_location_data_table)
             self.active_location_data_table.update(simple_heart_location_data_table)
 
+        if self.options.gift_rando.value in [2, 3]:
+            self.active_location_data_table.update(gift_location_data_table)
+
         # Create locations.
         for region_name, region_data in regions.items():
             region = self.multiworld.get_region(region_name, self.player)
@@ -144,8 +148,8 @@ class SlayThePrincessWorld(World):
         if self.options.pristine_sword_rando:
             item_pool += [self.create_item(ItemName.sword)]
 
-        if self.options.gift_rando:
-            item_pool += [self.create_item(ItemName.gift) for _ in range(5)]
+        if self.options.gift_rando in [1, 3]:
+            item_pool += [self.create_item(ItemName.invitation) for _ in range(5)]
 
         if self.options.narrator_rando:
             item_pool += [self.create_item(ItemName.narrator)]
@@ -184,7 +188,7 @@ class SlayThePrincessWorld(World):
     def fill_slot_data(self):
         save_slot_data = self.options.save_slot_rando.value
         if save_slot_data == -2:
-            save_slot_data = self.nb_filler
+            save_slot_data = min(self.nb_filler, 30)
 
         return {
             "goal": self.options.goal.value,
@@ -192,12 +196,12 @@ class SlayThePrincessWorld(World):
             "death_link": self.options.death_link.value,
             "chapter_access": self.options.chapter_access.value,
             "pristine_blade_rando": self.options.pristine_blade_rando.value,
-            "gift_rando": self.options.gift_rando.value,
             "narrator_rando": self.options.narrator_rando.value,
             "save_slot_rando": save_slot_data,
+            "gift_rando": self.options.gift_rando.value,
+            "memoriesanity": self.options.memoriesanity.value,
             "chapter_rando": self.options.chapter_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
             "oblivion_rando": self.options.oblivion_rando.value,
-            "memoriesanity": self.options.memoriesanity.value,
         }

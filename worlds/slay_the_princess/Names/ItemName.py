@@ -5,7 +5,7 @@ end_oblivion = "Just as you once were nothing..."
 
 filler = "A Filler item"
 mirror = "The Mirror"
-gift = "A Gift"
+invitation = "An Invitation"
 narrator = "The Narrator"
 save = "A Save Slot"
 

@@ -87,13 +87,6 @@ class PristineSwordRando(DefaultOnToggle):
     display_name = "Pristine Sword Rando"
 
 
-class GiftRando(DefaultOnToggle):
-    """
-    Shuffles gifts into the item pool as progression items required to complete loops. (+5 items)
-    """
-    display_name = "Gift Rando"
-
-
 class NarratorRando(DefaultOnToggle):
     """
     Shuffles the narrator into the item pool as an item required to talk with him in the mirror in the space between. (+1 items)
@@ -113,6 +106,36 @@ class SaveSlotRando(Range): #RandomCharmCosts for exemple
     range_start = -2
     range_end = 30
     default = -1
+
+
+class GiftRando(Choice):
+    """
+    Chooses to randomize gifts in the world. (+5 locations/items)
+    - Nothing: Gifts are not randomized
+    - Item: Invitations are added as progression items required to complete loops
+    - Location: Gifts are added as check locations. When you encounter the Shifting Mound for the Xth time during the same save
+    - Both: Invitations and Gifts are both items and locations
+    """
+    display_name = "Gift Rando"
+    option_nothing = 0
+    option_item = 1
+    option_location = 2
+    option_both = 3
+    default = 3
+
+
+class MemorieSanity(Choice):
+    """
+    Chooses to randomize the memories in the world. (+439 locations/items)
+    - Nothing: Memories are not randomized
+    - Location: Memories are added as check locations, but the items are not shuffled.
+    - Both: Memories are both items and locations
+    """
+    display_name = "Memories Sanity"
+    option_nothing = 0
+    option_location = 1
+    option_both = 2
+    default = 2
 
 
 class ChapterRando(Choice):
@@ -160,20 +183,6 @@ class OblivionRando(DefaultOnToggle):
     display_name = "Oblivion Rando"
 
 
-class MemorieSanity(Choice):
-    """
-    Chooses to randomize the memories in the world. (+439 locations/items)
-    - Nothing: Memories are not randomized
-    - Location: Memories are added as check locations, but the items are not shuffled.
-    - Both: Memories are both items and locations
-    """
-    display_name = "Memories Sanity"
-    option_nothing = 0
-    option_location = 1
-    option_both = 2
-    default = 2
-
-
 @dataclass
 class SlayThePrincessOptions(PerGameCommonOptions):
     #Game Options
@@ -186,31 +195,35 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     chapter_access: ChapterAccessRando
     pristine_blade_rando: PristineBladeRando
     pristine_sword_rando: PristineSwordRando
-    gift_rando: GiftRando
     narrator_rando: NarratorRando
     save_slot_rando: SaveSlotRando
+
+    #Both
+    gift_rando: GiftRando
+    memoriesanity: MemorieSanity
 
     #Location
     chapter_rando: ChapterRando
     heart_rando: HeartRando
     mirror_rando: MirrorRando
     oblivion_rando: OblivionRando
-    memoriesanity: MemorieSanity
 
 slay_the_princess_option_groups = [
     OptionGroup("Item Options", [
         ChapterAccessRando,
         PristineBladeRando,
         PristineSwordRando,
-        GiftRando,
         NarratorRando,
         SaveSlotRando,
+    ]),
+    OptionGroup("Items/Location Options", [
+        GiftRando,
+        MemorieSanity,
     ]),
     OptionGroup("Location Options", [
         ChapterRando,
         HeartRando,
         MirrorRando,
         OblivionRando,
-        MemorieSanity,
     ]),
 ]
