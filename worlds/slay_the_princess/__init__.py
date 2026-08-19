@@ -40,16 +40,17 @@ class SlayThePrincessWorld(World):
         "memoriesanity": gallery_location_data_table,
     }
     item_name_groups = {
-        "Pristine Blade": ( {ItemName.blade} | set(blade_chapter_item_data_table.keys()) | set(blade_princess_item_data_table.keys())),
         "Princess": set(princess_item_data_table.keys()),
         "Voice": set(voice_item_data_table.keys()),
+        "Pristine Blade": ({ItemName.blade} | set(blade_chapter_item_data_table.keys()) | set(blade_princess_item_data_table.keys())),
         "Gallery": set(gallery_item_data_table.keys())
     }
     location_name_groups = {
-        "Mirror": set(mirror_location_data_table.keys()),
-        "Oblivion": set(oblivion_location_data_table.keys()),
         "Chapter": (set(global_chapter_location_data_table) | set(princess_location_data_table.keys())),
         "Heart": (set(basic_heart_location_data_table.keys()) | set(double_heart_location_data_table.keys()) | set(simple_heart_location_data_table.keys())),
+        "Mirror": set(mirror_location_data_table.keys()),
+        "Oblivion": set(oblivion_location_data_table.keys()),
+        "Gift": set(gift_location_data_table.keys()),
         "Gallery": set(gallery_location_data_table.keys())
     }
 
