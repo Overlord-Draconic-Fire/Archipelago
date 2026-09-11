@@ -67,7 +67,6 @@ OBLIVION_REGIONS = {
     RegionName.nightmare,
     RegionName.beast,
     RegionName.witch,
-    RegionName.stranger,
     RegionName.prisoner,
     RegionName.damsel,
     RegionName.needle,
@@ -439,8 +438,6 @@ def max_reset(state: CollectionState, world, regions: set[str], want: int, skip_
     usable_chap2 = {_token_group(REGION_TO_TOKEN[r]["main"]) for r in chap2_regions if REGION_TO_TOKEN[r]["main"] in owned_tokens}
 
     if len(usable_chap2) >= want:
-        if regions == OBLIVION_REGIONS and want == 1 and usable_chap2 == {RegionName.stranger}:
-            return False
         return True
 
     usable_chap3 = 0

@@ -178,7 +178,7 @@ class MirrorRando(DefaultOnToggle):
 
 class OblivionRando(DefaultOnToggle):
     """
-    Add all oblivion step as check locations in the world. (+6 location)
+    Add all oblivion steps as check locations in the world. (+6 location)
     """
     display_name = "Oblivion Rando"
 
