@@ -165,7 +165,8 @@ class SlayThePrincessWorld(World):
         if self.options.save_slot_rando == -2:
             type_of_filler = ItemName.save
 
-        self.nb_filler = len(list(self.get_locations())) - len(item_pool) - 45 # 44 Event Token à ne pas compter + Victory Condition !
+        real_locations = [loc for loc in self.get_locations() if loc.address is not None] #On retire les Event !
+        self.nb_filler = len(real_locations) - len(item_pool)
         for i in range(self.nb_filler):
             if i < 30:
                 item_pool += [self.create_item(type_of_filler)]
