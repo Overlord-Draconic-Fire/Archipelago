@@ -105,7 +105,7 @@ class SaveSlotRando(Range): #RandomCharmCosts for exemple
     display_name = "Save Slot Rando"
     range_start = -2
     range_end = 30
-    default = -1
+    default = -2
 
 
 class GiftRando(Choice):
