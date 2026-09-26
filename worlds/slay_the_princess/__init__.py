@@ -197,6 +197,7 @@ class SlayThePrincessWorld(World):
             "death_link": self.options.death_link.value,
             "chapter_access": self.options.chapter_access.value,
             "pristine_blade_rando": self.options.pristine_blade_rando.value,
+            "pristine_sword_rando": self.options.pristine_sword_rando.value,
             "narrator_rando": self.options.narrator_rando.value,
             "save_slot_rando": save_slot_data,
             "gift_rando": self.options.gift_rando.value,
