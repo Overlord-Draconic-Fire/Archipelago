@@ -58,7 +58,7 @@ blade_princess_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.blade_wild: SlayThePrincessItemData(offset + blade + 22, ItemClassification.progression),
     ItemName.blade_thorn: SlayThePrincessItemData(offset + blade + 23, ItemClassification.progression),
     ItemName.blade_cage: SlayThePrincessItemData(offset + blade + 24, ItemClassification.progression),
-    ItemName.blade_grey: SlayThePrincessItemData(offset + blade + 25, ItemClassification.progression),
+    ItemName.blade_grey: SlayThePrincessItemData(offset + blade + 25, ItemClassification.filler),
     ItemName.blade_happily: SlayThePrincessItemData(offset + blade + 26, ItemClassification.progression),
     ItemName.blade_goddess: SlayThePrincessItemData(offset + blade + 27, ItemClassification.progression),
 }
