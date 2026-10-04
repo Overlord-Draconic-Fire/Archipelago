@@ -31,7 +31,6 @@ class SlayThePrincessWorld(World):
     active_location_data_table = {}
     nb_filler = 0
     optional_location_tables = {
-        "memoriesanity": gallery_location_data_table,
         "oblivion_rando": oblivion_location_data_table,
         "voice_rando": voice_location_data_table,
     }
@@ -101,6 +100,9 @@ class SlayThePrincessWorld(World):
         if self.options.gift_rando.value in [2, 3]:
             self.active_location_data_table.update(gift_location_data_table)
 
+        if self.options.memoriesanity.value in [1, 2]:
+            self.active_location_data_table.update(gallery_location_data_table)
+
         # Create locations.
         for region_name, region_data in regions.items():
             region = self.multiworld.get_region(region_name, self.player)
@@ -127,9 +129,9 @@ class SlayThePrincessWorld(World):
         region.add_locations({location: None}, SlayThePrincessLocation)
         victory_location = self.multiworld.get_location(location, self.player)
         if self.options.memories_hunt > 0:
-            victory_location.access_rule = lambda state: state.has_from_list(gallery_item_data_table, self.player, self.options.memories_hunt.value)
+            victory_location.access_rule = lambda s: s.has_from_list(gallery_item_data_table, self.player, self.options.memories_hunt.value)
         victory_location.place_locked_item(SlayThePrincessItem(item, ItemClassification.progression, None, self.player))
-        self.multiworld.completion_condition[self.player] = lambda state: state.has(item, self.player)
+        self.multiworld.completion_condition[self.player] = lambda s: s.has(item, self.player)
 
     def create_item(self, name: str, memories_hunt = False) -> SlayThePrincessItem:
         if memories_hunt:
@@ -185,7 +187,7 @@ class SlayThePrincessWorld(World):
                 continue
 
             location = self.multiworld.get_location(location_name, self.player)
-            location.access_rule = (lambda state, rule=location_data.rule: rule(state, self))
+            location.access_rule = (lambda s, rule=location_data.rule: rule(s, self))
 
     def connect_entrances(self) -> None:
         """Method to finalize the source and target regions of the World's entrances"""
