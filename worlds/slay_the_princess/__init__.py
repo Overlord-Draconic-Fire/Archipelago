@@ -75,6 +75,8 @@ class SlayThePrincessWorld(World):
         set_region_rules(self, regions)
 
         # Build active locations table from always-on + option-gated tables.
+        self.active_location_data_table = {}
+
         for option_name, data_table in self.optional_location_tables.items():
             if getattr(self.options, option_name):
                 self.active_location_data_table.update(data_table)
