@@ -7,10 +7,9 @@ from .Rules import has_blade, has_princess
 from .TokenSystem import max_reachable_vessels, can_reach_oblivion
 
 offset: int = 63900000
-specials: int = 10
-mirror: int = 20
-gift: int = 30
-oblivion: int = 40
+mirror: int = 10
+gift: int = 40
+oblivion: int = 50
 princess: int = 100
 heart: int = 200
 memories: int = 10000
@@ -37,7 +36,7 @@ oblivion_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         rule=lambda state, world: can_reach_oblivion(state, world, 6)),
 }
 
-mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+mirror_sb_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.mirror1: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 0,
         rule=lambda state, world: max_reachable_vessels(state, world, 1, False, skip_minus_one=True)),
@@ -53,6 +52,29 @@ mirror_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.mirror5: SlayThePrincessLocationData(
         RegionName.space_between, offset + mirror + 4,
         rule=lambda state, world: max_reachable_vessels(state, world, 5, False, skip_minus_one=True)),
+}
+
+mirror_chapter_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+    LocationName.mirror_adversary: SlayThePrincessLocationData(RegionName.adversary, offset + mirror + 5),
+    LocationName.mirror_tower: SlayThePrincessLocationData(RegionName.tower, offset + mirror + 6),
+    LocationName.mirror_spectre: SlayThePrincessLocationData(RegionName.spectre, offset + mirror + 7),
+    LocationName.mirror_nightmare: SlayThePrincessLocationData(RegionName.nightmare, offset + mirror + 8),
+    LocationName.mirror_razor: SlayThePrincessLocationData(RegionName.razor, offset + mirror + 9),
+    LocationName.mirror_beast: SlayThePrincessLocationData(RegionName.beast, offset + mirror + 10),
+    LocationName.mirror_witch: SlayThePrincessLocationData(RegionName.witch, offset + mirror + 11),
+    LocationName.mirror_stranger: SlayThePrincessLocationData(RegionName.stranger, offset + mirror + 12),
+    LocationName.mirror_prisoner: SlayThePrincessLocationData(RegionName.prisoner, offset + mirror + 13),
+    LocationName.mirror_damsel: SlayThePrincessLocationData(RegionName.damsel, offset + mirror + 14),
+
+    LocationName.mirror_needle: SlayThePrincessLocationData(RegionName.needle, offset + mirror + 15),
+    LocationName.mirror_fury: SlayThePrincessLocationData(RegionName.fury, offset + mirror + 16),
+    LocationName.mirror_wraith: SlayThePrincessLocationData(RegionName.wraith, offset + mirror + 17),
+    LocationName.mirror_clarity: SlayThePrincessLocationData(RegionName.clarity, offset + mirror + 18),
+    LocationName.mirror_den: SlayThePrincessLocationData(RegionName.den, offset + mirror + 19),
+    LocationName.mirror_thorn: SlayThePrincessLocationData(RegionName.thorn, offset + mirror + 20),
+    LocationName.mirror_cage: SlayThePrincessLocationData(RegionName.cage, offset + mirror + 21),
+    LocationName.mirror_grey: SlayThePrincessLocationData(RegionName.grey, offset + mirror + 22),
+    LocationName.mirror_happily: SlayThePrincessLocationData(RegionName.happily, offset + mirror + 23),
 }
 
 gift_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -807,7 +829,8 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 }
 
 location_data_table: Dict[str, SlayThePrincessLocationData] = {**oblivion_location_data_table,
-                                                               **mirror_location_data_table,
+                                                               **mirror_sb_location_data_table,
+                                                               **mirror_chapter_location_data_table,
                                                                **gift_location_data_table,
                                                                **princess_location_data_table,
                                                                **global_chapter_location_data_table,

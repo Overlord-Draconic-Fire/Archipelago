@@ -169,11 +169,20 @@ class HeartRando(Choice):
     default = 1
 
 
-class MirrorRando(DefaultOnToggle):
+class MirrorRando(Choice):
     """
-    Add facing the mirror in the end of the 5 loops as check locations in the world. (+5 locations)
+    Chooses to randomize facing a mirror in the world.
+    - Nothing: Mirror are not random.
+    - Space Between: Add facing the mirror in the end of the 5 loops as check locations in the world. (+5 locations)
+    - Chapter: Add facing a mirror in a chapter as check locations in the world. (+19 locations)
+    - Both: Facing the mirror in the space between and in a chapter are check locations in the world. (+24 locations)
     """
     display_name = "Mirror Rando"
+    option_nothing = 0
+    option_space_between = 1
+    option_chapter = 2
+    option_both = 3
+    default = 3
 
 
 class OblivionRando(DefaultOnToggle):

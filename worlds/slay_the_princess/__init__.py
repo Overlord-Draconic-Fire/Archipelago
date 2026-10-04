@@ -3,12 +3,8 @@ from typing import List
 from BaseClasses import Region, CollectionState, ItemClassification
 from worlds.AutoWorld import World, WebWorld
 from .DataTypes import SlayThePrincessLocation
-from .Items import SlayThePrincessItem, item_table, princess_item_data_table, item_data_table, voice_item_data_table, \
-    blade_princess_item_data_table, blade_chapter_item_data_table, gallery_item_data_table
-from .Locations import location_table, princess_location_data_table, global_chapter_location_data_table, \
-    location_data_table, gallery_location_data_table, mirror_location_data_table, oblivion_location_data_table, \
-    basic_heart_location_data_table, double_heart_location_data_table, simple_heart_location_data_table, \
-    gift_location_data_table
+from .Items import *
+from .Locations import *
 from .Names import ItemName, LocationName, RegionName
 from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
@@ -35,7 +31,6 @@ class SlayThePrincessWorld(World):
     active_location_data_table = {}
     nb_filler = 0
     optional_location_tables = {
-        "mirror_rando": mirror_location_data_table,
         "oblivion_rando": oblivion_location_data_table,
         "memoriesanity": gallery_location_data_table,
     }
@@ -48,7 +43,7 @@ class SlayThePrincessWorld(World):
     location_name_groups = {
         "Chapter": (set(global_chapter_location_data_table) | set(princess_location_data_table.keys())),
         "Heart": (set(basic_heart_location_data_table.keys()) | set(double_heart_location_data_table.keys()) | set(simple_heart_location_data_table.keys())),
-        "Mirror": set(mirror_location_data_table.keys()),
+        "Mirror": (set(mirror_sb_location_data_table.keys()) | set(mirror_chapter_location_data_table.keys())),
         "Oblivion": set(oblivion_location_data_table.keys()),
         "Gift": set(gift_location_data_table.keys()),
         "Gallery": set(gallery_location_data_table.keys())
@@ -93,6 +88,11 @@ class SlayThePrincessWorld(World):
         if self.options.heart_rando.value == 2:
             self.active_location_data_table.update(basic_heart_location_data_table)
             self.active_location_data_table.update(simple_heart_location_data_table)
+
+        if self.options.mirror_rando.value in [1, 3]:
+            self.active_location_data_table.update(mirror_sb_location_data_table)
+        if self.options.mirror_rando.value in [2, 3]:
+            self.active_location_data_table.update(mirror_chapter_location_data_table)
 
         if self.options.gift_rando.value in [2, 3]:
             self.active_location_data_table.update(gift_location_data_table)
