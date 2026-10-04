@@ -491,7 +491,7 @@ def set_region_rules(world, regions: dict[str, Region]):
 
     regions[RegionName.fury_tower + entry].connect(
         connecting_region=regions[RegionName.fury_tower],
-        rule=lambda state: has_princess(state, world, ItemName.fury) and has_voices(state, world, [ItemName.broken, ItemName.stubborn])
+        rule=lambda state: has_princess(state, world, ItemName.fury) and has_voices(state, world, [ItemName.broken, ItemName.stubborn, ItemName.cold, ItemName.smitten, ItemName.hunted, ItemName.cheated])
     )  # Fury Tower
 
     # Apotheosis (entry)
