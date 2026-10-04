@@ -31,8 +31,9 @@ class SlayThePrincessWorld(World):
     active_location_data_table = {}
     nb_filler = 0
     optional_location_tables = {
-        "oblivion_rando": oblivion_location_data_table,
         "memoriesanity": gallery_location_data_table,
+        "oblivion_rando": oblivion_location_data_table,
+        "voice_rando": voice_location_data_table,
     }
     item_name_groups = {
         "Princess": set(princess_item_data_table.keys()),
@@ -42,6 +43,7 @@ class SlayThePrincessWorld(World):
     }
     location_name_groups = {
         "Chapter": (set(global_chapter_location_data_table) | set(princess_location_data_table.keys())),
+        "Voice": set(voice_location_data_table.keys()),
         "Heart": (set(basic_heart_location_data_table.keys()) | set(double_heart_location_data_table.keys()) | set(simple_heart_location_data_table.keys())),
         "Mirror": (set(mirror_sb_location_data_table.keys()) | set(mirror_chapter_location_data_table.keys())),
         "Oblivion": set(oblivion_location_data_table.keys()),
@@ -204,6 +206,7 @@ class SlayThePrincessWorld(World):
             "gift_rando": self.options.gift_rando.value,
             "memoriesanity": self.options.memoriesanity.value,
             "chapter_rando": self.options.chapter_rando.value,
+            "voice_rando" : self.options.voice_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
             "oblivion_rando": self.options.oblivion_rando.value,

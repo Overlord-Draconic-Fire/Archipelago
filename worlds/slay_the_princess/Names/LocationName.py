@@ -74,6 +74,18 @@ happily = "Find Happily Ever After"
 
 goddess = "Find The Shifting Mound"
 
+# Voices
+stubborn = "Voice Introduction - The Stubborn"
+broken = "Voice Introduction - The Broken"
+cold = "Voice Introduction - The Cold"
+paranoid = "Voice Introduction - The Paranoid"
+cheated = "Voice Introduction - The Cheated"
+hunted = "Voice Introduction - The Hunted"
+opportunist = "Voice Introduction - The Opportunist"
+contrarian = "Voice Introduction - The Contrarian"
+skeptic = "Voice Introduction - The Skeptic"
+smitten = "Voice Introduction - The Smitten"
+
 # Heart
 adversary_heart = "A Bold Heart"
 tower_heart = "An Overwhelming Heart"

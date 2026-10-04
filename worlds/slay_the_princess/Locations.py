@@ -11,6 +11,7 @@ mirror: int = 10
 gift: int = 40
 oblivion: int = 50
 princess: int = 100
+voices: int = 150
 heart: int = 200
 memories: int = 10000
 entry = " ENTRY"
@@ -126,6 +127,19 @@ princess_location_data_table: Dict[str, SlayThePrincessLocationData] = {
 global_chapter_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.chap2: SlayThePrincessLocationData(RegionName.chap2, offset + princess + 23),
     LocationName.chap3: SlayThePrincessLocationData(RegionName.chap3, offset + princess + 24)
+}
+
+voice_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+    LocationName.stubborn: SlayThePrincessLocationData(RegionName.stubborn, offset + voices + 0),
+    LocationName.broken: SlayThePrincessLocationData(RegionName.broken, offset + voices + 1),
+    LocationName.cold: SlayThePrincessLocationData(RegionName.cold, offset + voices + 2),
+    LocationName.paranoid: SlayThePrincessLocationData(RegionName.paranoid, offset + voices + 3),
+    LocationName.cheated: SlayThePrincessLocationData(RegionName.cheated, offset + voices + 4),
+    LocationName.hunted: SlayThePrincessLocationData(RegionName.hunted, offset + voices + 5),
+    LocationName.opportunist: SlayThePrincessLocationData(RegionName.opportunist, offset + voices + 6),
+    LocationName.contrarian: SlayThePrincessLocationData(RegionName.contrarian, offset + voices + 7),
+    LocationName.skeptic: SlayThePrincessLocationData(RegionName.skeptic, offset + voices + 8),
+    LocationName.smitten: SlayThePrincessLocationData(RegionName.smitten, offset + voices + 9),
 }
 
 basic_heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -834,6 +848,7 @@ location_data_table: Dict[str, SlayThePrincessLocationData] = {**oblivion_locati
                                                                **gift_location_data_table,
                                                                **princess_location_data_table,
                                                                **global_chapter_location_data_table,
+                                                               **voice_location_data_table,
                                                                **basic_heart_location_data_table,
                                                                **double_heart_location_data_table,
                                                                **simple_heart_location_data_table,

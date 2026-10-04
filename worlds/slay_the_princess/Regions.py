@@ -34,6 +34,18 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.chap2: SlayThePrincessRegionData(RegionName.chap2, Chapter.two, False),
     RegionName.chap3: SlayThePrincessRegionData(RegionName.chap3, Chapter.three, False),
 
+    # Voice
+    RegionName.stubborn: SlayThePrincessRegionData(RegionName.stubborn, Chapter.meta, False),
+    RegionName.broken: SlayThePrincessRegionData(RegionName.broken, Chapter.meta, False),
+    RegionName.cold: SlayThePrincessRegionData(RegionName.cold, Chapter.meta, False),
+    RegionName.paranoid: SlayThePrincessRegionData(RegionName.paranoid, Chapter.meta, False),
+    RegionName.cheated: SlayThePrincessRegionData(RegionName.cheated, Chapter.meta, False),
+    RegionName.hunted: SlayThePrincessRegionData(RegionName.hunted, Chapter.meta, False),
+    RegionName.opportunist: SlayThePrincessRegionData(RegionName.opportunist, Chapter.meta, False),
+    RegionName.contrarian: SlayThePrincessRegionData(RegionName.contrarian, Chapter.meta, False),
+    RegionName.skeptic: SlayThePrincessRegionData(RegionName.skeptic, Chapter.meta, False),
+    RegionName.smitten: SlayThePrincessRegionData(RegionName.smitten, Chapter.meta, False),
+
     # Chapters 2
     RegionName.adversary: SlayThePrincessRegionData(RegionName.adversary, Chapter.two),
     RegionName.tower: SlayThePrincessRegionData(RegionName.tower, Chapter.two),
@@ -917,4 +929,104 @@ def set_region_rules(world, regions: dict[str, Region]):
         connecting_region=regions[RegionName.new_world],
         rule=lambda state: can_reach_new_world(state, world)
     )
+    # endregion
+
+    # region Voices
+    regions[RegionName.adversary].connect(regions[RegionName.stubborn])
+    regions[RegionName.tower].connect(regions[RegionName.broken])
+    regions[RegionName.spectre].connect(regions[RegionName.cold])
+    regions[RegionName.nightmare].connect(regions[RegionName.paranoid])
+    regions[RegionName.razor].connect(regions[RegionName.cheated])
+    regions[RegionName.beast].connect(regions[RegionName.hunted])
+    regions[RegionName.witch].connect(regions[RegionName.opportunist])
+    regions[RegionName.stranger].connect(regions[RegionName.contrarian])
+    regions[RegionName.prisoner].connect(regions[RegionName.skeptic])
+    regions[RegionName.damsel].connect(regions[RegionName.smitten])
+
+    regions[RegionName.needle].connect(regions[RegionName.stubborn])
+    regions[RegionName.needle_hunted].connect(regions[RegionName.hunted])
+    regions[RegionName.needle_skeptic].connect(regions[RegionName.skeptic])
+
+    regions[RegionName.fury].connect(regions[RegionName.stubborn])
+    regions[RegionName.fury_cold].connect(regions[RegionName.cold])
+    regions[RegionName.fury_contrarian].connect(regions[RegionName.contrarian])
+    regions[RegionName.fury_broken].connect(regions[RegionName.broken])
+    regions[RegionName.fury_tower].connect(regions[RegionName.broken])
+    regions[RegionName.fury_tower].connect(regions[RegionName.cold])
+    regions[RegionName.fury_tower].connect(regions[RegionName.smitten])
+    regions[RegionName.fury_tower].connect(regions[RegionName.hunted])
+    regions[RegionName.fury_tower].connect(regions[RegionName.cheated])
+
+    regions[RegionName.apotheosis].connect(regions[RegionName.broken])
+    regions[RegionName.apotheosis_contrarian].connect(regions[RegionName.contrarian])
+    regions[RegionName.apotheosis_paranoid].connect(regions[RegionName.paranoid])
+
+    regions[RegionName.dragon].connect(regions[RegionName.cold])
+    regions[RegionName.dragon].connect(regions[RegionName.opportunist])
+
+    regions[RegionName.wraith_cheated].connect(regions[RegionName.cold])
+    regions[RegionName.wraith_cheated].connect(regions[RegionName.cheated])
+    regions[RegionName.wraith_paranoid].connect(regions[RegionName.cold])
+    regions[RegionName.wraith_paranoid].connect(regions[RegionName.paranoid])
+    regions[RegionName.wraith_cold].connect(regions[RegionName.paranoid])
+    regions[RegionName.wraith_cold].connect(regions[RegionName.cold])
+    regions[RegionName.wraith_opportunist].connect(regions[RegionName.paranoid])
+    regions[RegionName.wraith_opportunist].connect(regions[RegionName.opportunist])
+
+    regions[RegionName.clarity].connect(regions[RegionName.stubborn])
+    regions[RegionName.clarity].connect(regions[RegionName.broken])
+    regions[RegionName.clarity].connect(regions[RegionName.cold])
+    regions[RegionName.clarity].connect(regions[RegionName.paranoid])
+    regions[RegionName.clarity].connect(regions[RegionName.cheated])
+    regions[RegionName.clarity].connect(regions[RegionName.hunted])
+    regions[RegionName.clarity].connect(regions[RegionName.opportunist])
+    regions[RegionName.clarity].connect(regions[RegionName.contrarian])
+    regions[RegionName.clarity].connect(regions[RegionName.skeptic])
+    regions[RegionName.clarity].connect(regions[RegionName.smitten])
+
+    regions[RegionName.razor_chap3].connect(regions[RegionName.stubborn])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.broken])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.cold])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.paranoid])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.cheated])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.hunted])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.opportunist])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.contrarian])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.skeptic])
+    regions[RegionName.razor_chap3].connect(regions[RegionName.smitten])
+
+    regions[RegionName.den].connect(regions[RegionName.hunted])
+    regions[RegionName.den_skeptic].connect(regions[RegionName.skeptic])
+    regions[RegionName.den_stubborn].connect(regions[RegionName.stubborn])
+
+    regions[RegionName.wild_beast_broken].connect(regions[RegionName.hunted])
+    regions[RegionName.wild_beast_broken].connect(regions[RegionName.broken])
+    regions[RegionName.wild_beast_contrarian].connect(regions[RegionName.hunted])
+    regions[RegionName.wild_beast_contrarian].connect(regions[RegionName.contrarian])
+    regions[RegionName.wild_beast_opportunist].connect(regions[RegionName.hunted])
+    regions[RegionName.wild_beast_opportunist].connect(regions[RegionName.opportunist])
+    regions[RegionName.wild_beast_stubborn].connect(regions[RegionName.hunted])
+    regions[RegionName.wild_beast_stubborn].connect(regions[RegionName.stubborn])
+    regions[RegionName.wild_witch_stubborn].connect(regions[RegionName.opportunist])
+    regions[RegionName.wild_witch_stubborn].connect(regions[RegionName.stubborn])
+    regions[RegionName.wild_witch_cheated].connect(regions[RegionName.opportunist])
+    regions[RegionName.wild_witch_cheated].connect(regions[RegionName.cheated])
+    regions[RegionName.wild_witch_paranoid].connect(regions[RegionName.opportunist])
+    regions[RegionName.wild_witch_paranoid].connect(regions[RegionName.paranoid])
+
+    regions[RegionName.thorn].connect(regions[RegionName.opportunist])
+    regions[RegionName.thorn_smitten].connect(regions[RegionName.smitten])
+    regions[RegionName.thorn_cheated].connect(regions[RegionName.cheated])
+
+    regions[RegionName.cage].connect(regions[RegionName.skeptic])
+    regions[RegionName.cage_paranoid].connect(regions[RegionName.paranoid])
+    regions[RegionName.cage_cheated].connect(regions[RegionName.cheated])
+    regions[RegionName.cage_broken].connect(regions[RegionName.broken])
+
+    regions[RegionName.grey].connect(regions[RegionName.cold])
+    regions[RegionName.grey_drowned].connect(regions[RegionName.skeptic])
+    regions[RegionName.grey_burned].connect(regions[RegionName.smitten])
+
+    regions[RegionName.happily_skeptic].connect(regions[RegionName.skeptic])
+    regions[RegionName.happily_opportunist].connect(regions[RegionName.opportunist])
     # endregion

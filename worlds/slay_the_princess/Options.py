@@ -153,6 +153,11 @@ class ChapterRando(Choice):
     option_both = 3
     default = 3
 
+class VoiceRando(DefaultOnToggle):
+    """
+    Add the fact that a voice speaks for the first time as check locations in the world. (+10 locations)
+    """
+    display_name = "Voice Rando"
 
 class HeartRando(Choice):
     """
@@ -213,6 +218,7 @@ class SlayThePrincessOptions(PerGameCommonOptions):
 
     #Location
     chapter_rando: ChapterRando
+    voice_rando: VoiceRando
     heart_rando: HeartRando
     mirror_rando: MirrorRando
     oblivion_rando: OblivionRando
@@ -231,6 +237,7 @@ slay_the_princess_option_groups = [
     ]),
     OptionGroup("Location Options", [
         ChapterRando,
+        VoiceRando,
         HeartRando,
         MirrorRando,
         OblivionRando,
