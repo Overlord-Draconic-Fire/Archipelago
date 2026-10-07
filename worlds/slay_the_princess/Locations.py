@@ -723,7 +723,7 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
         RegionName.wild, offset + memories + 2011,
         rule=lambda state, world: max_reachable_vessels(state, world, 5)),
     LocationName.gallery_wild[12]: SlayThePrincessLocationData(
-        RegionName.wild, offset + memories + 2012,
+        RegionName.wild_blade, offset + memories + 2012,
         rule=lambda state, world: max_reachable_vessels(state, world, 5)),
 
     LocationName.gallery_thorn[1]: SlayThePrincessLocationData(RegionName.thorn, offset + memories + 2101),
