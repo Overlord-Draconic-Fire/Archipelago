@@ -162,7 +162,7 @@ class SlayThePrincessWorld(World):
             item_pool += [self.create_item(ItemName.narrator)]
 
         if self.options.memoriesanity == 2:
-            item_pool += [self.create_item(name, self.options.memories_hunt > 0) for name in gallery_item_data_table.keys()]
+            item_pool += [self.create_item(name, memories_hunt=self.options.memories_hunt > 0) for name in gallery_item_data_table.keys()]
 
         if self.options.save_slot_rando >= 0:
             item_pool += [self.create_item(ItemName.save) for _ in range(self.options.save_slot_rando)]
