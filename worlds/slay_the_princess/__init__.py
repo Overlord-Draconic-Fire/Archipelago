@@ -33,6 +33,7 @@ class SlayThePrincessWorld(World):
     optional_location_tables = {
         "oblivion_rando": oblivion_location_data_table,
         "voice_rando": voice_location_data_table,
+        "location_blade_rando": blade_location_data_table
     }
     item_name_groups = {
         "Princess": set(princess_item_data_table.keys()),
@@ -211,6 +212,7 @@ class SlayThePrincessWorld(World):
             "memoriesanity": self.options.memoriesanity.value,
             "chapter_rando": self.options.chapter_rando.value,
             "voice_rando" : self.options.voice_rando.value,
+            "location_blade_rando": self.options.location_blade_rando.value,
             "heart_rando": self.options.heart_rando.value,
             "mirror_rando": self.options.mirror_rando.value,
             "oblivion_rando": self.options.oblivion_rando.value,

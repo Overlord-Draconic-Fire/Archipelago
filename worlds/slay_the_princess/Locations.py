@@ -12,7 +12,8 @@ gift: int = 40
 oblivion: int = 50
 princess: int = 100
 voices: int = 150
-heart: int = 200
+blade: int = 200
+heart: int = 250
 memories: int = 10000
 entry = " ENTRY"
 
@@ -140,6 +141,37 @@ voice_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.contrarian: SlayThePrincessLocationData(RegionName.contrarian, offset + voices + 7),
     LocationName.skeptic: SlayThePrincessLocationData(RegionName.skeptic, offset + voices + 8),
     LocationName.smitten: SlayThePrincessLocationData(RegionName.smitten, offset + voices + 9),
+}
+
+blade_location_data_table: Dict[str, SlayThePrincessLocationData] = {
+    LocationName.blade_princess: SlayThePrincessLocationData(RegionName.one, offset + blade + 0),
+    LocationName.blade_goddess: SlayThePrincessLocationData(RegionName.goddess_blade, offset + blade + 1),
+
+    LocationName.blade_adversary: SlayThePrincessLocationData(RegionName.adversary_blade, offset + blade + 2),
+    LocationName.blade_tower: SlayThePrincessLocationData(RegionName.tower_blade, offset + blade + 3),
+    LocationName.blade_spectre: SlayThePrincessLocationData(RegionName.spectre_blade, offset + blade + 4),
+    LocationName.blade_nightmare: SlayThePrincessLocationData(RegionName.nightmare_blade, offset + blade + 5),
+    LocationName.blade_razor: SlayThePrincessLocationData(RegionName.razor_blade, offset + blade + 6), #Razor 2 demande l'item mais pas razor 3 !!!
+    LocationName.blade_beast: SlayThePrincessLocationData(RegionName.beast_blade, offset + blade + 7),
+    LocationName.blade_witch: SlayThePrincessLocationData(RegionName.witch_blade, offset + blade + 8),
+    LocationName.blade_stranger: SlayThePrincessLocationData(RegionName.stranger_blade, offset + blade + 9),
+    LocationName.blade_prisoner: SlayThePrincessLocationData(RegionName.prisoner, offset + blade + 10),
+    LocationName.blade_damsel: SlayThePrincessLocationData(RegionName.damsel_blade, offset + blade + 11),
+
+    LocationName.blade_needle: SlayThePrincessLocationData(RegionName.needle_blade, offset + blade + 12),
+    LocationName.blade_fury: SlayThePrincessLocationData(
+        RegionName.fury, offset + blade + 13,
+        rule=lambda state, world: has_blade(state, world, ItemName.blade_fury)),
+    LocationName.blade_apotheosis: SlayThePrincessLocationData(RegionName.apotheosis_blade, offset + blade + 14),
+    LocationName.blade_dragon: SlayThePrincessLocationData(RegionName.dragon_kind, offset + blade + 15),
+    LocationName.blade_den: SlayThePrincessLocationData(RegionName.den_blade, offset + blade + 16),
+    LocationName.blade_wild: SlayThePrincessLocationData(RegionName.wild_blade, offset + blade + 17),
+    LocationName.blade_thorn: SlayThePrincessLocationData(RegionName.thorn_blade, offset + blade + 18),
+    LocationName.blade_cage: SlayThePrincessLocationData(RegionName.cage, offset + blade + 19),
+    LocationName.blade_grey: SlayThePrincessLocationData(
+        RegionName.grey_burned, offset + blade + 20,
+        rule=lambda state, world: has_blade(state, world, ItemName.blade_grey)),
+    LocationName.blade_happily: SlayThePrincessLocationData(RegionName.happily_blade, offset + blade + 21),
 }
 
 basic_heart_location_data_table: Dict[str, SlayThePrincessLocationData] = {
@@ -849,6 +881,7 @@ location_data_table: Dict[str, SlayThePrincessLocationData] = {**oblivion_locati
                                                                **princess_location_data_table,
                                                                **global_chapter_location_data_table,
                                                                **voice_location_data_table,
+                                                               **blade_location_data_table,
                                                                **basic_heart_location_data_table,
                                                                **double_heart_location_data_table,
                                                                **simple_heart_location_data_table,
