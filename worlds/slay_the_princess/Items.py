@@ -4,6 +4,7 @@ from BaseClasses import Item, ItemClassification
 from .Names import ItemName, LocationName
 
 offset: int = 63900000
+trap: int = 50
 princess: int = 100
 voice: int = 200
 blade: int = 300
@@ -18,6 +19,7 @@ class SlayThePrincessItem(Item):
 class SlayThePrincessItemData(NamedTuple):
     code: Optional[int] = None
     type: ItemClassification = ItemClassification.filler
+    trapWeight: int = 0
 
 
 other_item_data_table: Dict[str, SlayThePrincessItemData] = {
@@ -28,6 +30,7 @@ other_item_data_table: Dict[str, SlayThePrincessItemData] = {
     ItemName.save: SlayThePrincessItemData(offset + other + 4, ItemClassification.useful | ItemClassification.deprioritized | ItemClassification.skip_balancing),
     ItemName.blade: SlayThePrincessItemData(offset + blade + 0, ItemClassification.progression | ItemClassification.useful),
     ItemName.sword: SlayThePrincessItemData(offset + blade + 28, ItemClassification.progression),
+    ItemName.wraith: SlayThePrincessItemData(offset + blade + 29, ItemClassification.filler),
 }
 
 blade_chapter_item_data_table: Dict[str, SlayThePrincessItemData] = {
@@ -92,16 +95,16 @@ princess_item_data_table: Dict[str, SlayThePrincessItemData] = {
 }
 
 voice_item_data_table: Dict[str, SlayThePrincessItemData] = {
-    ItemName.broken: SlayThePrincessItemData(offset + voice + 0, ItemClassification.progression),
-    ItemName.cheated: SlayThePrincessItemData(offset + voice + 1, ItemClassification.progression),
+    ItemName.stubborn: SlayThePrincessItemData(offset + voice + 0, ItemClassification.progression),
+    ItemName.broken: SlayThePrincessItemData(offset + voice + 1, ItemClassification.progression),
     ItemName.cold: SlayThePrincessItemData(offset + voice + 2, ItemClassification.progression),
-    ItemName.contrarian: SlayThePrincessItemData(offset + voice + 3, ItemClassification.progression),
-    ItemName.hunted: SlayThePrincessItemData(offset + voice + 4, ItemClassification.progression),
-    ItemName.opportunist: SlayThePrincessItemData(offset + voice + 5, ItemClassification.progression),
-    ItemName.paranoid: SlayThePrincessItemData(offset + voice + 6, ItemClassification.progression),
-    ItemName.skeptic: SlayThePrincessItemData(offset + voice + 7, ItemClassification.progression),
-    ItemName.smitten: SlayThePrincessItemData(offset + voice + 8, ItemClassification.progression),
-    ItemName.stubborn: SlayThePrincessItemData(offset + voice + 9, ItemClassification.progression),
+    ItemName.paranoid: SlayThePrincessItemData(offset + voice + 3, ItemClassification.progression),
+    ItemName.cheated: SlayThePrincessItemData(offset + voice + 4, ItemClassification.progression),
+    ItemName.hunted: SlayThePrincessItemData(offset + voice + 5, ItemClassification.progression),
+    ItemName.opportunist: SlayThePrincessItemData(offset + voice + 6, ItemClassification.progression),
+    ItemName.contrarian: SlayThePrincessItemData(offset + voice + 7, ItemClassification.progression),
+    ItemName.skeptic: SlayThePrincessItemData(offset + voice + 8, ItemClassification.progression),
+    ItemName.smitten: SlayThePrincessItemData(offset + voice + 9, ItemClassification.progression),
 }
 
 gallery_item_data_table: Dict[str, SlayThePrincessItemData] = {
@@ -570,11 +573,26 @@ gallery_item_data_table: Dict[str, SlayThePrincessItemData] = {
     LocationName.gallery_happily[20]: SlayThePrincessItemData(offset + memories + 2420, ItemClassification.filler),
 }
 
+trap_item_data_table: Dict[str, SlayThePrincessItemData] = {
+    ItemName.heroTrap: SlayThePrincessItemData(offset + trap + 0, ItemClassification.trap, 1),
+    ItemName.stubbornTrap: SlayThePrincessItemData(offset + trap + 1, ItemClassification.trap, 1),
+    #ItemName.brokenTrap: SlayThePrincessItemData(offset + trap + 2, ItemClassification.trap, 1),
+    #ItemName.coldTrap: SlayThePrincessItemData(offset + trap + 3, ItemClassification.trap, 1),
+    ItemName.paranoidTrap: SlayThePrincessItemData(offset + trap + 4, ItemClassification.trap, 0),
+    #ItemName.cheatedTrap: SlayThePrincessItemData(offset + trap + 5, ItemClassification.trap, 1),
+    ItemName.huntedTrap: SlayThePrincessItemData(offset + trap + 6, ItemClassification.trap, 0),
+    #ItemName.opportunistTrap: SlayThePrincessItemData(offset + trap + 7, ItemClassification.trap, 1),
+    ItemName.contrarianTrap: SlayThePrincessItemData(offset + trap + 8, ItemClassification.trap, 1),
+    #ItemName.skepticTrap: SlayThePrincessItemData(offset + trap + 9, ItemClassification.trap, 1),
+    ItemName.smittenTrap: SlayThePrincessItemData(offset + trap + 10, ItemClassification.trap, 1),
+}
+
 item_data_table: Dict[str, SlayThePrincessItemData] = {**other_item_data_table,
                                                        **blade_chapter_item_data_table,
                                                        **blade_princess_item_data_table,
                                                        **princess_item_data_table,
                                                        **voice_item_data_table,
-                                                       **gallery_item_data_table}
+                                                       **gallery_item_data_table,
+                                                       **trap_item_data_table}
 
 item_table = {name: data.code for name, data in item_data_table.items() if data.code is not None}

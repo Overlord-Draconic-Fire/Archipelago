@@ -29,7 +29,7 @@ class SlayThePrincessWorld(World):
     location_name_to_id = location_table
     item_name_to_id = item_table
     active_location_data_table = {}
-    nb_filler = 0
+    nb_save_item = 0
     optional_location_tables = {
         "oblivion_rando": oblivion_location_data_table,
         "voice_rando": voice_location_data_table,
@@ -165,20 +165,33 @@ class SlayThePrincessWorld(World):
         if self.options.memoriesanity == 2:
             item_pool += [self.create_item(name, memories_hunt=self.options.memories_hunt > 0) for name in gallery_item_data_table.keys()]
 
-        if self.options.save_slot_rando >= 0:
+        if self.options.save_slot_rando > 0:
             item_pool += [self.create_item(ItemName.save) for _ in range(self.options.save_slot_rando)]
 
-        type_of_filler = ItemName.filler
-        if self.options.save_slot_rando == -2:
-            type_of_filler = ItemName.save
+        real_locations = [loc for loc in self.get_locations() if loc.address is not None]  # On retire les Event !
+        nb_filler_with_trap = len(real_locations) - len(item_pool)
+        nb_real_filler = nb_filler_with_trap
 
-        real_locations = [loc for loc in self.get_locations() if loc.address is not None] #On retire les Event !
-        self.nb_filler = len(real_locations) - len(item_pool)
-        for i in range(self.nb_filler):
-            if i < 30:
-                item_pool += [self.create_item(type_of_filler)]
-            else:
-                item_pool += [self.create_item(ItemName.filler)]
+        if self.options.save_slot_rando == -2:
+            self.nb_save_item = min(nb_filler_with_trap, 30)
+            item_pool += [self.create_item(ItemName.save) for _ in range(self.nb_save_item)]
+            nb_filler_with_trap -= self.nb_save_item
+            nb_real_filler -= self.nb_save_item
+
+        if nb_filler_with_trap > 0:
+            nb_traps = round(nb_filler_with_trap * self.options.trap_pourcentage / 100)
+            trap_weights = {name: weight for name, weight in self.options.trap_weights.value.items() if weight > 0}
+            trap_names = list(trap_weights.keys())
+            trap_weights_values = list(trap_weights.values())
+            item_pool += [self.create_item(trap_name) for trap_name in self.random.choices(trap_names, weights=trap_weights_values, k=nb_traps)]
+            nb_real_filler -= nb_traps
+
+        if nb_real_filler > 0:
+            if self.options.pristine_blade_rando == 3:
+                item_pool += [self.create_item(ItemName.blade_wraith)]
+                nb_real_filler -= 1
+
+            item_pool += [self.create_item(ItemName.filler) for _ in range(nb_real_filler)]
 
         self.multiworld.itempool += item_pool
 
@@ -197,19 +210,26 @@ class SlayThePrincessWorld(World):
     def fill_slot_data(self):
         save_slot_data = self.options.save_slot_rando.value
         if save_slot_data == -2:
-            save_slot_data = min(self.nb_filler, 30)
+            save_slot_data = self.nb_save_item
 
         return {
             "goal": self.options.goal.value,
             "memories_hunt": self.options.memories_hunt.value,
             "death_link": self.options.death_link.value,
+
+            "trap_pourcentage": self.options.trap_pourcentage,
+            "trap_weights": self.options.trap_weights,
+            #"trap_link": self.options.trap_link,
+
             "chapter_access": self.options.chapter_access.value,
             "pristine_blade_rando": self.options.pristine_blade_rando.value,
             "pristine_sword_rando": self.options.pristine_sword_rando.value,
             "narrator_rando": self.options.narrator_rando.value,
             "save_slot_rando": save_slot_data,
+
             "gift_rando": self.options.gift_rando.value,
             "memoriesanity": self.options.memoriesanity.value,
+
             "chapter_rando": self.options.chapter_rando.value,
             "voice_rando" : self.options.voice_rando.value,
             "location_blade_rando": self.options.location_blade_rando.value,

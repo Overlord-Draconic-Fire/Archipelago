@@ -58,7 +58,7 @@ region_data_table: dict[str, SlayThePrincessRegionData] = {
     RegionName.prisoner: SlayThePrincessRegionData(RegionName.prisoner, Chapter.two),
     RegionName.damsel: SlayThePrincessRegionData(RegionName.damsel, Chapter.two),
 
-    # Chapters 2 Dagger
+    # Chapters 2 Blade
     RegionName.adversary_blade: SlayThePrincessRegionData(RegionName.adversary, Chapter.two, False),
     RegionName.tower_blade: SlayThePrincessRegionData(RegionName.tower, Chapter.two, False),
     RegionName.spectre_blade: SlayThePrincessRegionData(RegionName.spectre, Chapter.two, False),

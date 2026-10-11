@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 import random
 
-from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle, Range
+from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle, Range, OptionCounter
 from worlds.AutoWorld import World
+from worlds.slay_the_princess import trap_item_data_table
 
 class Goal(Choice):
     """
@@ -46,6 +47,53 @@ class DeathLink(Choice):
     option_on_real_death = 3
     option_both = 4
     default = 0
+
+
+class TrapPourcentage(Range):
+    """
+    Percentage of filler items that need to be replaced by traps
+    """
+    display_name = "Trap Pourcentage"
+    range_start = 0
+    range_end = 100
+    default = 0
+
+
+class TrapWeights(OptionCounter):
+    """
+    The percentage chance of receiving each specific trap type (Scaring options are disabled by default):
+    - **Broken:** [Not yet implemented] Forces the player to kneel.
+    - **Cheated:** [Not yet implemented] Displays a fake Game Over screen.
+    - **Cold:** [Not yet implemented] ???.
+    - **Contrarian:** Randomizes the actions associated with the next 3 choices, making the selected option lead to a different outcome.
+    - **Hero:** Displays a fake good ending screen for at least 5 seconds.
+    - **Hunted:** Triggers a jumpscare from the beast.
+    - **Opportunist:** [Not yet implemented] If the player is on a staircase when the trap activates, they die.
+    - **Paranoid:** Blocks the player in the Nightmare's approach sequence for 25 seconds when repeating the Paranoid's dialogue.
+    - **Skeptic:** [Not yet implemented] ???.
+    - **Smitten:** Forces the player to select an available choice involving saving the Princess.
+    - **Stubborn:** Forces the player to select an available choice involving slaying the Princess.
+    - **Narrator:** [Not yet implemented] Disables dialogue skipping.
+
+    Notes:
+    - Smitten, Stubborn and Contrarian: Smitten and Stubborn activate in the order they were received, whenever a matching dialogue choice becomes available.
+    Both always take priority over Contrarian. All three traps remain active until they find a choice that meets their requirements.
+
+    - Hero, Hunted and Paranoid: These traps activate immediately and temporarily interrupt whatever the player is doing.
+    For example, Hunted can trigger while Paranoid is active. Once the jumpscare ends, the player returns to the interrupted sequence.
+    """
+    #Autres idées: Delete Save / Restarts the current loop
+    display_name = "Trap Weights"
+    min = 0
+    default = {key: value.trapWeight for key, value in trap_item_data_table.items()}
+    valid_keys = {trap for trap in trap_item_data_table.keys()}
+
+
+class TrapLink(Toggle):
+    """
+    The traps are linked to all the other players
+    """
+    display_name = "Trap Link"
 
 
 class ChapterAccessRando(Choice):
@@ -214,6 +262,11 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     death_link: DeathLink
     #entrance_rando: EntranceRando
 
+    #Trap
+    trap_pourcentage: TrapPourcentage
+    trap_weights: TrapWeights
+    #trap_link: TrapLink
+
     #Item
     chapter_access: ChapterAccessRando
     pristine_blade_rando: PristineBladeRando
@@ -234,6 +287,11 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     oblivion_rando: OblivionRando
 
 slay_the_princess_option_groups = [
+    OptionGroup("Trap Options", [
+        TrapPourcentage,
+        TrapWeights,
+        #TrapLink,
+    ]),
     OptionGroup("Item Options", [
         ChapterAccessRando,
         PristineBladeRando,
