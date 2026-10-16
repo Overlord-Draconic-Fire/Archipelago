@@ -217,8 +217,8 @@ class SlayThePrincessWorld(World):
             "memories_hunt": self.options.memories_hunt.value,
             "death_link": self.options.death_link.value,
 
-            "trap_pourcentage": self.options.trap_pourcentage,
-            "trap_weights": self.options.trap_weights,
+            "trap_pourcentage": self.options.trap_pourcentage.value,
+            "trap_weights": self.options.trap_weights.value,
             #"trap_link": self.options.trap_link,
 
             "chapter_access": self.options.chapter_access.value,
