@@ -574,17 +574,20 @@ gallery_item_data_table: Dict[str, SlayThePrincessItemData] = {
 }
 
 trap_item_data_table: Dict[str, SlayThePrincessItemData] = {
-    ItemName.heroTrap: SlayThePrincessItemData(offset + trap + 0, ItemClassification.trap, 1),
-    ItemName.stubbornTrap: SlayThePrincessItemData(offset + trap + 1, ItemClassification.trap, 1),
-    #ItemName.brokenTrap: SlayThePrincessItemData(offset + trap + 2, ItemClassification.trap, 1),
+    #ItemName.archipelagoTrap: SlayThePrincessItemData(offset + trap + 2, ItemClassification.trap, 1),
+    ItemName.brokenTrap: SlayThePrincessItemData(offset + trap + 2, ItemClassification.trap, 1),
+    ItemName.cheatedTrap: SlayThePrincessItemData(offset + trap + 5, ItemClassification.trap, 1),
     #ItemName.coldTrap: SlayThePrincessItemData(offset + trap + 3, ItemClassification.trap, 1),
-    ItemName.paranoidTrap: SlayThePrincessItemData(offset + trap + 4, ItemClassification.trap, 0),
-    #ItemName.cheatedTrap: SlayThePrincessItemData(offset + trap + 5, ItemClassification.trap, 1),
+    ItemName.contrarianTrap: SlayThePrincessItemData(offset + trap + 10, ItemClassification.trap, 1),
+    ItemName.heroTrap: SlayThePrincessItemData(offset + trap + 0, ItemClassification.trap, 1),
     ItemName.huntedTrap: SlayThePrincessItemData(offset + trap + 6, ItemClassification.trap, 0),
-    #ItemName.opportunistTrap: SlayThePrincessItemData(offset + trap + 7, ItemClassification.trap, 1),
-    ItemName.contrarianTrap: SlayThePrincessItemData(offset + trap + 8, ItemClassification.trap, 1),
-    #ItemName.skepticTrap: SlayThePrincessItemData(offset + trap + 9, ItemClassification.trap, 1),
-    ItemName.smittenTrap: SlayThePrincessItemData(offset + trap + 10, ItemClassification.trap, 1),
+    ItemName.narratorTrap: SlayThePrincessItemData(offset + trap + 7, ItemClassification.trap, 1),
+    ItemName.opportunistTrap: SlayThePrincessItemData(offset + trap + 9, ItemClassification.trap, 1),
+    ItemName.paranoidTrap: SlayThePrincessItemData(offset + trap + 4, ItemClassification.trap, 0),
+    #ItemName.princessTrap: SlayThePrincessItemData(offset + trap + 8, ItemClassification.trap, 1),
+    #ItemName.skepticTrap: SlayThePrincessItemData(offset + trap + 11, ItemClassification.trap, 1),
+    ItemName.smittenTrap: SlayThePrincessItemData(offset + trap + 12, ItemClassification.trap, 1),
+    ItemName.stubbornTrap: SlayThePrincessItemData(offset + trap + 1, ItemClassification.trap, 1),
 }
 
 item_data_table: Dict[str, SlayThePrincessItemData] = {**other_item_data_table,

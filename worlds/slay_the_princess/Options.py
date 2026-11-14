@@ -61,28 +61,31 @@ class TrapPourcentage(Range):
 
 class TrapWeights(OptionCounter):
     """
-    The percentage chance of receiving each specific trap type (Scaring options are disabled by default):
-    - **Broken:** [Not yet implemented] Forces the player to kneel.
-    - **Cheated:** [Not yet implemented] Displays a fake Game Over screen.
+    The percentage chance of receiving each specific trap type (The "scary" options are disabled by default):
+    - **Archipelago:** [Not yet implemented] Displays a message indicating that a progressive item was received, even though this is incorrect.
+    - **Broken:** Plays Broken's sobbing sound in a loop until the current chapter ends.
+    - **Cheated:** Displays a fake Game Over screen.
     - **Cold:** [Not yet implemented] ???.
     - **Contrarian:** Randomizes the actions associated with the next 3 choices, making the selected option lead to a different outcome.
     - **Hero:** Displays a fake good ending screen for at least 5 seconds.
     - **Hunted:** Triggers a jumpscare from the beast.
-    - **Opportunist:** [Not yet implemented] If the player is on a staircase when the trap activates, they die.
+    - **Narrator:** Disables dialogue skipping.
+    - **Opportunist:** If the player is on a staircase when the trap activates, they die.
     - **Paranoid:** Blocks the player in the Nightmare's approach sequence for 25 seconds when repeating the Paranoid's dialogue.
+    - **Princess:** [Not yet implemented] ???
     - **Skeptic:** [Not yet implemented] ???.
     - **Smitten:** Forces the player to select an available choice involving saving the Princess.
     - **Stubborn:** Forces the player to select an available choice involving slaying the Princess.
-    - **Narrator:** [Not yet implemented] Disables dialogue skipping.
+
 
     Notes:
-    - Smitten, Stubborn and Contrarian: Smitten and Stubborn activate in the order they were received, whenever a matching dialogue choice becomes available.
+    - Smitten and Stubborn activate in the order they were received, whenever a matching dialogue choice becomes available.
     Both always take priority over Contrarian. All three traps remain active until they find a choice that meets their requirements.
 
-    - Hero, Hunted and Paranoid: These traps activate immediately and temporarily interrupt whatever the player is doing.
-    For example, Hunted can trigger while Paranoid is active. Once the jumpscare ends, the player returns to the interrupted sequence.
+    - Hero, Hunted and Paranoid activate immediately and temporarily interrupt WHATEVER the player is doing WHEREVER he may be (You are not safe in the menus).
+    For example, Hunted can trigger while Paranoid is active. Once the jumpscare ends, the player returns to the interrupted paranoid trap.
     """
-    #Autres idées: Delete Save / Restarts the current loop
+
     display_name = "Trap Weights"
     min = 0
     default = {key: value.trapWeight for key, value in trap_item_data_table.items()}

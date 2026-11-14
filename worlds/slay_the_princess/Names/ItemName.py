@@ -83,6 +83,9 @@ skeptic = "Voice - The Skeptic"
 smitten = "Voice - The Smitten"
 
 # Traps
+archipelagoTrap = "Trap of The Archipelago"
+princessTrap = "Trap of The Princess"
+narratorTrap = "Trap of The Narrator"
 heroTrap = "Trap of The Hero"
 stubbornTrap = "Trap of The Stubborn"
 brokenTrap = "Trap of The Broken"
