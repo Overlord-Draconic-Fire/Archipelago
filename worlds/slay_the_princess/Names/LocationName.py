@@ -152,7 +152,9 @@ grey_heart_deep = "A Deep Heart"
 happily_heart = "An Honest Heart"
 
 # Gallery
+all_gallery_name = []
 def _gallery_list(route_name, count) -> list[str]:
+    all_gallery_name.append(route_name)
     # Index 0 is intentionally empty so callers can use 1-based gallery indexes.
     return [""] + [f"Gallery - {route_name} [{i}]" for i in range(1, count + 1)]
 

@@ -2,6 +2,7 @@ from typing import Dict, NamedTuple, Optional, Callable, Any
 
 from BaseClasses import Location, CollectionState
 from .DataTypes import SlayThePrincessLocationData
+from .Items import gallery_item_data_table
 from .Names import ItemName, LocationName, RegionName
 from .Rules import has_blade, has_princess
 from .TokenSystem import max_reachable_vessels, can_reach_oblivion
@@ -151,7 +152,7 @@ blade_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.blade_tower: SlayThePrincessLocationData(RegionName.tower_blade, offset + blade + 3),
     LocationName.blade_spectre: SlayThePrincessLocationData(RegionName.spectre_blade, offset + blade + 4),
     LocationName.blade_nightmare: SlayThePrincessLocationData(RegionName.nightmare_blade, offset + blade + 5),
-    LocationName.blade_razor: SlayThePrincessLocationData(RegionName.razor_blade, offset + blade + 6), #Razor 2 demande l'item mais pas razor 3 !!!
+    LocationName.blade_razor: SlayThePrincessLocationData(RegionName.razor_blade, offset + blade + 6), #debug!!! Razor 2 demande l'item mais pas razor 3 !!!
     LocationName.blade_beast: SlayThePrincessLocationData(RegionName.beast_blade, offset + blade + 7),
     LocationName.blade_witch: SlayThePrincessLocationData(RegionName.witch_blade, offset + blade + 8),
     LocationName.blade_stranger: SlayThePrincessLocationData(RegionName.stranger_blade, offset + blade + 9),
@@ -872,6 +873,11 @@ gallery_location_data_table: Dict[str, SlayThePrincessLocationData] = {
     LocationName.gallery_happily[20]: SlayThePrincessLocationData(
         RegionName.happily, offset + memories + 2420,
         rule=lambda state, world: max_reachable_vessels(state, world, 5)),
+}
+
+gallery_location_data_table = {
+    name: data._replace(group=gallery_item_data_table[name].group)
+    for name, data in gallery_location_data_table.items()
 }
 
 location_data_table: Dict[str, SlayThePrincessLocationData] = {**oblivion_location_data_table,

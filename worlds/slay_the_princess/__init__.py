@@ -10,6 +10,7 @@ from .Options import SlayThePrincessOptions, slay_the_princess_option_groups
 from .Regions import region_data_table, SlayThePrincessRegionData, set_region_rules
 from .Rules import has_blade
 from .TokenSystem import create_token, rando_entrance, fill_region_tokens
+import random
 
 
 class SlayThePrincessWeb(WebWorld):
@@ -28,13 +29,16 @@ class SlayThePrincessWorld(World):
     options: SlayThePrincessOptions
     location_name_to_id = location_table
     item_name_to_id = item_table
+
     active_location_data_table = {}
     nb_save_item = 0
+    selected_memories = []
     optional_location_tables = {
         "oblivion_rando": oblivion_location_data_table,
         "voice_rando": voice_location_data_table,
         "location_blade_rando": blade_location_data_table
     }
+
     item_name_groups = {
         "Princess": set(princess_item_data_table.keys()),
         "Voice": set(voice_item_data_table.keys()),
@@ -56,6 +60,22 @@ class SlayThePrincessWorld(World):
 
         rando_entrance(self)
         fill_region_tokens()
+
+        if self.options.memoriesanity.value != 0:
+            self.select_memories()
+
+    def select_memories(self):
+        active_galleries = {f"Gallery - {route_name}" for route_name in self.options.Memoriesanity_galleries.value}
+        active_groups = {MemoryGroup(group) for group in self.options.Memoriesanity_groups.value}
+
+        memories_list = [
+            memory for memory, item_data in gallery_item_data_table.items()
+            if memory.rsplit(" [", 1)[0] in active_galleries and item_data.group in active_groups
+        ]
+
+        memory_count = round(len(memories_list) * self.options.memoriesanity_percentage.value / 100)
+        self.selected_memories = random.sample(memories_list, memory_count)
+
 
     def create_regions(self) -> None:
         # Create regions
@@ -102,7 +122,10 @@ class SlayThePrincessWorld(World):
             self.active_location_data_table.update(gift_location_data_table)
 
         if self.options.memoriesanity.value in [1, 2]:
-            self.active_location_data_table.update(gallery_location_data_table)
+            selected_location_data = {
+                name: data for name, data in gallery_location_data_table.items() if name in self.selected_memories
+            }
+            self.active_location_data_table.update(selected_location_data)
 
         # Create locations.
         for region_name, region_data in regions.items():
@@ -144,7 +167,7 @@ class SlayThePrincessWorld(World):
 
         if self.options.chapter_access in [1, 3]:
             item_pool += [self.create_item(name) for name in princess_item_data_table.keys()]
-        if self.options.chapter_access in [2, 3]:
+        if self.options.chapter_access.value in [2, 3]:
             item_pool += [self.create_item(name) for name in voice_item_data_table.keys()]
 
         if self.options.pristine_blade_rando == 1:
@@ -163,7 +186,7 @@ class SlayThePrincessWorld(World):
             item_pool += [self.create_item(ItemName.narrator)]
 
         if self.options.memoriesanity == 2:
-            item_pool += [self.create_item(name, memories_hunt=self.options.memories_hunt > 0) for name in gallery_item_data_table.keys()]
+            item_pool += [self.create_item(name, memories_hunt=self.options.memories_hunt > 0) for name in self.selected_memories]
 
         if self.options.save_slot_rando > 0:
             item_pool += [self.create_item(ItemName.save) for _ in range(self.options.save_slot_rando)]
@@ -179,7 +202,7 @@ class SlayThePrincessWorld(World):
             nb_real_filler -= self.nb_save_item
 
         if nb_filler_with_trap > 0:
-            nb_traps = round(nb_filler_with_trap * self.options.trap_pourcentage / 100)
+            nb_traps = round(nb_filler_with_trap * self.options.trap_percentage / 100)
             trap_weights = {name: weight for name, weight in self.options.trap_weights.value.items() if weight > 0}
             trap_names = list(trap_weights.keys())
             trap_weights_values = list(trap_weights.values())
@@ -187,7 +210,7 @@ class SlayThePrincessWorld(World):
             nb_real_filler -= nb_traps
 
         if nb_real_filler > 0:
-            if self.options.pristine_blade_rando == 3:
+            if self.options.pristine_blade_rando.value == 3:
                 item_pool += [self.create_item(ItemName.blade_wraith)]
                 nb_real_filler -= 1
 
@@ -217,7 +240,7 @@ class SlayThePrincessWorld(World):
             "memories_hunt": self.options.memories_hunt.value,
             "death_link": self.options.death_link.value,
 
-            "trap_pourcentage": self.options.trap_pourcentage.value,
+            "trap_percentage": self.options.trap_percentage.value,
             "trap_weights": self.options.trap_weights.value,
             #"trap_link": self.options.trap_link,
 
@@ -228,7 +251,11 @@ class SlayThePrincessWorld(World):
             "save_slot_rando": save_slot_data,
 
             "gift_rando": self.options.gift_rando.value,
+
             "memoriesanity": self.options.memoriesanity.value,
+            "Memoriesanity_galleries": self.options.Memoriesanity_galleries.value,
+            "Memoriesanity_groups": self.options.Memoriesanity_groups.value,
+            "memoriesanity_percentage": self.options.memoriesanity_percentage.value,
 
             "chapter_rando": self.options.chapter_rando.value,
             "voice_rando" : self.options.voice_rando.value,

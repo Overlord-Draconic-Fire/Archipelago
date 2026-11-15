@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 import random
 
-from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle, Range, OptionCounter
+from Options import Choice, Toggle, OptionGroup, PerGameCommonOptions, DefaultOnToggle, Range, OptionCounter, OptionSet
 from worlds.AutoWorld import World
 from worlds.slay_the_princess import trap_item_data_table
+from .Names.LocationName import all_gallery_name
+from .DataTypes import all_memory_group_name
 
 class Goal(Choice):
     """
@@ -49,33 +51,33 @@ class DeathLink(Choice):
     default = 0
 
 
-class TrapPourcentage(Range):
+class TrapPercentage(Range):
     """
     Percentage of filler items that need to be replaced by traps
     """
-    display_name = "Trap Pourcentage"
+    display_name = "Trap Percentage"
     range_start = 0
     range_end = 100
-    default = 0
+    default = 25
 
 
 class TrapWeights(OptionCounter):
     """
     The percentage chance of receiving each specific trap type (The "scary" options are disabled by default):
-    - **Archipelago:** [Not yet implemented] Displays a message indicating that a progressive item was received, even though this is incorrect.
-    - **Broken:** Plays Broken's sobbing sound in a loop until the current chapter ends.
-    - **Cheated:** Displays a fake Game Over screen.
-    - **Cold:** [Not yet implemented] ???.
-    - **Contrarian:** Randomizes the actions associated with the next 3 choices, making the selected option lead to a different outcome.
-    - **Hero:** Displays a fake good ending screen for at least 5 seconds.
-    - **Hunted:** Triggers a jumpscare from the beast.
-    - **Narrator:** Disables dialogue skipping.
-    - **Opportunist:** If the player is on a staircase when the trap activates, they die.
-    - **Paranoid:** Blocks the player in the Nightmare's approach sequence for 25 seconds when repeating the Paranoid's dialogue.
-    - **Princess:** [Not yet implemented] ???
-    - **Skeptic:** [Not yet implemented] ???.
-    - **Smitten:** Forces the player to select an available choice involving saving the Princess.
-    - **Stubborn:** Forces the player to select an available choice involving slaying the Princess.
+    - Archipelago: [Not yet implemented] Displays a message indicating that a progressive item was received, even though this is incorrect.
+    - Broken: Plays Broken's sobbing sound in a loop until the current chapter ends.
+    - Cheated: Displays a fake Game Over screen.
+    - Cold: [Not yet implemented] ???.
+    - Contrarian: Randomizes the actions associated with the next 3 choices, making the selected option lead to a different outcome.
+    - Hero: Displays a fake good ending screen for at least 5 seconds.
+    - Hunted: Triggers a jumpscare from the beast.
+    - Narrator: Disables dialogue skipping.
+    - Opportunist: If the player is on a staircase when the trap activates, they die.
+    - Paranoid: Blocks the player in the Nightmare's approach sequence for 25 seconds when repeating the Paranoid's dialogue.
+    - Princess: [Not yet implemented] ???
+    - Skeptic: [Not yet implemented] ???.
+    - Smitten: Forces the player to select an available choice involving saving the Princess.
+    - Stubborn: Forces the player to select an available choice involving slaying the Princess.
 
 
     Notes:
@@ -88,8 +90,8 @@ class TrapWeights(OptionCounter):
 
     display_name = "Trap Weights"
     min = 0
+    valid_keys = [trap for trap in trap_item_data_table.keys()]
     default = {key: value.trapWeight for key, value in trap_item_data_table.items()}
-    valid_keys = {trap for trap in trap_item_data_table.keys()}
 
 
 class TrapLink(Toggle):
@@ -189,6 +191,49 @@ class MemorieSanity(Choice):
     default = 2
 
 
+class MemorieSanityGalleries(OptionSet):
+    """
+    Select which memory galleries can be randomized.
+    """
+    display_name = "Memories Sanity Galleries"
+    valid_keys = all_gallery_name
+    default = all_gallery_name
+
+MemorieSanityGalleries.__doc__ += (
+    "\nPossible values: " + ", ".join(all_gallery_name)
+)
+
+
+class MemorieSanityGroups(OptionSet):
+    """
+    Select which memory groups can be randomized.
+
+    Possible values:
+    - Wood: "Images depicting the woods, mostly in Chapter 3 and with the text 'These aren't the same woods'."
+    - Cabin: "Images showing the cabin from a distance or its first floor."
+    - Basement: "Images with the text 'If the Princess lives here, slaying her would probably be doing her a favor', shown when facing the Princess."
+    - Find: "Chapter 1 images revealing all possible Chapter 2 variations."
+    - Before: "Images with the text 'You've been here before', showing the vessel in the distance in The Long Quiet."
+    - Heart: "Images with the text 'A xxx heart.', showing the vessel close up in The Long Quiet."
+    - Eyes: "Images with the text 'See through her eyes at the end of everything', unlocked during the final confrontation."
+    - Destroy: "The five images related to the 'Your New World' ending."
+    - Other: "Images that do not fit into any of the other categories."
+    """
+    display_name = "Memories Sanity Groups"
+    valid_keys = all_memory_group_name
+    default = all_memory_group_name
+
+
+class MemorieSanityPercentage(Range):
+    """
+    Percentage of memories that will actually be randomized in the world (after applying all the options above)
+    """
+    display_name = "Memories Sanity Percentage"
+    range_start = 0
+    range_end = 100
+    default = 100
+
+
 class ChapterRando(Choice):
     """
     Chooses to randomize entering a chapter in the world.
@@ -266,7 +311,7 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     #entrance_rando: EntranceRando
 
     #Trap
-    trap_pourcentage: TrapPourcentage
+    trap_percentage: TrapPercentage
     trap_weights: TrapWeights
     #trap_link: TrapLink
 
@@ -279,7 +324,12 @@ class SlayThePrincessOptions(PerGameCommonOptions):
 
     #Both
     gift_rando: GiftRando
+
+    #Memoriesanity
     memoriesanity: MemorieSanity
+    Memoriesanity_galleries: MemorieSanityGalleries
+    Memoriesanity_groups: MemorieSanityGroups
+    memoriesanity_percentage: MemorieSanityPercentage
 
     #Location
     chapter_rando: ChapterRando
@@ -291,7 +341,7 @@ class SlayThePrincessOptions(PerGameCommonOptions):
 
 slay_the_princess_option_groups = [
     OptionGroup("Trap Options", [
-        TrapPourcentage,
+        TrapPercentage,
         TrapWeights,
         #TrapLink,
     ]),
@@ -304,7 +354,12 @@ slay_the_princess_option_groups = [
     ]),
     OptionGroup("Items/Location Options", [
         GiftRando,
+    ]),
+    OptionGroup("MemorieSanity Options", [
         MemorieSanity,
+        MemorieSanityGalleries,
+        MemorieSanityGroups,
+        MemorieSanityPercentage
     ]),
     OptionGroup("Location Options", [
         ChapterRando,
