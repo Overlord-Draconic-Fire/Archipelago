@@ -238,7 +238,8 @@ class SlayThePrincessWorld(World):
         return {
             "goal": self.options.goal.value,
             "memories_hunt": self.options.memories_hunt.value,
-            "death_link": self.options.death_link.value,
+            "death_link_receive": self.options.death_link_receive.value,
+            "death_link_send": self.options.death_link_send.value,
 
             "trap_percentage": self.options.trap_percentage.value,
             "trap_weights": self.options.trap_weights.value,

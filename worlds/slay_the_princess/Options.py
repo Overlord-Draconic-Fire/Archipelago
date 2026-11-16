@@ -33,21 +33,46 @@ class MemoriesHunt(Range):
     default = 0
 
 
-class DeathLink(Choice):
+class DeathLinkReceive(Choice):
     """
-    Determines how DeathLink behaves.
-    - Nothing: DeathLink is disabled.
-    - Only Receive: You can receive DeathLinks from other players, but your deaths are never sent.
+    Determines what happens when receiving a DeathLink.
+    - Nothing: DeathLinks are disabled.
+    - Restart Chapter: Restarts the current chapter.
+    - Restart Loop: Restarts the current loop.
+    - Return to Menu: Returns to the main menu (restart at loop 1)
+    - Delete Associated Saves: Returns to the main menu and deletes associated saves (Save made in the run you are currently in).
+    - Delete All Saves: Returns to the main menu and deletes ALL saves (Even saves made in a different run).
+    PS: Pressing "new game" creates a new "run".
+
+    Warning: DeathLink Receive must be enabled to send DeathLinks.
+    """
+
+    display_name = "DeathLink Receive"
+    option_nothing = 0
+    option_restart_chapter = 1
+    option_restart_loop = 2
+    option_return_to_menu = 3
+    option_delete_associated_saves = 4
+    option_delete_all_saves = 5
+    default = 0
+
+
+class DeathLinkSend(Choice):
+    """
+    Determines when DeathLinks are sent to other players.
+    - Nothing: Never sends DeathLinks, you will only receive them.
     - On Archipelago Death: Sends a DeathLink when you become stuck because you are missing required progression items.
     - On Real Death: Sends a DeathLink whenever the protagonist dies during the story.
     - Both: Combines Archipelago Death and Real Death behaviors.
+
+    Warning: DeathLink Receive must be enabled to send DeathLinks.
     """
-    display_name = "Death Link"
+
+    display_name = "DeathLink Send"
     option_nothing = 0
-    option_only_receive = 1
-    option_on_archipelago_death = 2
-    option_on_real_death = 3
-    option_both = 4
+    option_on_archipelago_death = 1
+    option_on_real_death = 2
+    option_both = 3
     default = 0
 
 
@@ -307,7 +332,8 @@ class SlayThePrincessOptions(PerGameCommonOptions):
     #Game Options
     goal: Goal
     memories_hunt: MemoriesHunt
-    death_link: DeathLink
+    death_link_receive: DeathLinkReceive
+    death_link_send: DeathLinkSend
     #entrance_rando: EntranceRando
 
     #Trap
